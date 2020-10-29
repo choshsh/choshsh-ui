@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doms.vm">
+	<select id="getVmCount" parameterType="com.doms.api.dto.VmSearch" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			vm_list
+		WHERE
+			1=1
+			<if test='vmNo != ""'>
+				AND VM_NO = #{vmNo}
+			</if>
+	</select>
+
+	<select id="getVm" parameterType="com.doms.api.dto.VmSearch" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			vm_list
+		WHERE
+			VM_NO = #{vmNo}
+	</select>
+
+	<!-- 운영 중인 리스트 -->
+	<select id="getVmList" parameterType="com.doms.api.dto.VmSearch" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			vm_list
+		WHERE
+			1=1
+			<choose>
+				<when test='vmRegDate == "thisMonthMade"'>
+					AND DATE_FORMAT(VM_DEL_DATE, '%Y%m') = DATE_FORMAT(NOW(), '%Y%m')
+					ORDER BY VM_CLUSTER_LOCATION DESC, VM_NICKNAME
+				</when>
+				<otherwise>
+					ORDER BY VM_CLUSTER_LOCATION_NM DESC, VM_NICKNAME ASC
+				</otherwise>
+			</choose>
+	</select>
+
+	<!-- 모두 -->
+	<select id="getVmListAll" parameterType="com.doms.api.dto.VmSearch" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			vm_list_all
+		WHERE
+			1=1
+			<choose>
+				<when test='div == "add"'>
+					AND YEAR(VM_REG_DATE) = YEAR(NOW())
+					AND MONTH(VM_REG_DATE) = #{monthParam}
+					ORDER BY VM_CLUSTER_LOCATION DESC, VM_NICKNAME
+				</when>
+				<when test='div == "remove"'>
+					AND YEAR(VM_DEL_DATE) = YEAR(NOW())
+					AND MONTH(VM_DEL_DATE) = #{monthParam}
+					ORDER BY VM_CLUSTER_LOCATION DESC, VM_NICKNAME
+				</when>
+				<when test='orderBy == "VLA01"'>
+					ORDER BY VM_CLUSTER_LOCATION DESC, VM_NICKNAME
+				</when>
+			</choose>
+	</select>
+
+	<select id="getVmChartTotal" parameterType="com.doms.api.dto.VmSearch" resultType="int">
+		SELECT
+			<!-- format: yyyymm -->
+			DATE_FORMAT(VM_REG_DATE, '%Y%m') AS DATE
+		FROM
+			VM_LIST_ALL
+		WHERE
+			1=1
+			<choose>
+				<when test='vmClusterLocationNm != ""'>
+					AND VM_CLUSTER_LOCATION_NM like #{vmClusterLocationNm}
+				</when>
+			</choose>
+		ORDER BY
+			DATE
+	</select>
+
+	<select id="getVmChartTotalDel" parameterType="com.doms.api.dto.VmSearch" resultType="int">
+		SELECT
+		    <!-- format: yyyymm -->
+			DATE_FORMAT(VM_DEL_DATE, '%Y%m') AS DATE
+		FROM
+			VM_LIST_ALL
+		WHERE
+			VM_DEL_YN = 'Y'
+			<choose>
+				<when test='vmClusterLocationNm != ""'>
+					AND VM_CLUSTER_LOCATION_NM like #{vmClusterLocationNm}
+				</when>
+			</choose>
+		ORDER BY
+			DATE
+	</select>
+
+	<select id="getVmClusterList" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			iv_vm_cluster
+		WHERE
+			DEL_YN = 'N'
+		ORDER BY
+			VM_CLUSTER_NM
+	</select>
+
+	<select id="getVmUsageList" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			iv_vm_usage
+		WHERE
+			DEL_YN = 'N'
+	</select>
+
+	<select id="getVmOsList" resultType="com.doms.api.dto.VmDTO">
+		SELECT
+			*
+		FROM
+			iv_vm_os
+		WHERE
+			DEL_YN = 'N'
+		ORDER BY
+			VM_OS_DETAIL DESC
+	</select>
+
+	<select id="getVmChartMonthly" resultType="com.doms.api.dto.VmChartDTO">
+		SELECT
+			*
+		FROM
+			VM_CHART_MONTHLY
+	</select>
+
+	<select id="getCountPerOsDetailTotal" resultType="hashMap">
+		SELECT
+			VM_OS_LINE,
+			VM_OS_DETAIL,
+			COUNT(*) CNT
+		FROM
+			VM_LIST
+		GROUP BY
+			VM_OS_LINE,
+			VM_OS_DETAIL
+		ORDER BY
+			VM_OS_LINE DESC,
+			VM_OS_DETAIL DESC
+	</select>
+
+	<select id="getVmDatastore" resultType="com.doms.api.dto.VmChartDTO">
+		SELECT
+			*
+		FROM
+			VM_DATASTORE
+		ORDER BY
+			DS_NM
+	</select>
+
+	<select id="getVmHost" resultType="com.doms.api.dto.VmChartDTO">
+		SELECT
+			*
+		FROM
+			VM_HOST
+		ORDER BY
+			HOST_NM
+	</select>
+
+
+	<insert id="insertVm" parameterType="com.doms.api.dto.VmDTO">
+		INSERT INTO
+			IV_VM_MST
+			(
+				VM_NO,
+				VM_CLUSTER_CD,
+				VM_NM,
+				VM_NICKNAME,
+				VM_USAGE_CD,
+				VM_IP,
+				VM_OS_CD,
+				VM_CPU_CORE,
+				VM_MEMORY,
+				VM_USE_EMPL,
+				VM_MNG_EMPL,
+				VM_POWER_ON,
+				VM_COMMENT,
+				VM_DISK
+			)
+		VALUES
+			(
+				#{vmNo},
+				#{vmClusterCd},
+				#{vmNm},
+				#{vmNickname},
+				#{vmUsageCd},
+				#{vmIp},
+				#{vmOsCd},
+				#{vmCpuCore},
+				#{vmMemory},
+				#{vmUseEmpl},
+				#{vmMngEmpl},
+				#{vmPowerOn},
+				#{vmComment},
+				#{vmDisk}
+			)
+	</insert>
+
+	<update id="updateVm" parameterType="com.doms.api.dto.VmDTO">
+		UPDATE
+			IV_VM_MST
+		SET
+			VM_CLUSTER_CD = #{vmClusterCd},
+			VM_NM = #{vmNm},
+			VM_NICKNAME = #{vmNickname},
+			VM_USAGE_CD = #{vmUsageCd},
+			VM_IP = #{vmIp},
+			VM_OS_CD = #{vmOsCd},
+			VM_CPU_CORE = #{vmCpuCore},
+			VM_MEMORY = #{vmMemory},
+			VM_USE_EMPL = #{vmUseEmpl},
+			VM_MNG_EMPL = #{vmMngEmpl},
+			VM_POWER_ON = #{vmPowerOn},
+			VM_HOSTNAME = #{vmHostname},
+			VM_COMMENT = #{vmComment},
+			VM_DISK = #{vmDisk}
+		WHERE
+			VM_NO = #{vmNo}
+	</update>
+
+	<update id="delVm" parameterType="com.doms.api.dto.VmSearch">
+		UPDATE
+			IV_VM_MST
+		SET
+			VM_DEL_YN = 'Y' ,
+			VM_DEL_DATE = NOW()
+		WHERE
+			VM_NO = #{vmNo}
+	</update>
+</mapper>
