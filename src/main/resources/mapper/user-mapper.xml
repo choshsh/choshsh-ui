@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doms.user">
+	<select id="getUserCount" parameterType="com.doms.api.dto.UserDTO" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			iv_user
+		WHERE
+			del = 'N'
+			<choose>
+				<when test='userId != null and userPw != null'>
+					AND user_id = #{userId}
+					AND user_pw = #{userPw}
+				</when>
+			</choose>
+	</select>
+
+	<select id="getUser" parameterType="String" resultType="com.doms.api.dto.UserDTO">
+		SELECT
+			*
+		FROM
+			iv_user
+		WHERE
+			del = 'N'
+			AND user_id = #{userId}
+	</select>
+
+	<select id="getUserList" resultType="com.doms.api.dto.UserDTO">
+		SELECT
+			*
+		FROM
+			iv_user
+		WHERE
+			del = 'N'
+	</select>
+
+</mapper>

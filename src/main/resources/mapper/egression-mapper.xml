@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doms.egression">
+	<select id="getNow" resultType="string">
+		SELECT
+			SYSDATE
+		FROM
+			DUAL
+	</select>
+
+	<select id="getNow02" resultType="string">
+		SELECT
+			TO_CHAR(SYSDATE, 'mm/dd/yyyy')
+		FROM
+			DUAL
+	</select>
+
+	<select id="getEgressionList" parameterType="com.doms.api.dto.EgressionSearch" resultType="com.doms.api.dto.EgressionDTO">
+		SELECT
+			CBD.CD_NM AS TEAM_NM,
+			EG.MBR_NM,
+			SUBSTR(EG.S_DATE,
+			1,
+			4)|| '/' || SUBSTR(EG.S_DATE,
+			5,
+			2)|| '/' || SUBSTR(EG.S_DATE,
+			7,
+			2)|| ' ~ ' || SUBSTR(EG.E_DATE,
+			5,
+			2)|| '/' || SUBSTR(EG.E_DATE,
+			7,
+			2) || ' (' ||(TO_DATE(EG.E_DATE, 'yyyymmdd') - TO_DATE(EG.S_DATE, 'yyyymmdd') + 1) || '일)' AS EG_DATE,
+			EG.EG_LOC || ':' || EG.EG_LOC_DTL AS EG_LOC_DTL,
+			EG.EG_OBJECT || ':' || EG.EG_OBJECT_DTL AS EG_OBJECT_DTL,
+			EG.EG_OBJECT,
+			DECODE(EG.SITE_WORK, 'Y', 'Y', 'N') AS SITE_WORK,
+			EG.S_DATE,
+			EG.E_DATE,
+			EG.S_TIME,
+			EG.E_TIME,
+			EG.EG_STATUS,
+			CASE EG.EG_STATUS WHEN 'Y' THEN '외출' WHEN 'N' THEN '복귀' ELSE '-' END AS EG_STATUS_NM,
+			MB.MNG_TEAM
+		FROM
+			ITSM.Z_IT_MEMBER_EGRESSION EG
+				JOIN ITSM.C_IT_MEMBER MB ON EG.MBR_ID = MB.MBR_ID AND EG.EG_STATUS <![CDATA[ <> ]]> 'X'
+				JOIN ITSM.C_BCD_DTL CBD ON MB.MNG_TEAM = CBD.CD AND CBD.GRP_CD = 'ADM001'
+					<choose>
+						<when test='scope == "A"'>
+							AND MB.MNG_TEAM IN ('TSM01', 'TSM02', 'TSM03', 'TSM04', 'TIT01')
+						</when>
+						<otherwise>
+							AND MB.MNG_TEAM IN ('TSM01', 'TSM02', 'TIT01')
+						</otherwise>
+					</choose>
+		WHERE
+			(
+			S_DATE <![CDATA[ <= ]]> TO_CHAR(TO_DATE(#{sDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			AND E_DATE <![CDATA[ >= ]]> TO_CHAR(TO_DATE(#{sDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			)
+			OR
+			(
+			S_DATE <![CDATA[ <= ]]> TO_CHAR(TO_DATE(#{eDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			AND E_DATE <![CDATA[ >= ]]> TO_CHAR(TO_DATE(#{eDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			)
+			OR
+			(
+			S_DATE <![CDATA[ >= ]]> TO_CHAR(TO_DATE(#{sDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			AND E_DATE <![CDATA[ <= ]]> TO_CHAR(TO_DATE(#{eDate}, 'mm/dd/yyyy'), 'yyyymmdd')
+			)
+			<if test='egStatus != null'>
+				AND EG_STATUS = #{egStatus}
+			</if>
+		ORDER BY
+			TEAM_NM , MBR_NM, S_DATE
+	</select>
+
+	<!-- 오늘 통계 -->
+	<select id="getEgressionChartThisDay" parameterType="com.doms.api.dto.EgressionSearch" resultType="com.doms.api.dto.EgressionDTO">
+		SELECT
+			EG.EG_OBJECT,
+			COUNT(*) AS CNT
+		FROM
+			ITSM.Z_IT_MEMBER_EGRESSION EG
+				JOIN ITSM.C_IT_MEMBER MB ON EG.MBR_ID = MB.MBR_ID AND EG.EG_STATUS <![CDATA[ = ]]> 'Y'
+				JOIN ITSM.C_BCD_DTL CBD ON MB.MNG_TEAM = CBD.CD AND CBD.GRP_CD = 'ADM001' AND MB.MNG_TEAM IN ('TSM01', 'TSM02', 'TSM03', 'TSM04', 'TIT01')
+		WHERE
+			S_DATE <![CDATA[ <= ]]> TO_CHAR(SYSDATE, 'yyyymmdd')
+			AND E_DATE <![CDATA[ >= ]]> TO_CHAR(SYSDATE, 'yyyymmdd')
+		GROUP BY
+			EG.EG_OBJECT
+	</select>
+
+	<select id="getEgressionObject" parameterType="com.doms.api.dto.EgressionSearch" resultType="com.doms.api.dto.EgressionDTO">
+		SELECT
+			EG.EG_OBJECT
+		FROM
+			ITSM.Z_IT_MEMBER_EGRESSION EG
+		GROUP BY
+			EG.EG_OBJECT
+		ORDER BY
+			EG.EG_OBJECT
+	</select>
+</mapper>

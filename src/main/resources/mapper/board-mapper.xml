@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doms.board">
+	<select id="getBoardCount" parameterType="com.doms.api.dto.BoardSearch" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			BOARD bd
+		WHERE
+			bd.DEL_YN = 'N'
+			AND bd.BD_CD = #{bdCd}
+			<if test='bdSeq >= 0'>
+				AND bd.BD_SEQ = #{bdSeq}
+			</if>
+	</select>
+
+	<select id="getBoard" parameterType="com.doms.api.dto.BoardSearch" resultType="com.doms.api.dto.BoardDTO">
+		SELECT
+			BD_SEQ,
+			TITLE,
+			CONTENT,
+			BD_CD,
+			KEYWORD,
+			DATE_FORMAT(bd.REG_DT, '%Y-%m%-%d %H:%i') as REG_DT,
+			DATE_FORMAT(bd.MOD_DT, '%Y-%m%-%d %H:%i') as MOD_DT,
+			(SELECT USER_NAME FROM IV_USER WHERE USER_SEQ = bd.USER_SEQ) AS USER_NAME,
+			(SELECT USER_NAME FROM IV_USER WHERE USER_SEQ = bd.MOD_USER_SEQ) AS MOD_USER_NAME
+		FROM
+			BOARD bd
+		WHERE
+			bd.DEL_YN = 'N'
+			AND bd.BD_CD = #{bdCd}
+			AND bd.BD_SEQ = #{bdSeq}
+
+	</select>
+
+	<select id="getBoardList" parameterType="com.doms.api.dto.BoardSearch" resultType="com.doms.api.dto.BoardDTO">
+		SELECT
+			bd.BD_SEQ,
+			bd.TITLE,
+			bd.CONTENT,
+			bd.KEYWORD,
+			bd.USER_SEQ,
+			bd.MOD_USER_SEQ,
+			DATE(bd.REG_DT) as REG_DT,
+			bd.DEL_YN,
+			bd.DEL_DT,
+			bd.MOD_DT,
+			bd.BD_CD,
+			iv.*
+		FROM
+			BOARD bd
+				JOIN IV_USER iv
+					ON bd.USER_SEQ = iv.USER_SEQ
+		WHERE
+			bd.DEL_YN = 'N'
+			AND bd.BD_CD = #{bdCd}
+		ORDER BY
+			bd.REG_DT DESC
+	</select>
+
+	<insert id="insertBoard" parameterType="com.doms.api.dto.BoardDTO" useGeneratedKeys="true" keyProperty="bdSeq">
+		INSERT INTO
+			BOARD
+			(
+				TITLE,
+				CONTENT,
+				KEYWORD,
+				USER_SEQ,
+				BD_CD
+			)
+		VALUES
+			(
+				#{title},
+				#{content},
+				#{keyword},
+				#{userSeq},
+				#{bdCd}
+			)
+	</insert>
+
+	<update id="updateBoard" parameterType="com.doms.api.dto.BoardDTO">
+		UPDATE
+			BOARD
+		SET
+			TITLE = #{title},
+			CONTENT = #{content},
+			KEYWORD = #{keyword},
+			MOD_USER_SEQ = #{userSeq},
+			MOD_DT = NOW()
+		WHERE
+			BD_SEQ = #{bdSeq}
+	</update>
+
+	<update id="delBoard" parameterType="com.doms.api.dto.BoardSearch">
+		UPDATE
+			BOARD
+		SET
+			DEL_YN = 'Y' ,
+			DEL_DT = NOW()
+		WHERE
+			BD_SEQ = #{bdSeq}
+	</update>
+</mapper>

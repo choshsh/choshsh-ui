@@ -1,0 +1,88 @@
+spring: # common
+  db1:
+    datasource:
+      username: root
+      password: P@ssw0rd!@#
+  db2: # ITSM 오라클
+    datasource:
+      jdbc-url: jdbc:oracle:thin:@51.8.121.5:1521/PRO
+      username: csipjt
+      password: csipjt
+  db3: # networker 본사
+    datasource:
+      jdbc-url: jdbc:postgresql://51.2.33.39:5432/lgto_gst
+      username: lgtogst
+      password: 
+  db4: # networker 구미1
+    datasource:
+      jdbc-url: jdbc:postgresql://51.8.60.75:5432/lgto_gst
+      username: lgtogst
+      password: 
+  db5: # networker 구미1TCK
+    datasource:
+      jdbc-url: jdbc:postgresql://51.8.41.46:5432/lgto_gst
+      username: lgtogst
+      password: 
+  db6: # networker 구미3
+    datasource:
+      jdbc-url: jdbc:postgresql://51.8.121.37:5432/lgto_gst
+      username: lgtogst
+      password: 
+  db7: # networker 구미4
+    datasource:
+      jdbc-url: jdbc:postgresql://51.8.131.76:5432/lgto_gst
+      username: lgtogst
+      password: 
+  db8: # networker 군산
+    datasource:
+      jdbc-url: jdbc:postgresql://51.2.48.30:5432/lgto_gst
+      username: lgtogst
+      password: 
+  mail:
+    host: 51.2.30.41
+    port: 25
+    protocol: smtp
+logging:
+  pattern:
+    console: '%clr{faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+server:
+  compression:
+    enabled: true
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      timeout: 14400
+linkedURL:
+  monitoring: http://51.2.30.75:3000/dashboards
+  repo: http://51.2.30.83/
+  gitlab: http://51.2.30.83:8929
+--- 
+spring: # dev
+  profiles: dev
+  db1:
+    datasource:
+      jdbc-url: jdbc:mysql://51.2.30.99:1746/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
+logging:
+  level:
+    com:
+      doms: debug
+    root: info
+---
+spring: # prod
+  profiles:  prod
+  db1:
+    datasource:
+      jdbc-url: jdbc:mysql://db:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
+logging:
+  level:
+    root: error
+---
+spring: # prodSlave
+  profiles:  prodSlave
+  db1:
+    datasource:
+      jdbc-url: jdbc:mysql://db:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
+logging:
+  level:
+    root: error
