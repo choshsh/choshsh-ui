@@ -1,8 +1,0 @@
-deploy-to-server:
-  stage: deploy
-  only:
-    - master
-  script:
-    - echo 'hello world222222!'
-  tags:
-    - jar CI
