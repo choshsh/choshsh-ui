@@ -3,6 +3,7 @@ deploy-to-server:
   only:
     - master
   script:
+    - whoami
     - /tmp/deploy.sh
   tags:
     - deploy
