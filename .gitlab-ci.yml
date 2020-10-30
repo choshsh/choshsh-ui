@@ -1,0 +1,8 @@
+deploy-to-server:
+  stage: deploy
+  only:
+    - master
+  script:
+    - /tmp/deploy.sh
+  tags:
+    - deploy
