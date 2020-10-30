@@ -3,7 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - hostname
-    - ip a
+    - /root/docker/config/gitlab-runner/auto-deploy.sh
   tags:
     - deploy
