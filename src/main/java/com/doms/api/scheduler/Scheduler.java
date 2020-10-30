@@ -1,7 +1,6 @@
 package com.doms.api.scheduler;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.doms.api.dto.BackupDTO;
-import com.doms.api.dto.BackupSearch;
 import com.doms.api.dto.MailDTO;
 import com.doms.api.svc.BackupSvc;
 import com.doms.api.svc.DiSvc;
@@ -19,6 +17,10 @@ import com.doms.api.svc.MailSvc;
 
 @Component
 public class Scheduler {
+
+	@Value("${spring.profiles}")
+	private String profiles;
+
 	@Autowired
 	private DiSvc diSvc;
 
@@ -26,10 +28,7 @@ public class Scheduler {
 	private MailSvc mailSvc;
 
 	@Autowired
-	BackupSvc backupSvc;
-
-	@Value("${spring.profiles}")
-	private String profiles;
+	private BackupSvc backupSvc;
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private Date now = new Date();
@@ -78,42 +77,27 @@ public class Scheduler {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Scheduled(cron = "0 0 10 * * 1-5")
 	public void backupNoti() {
 		if (profiles.equalsIgnoreCase("prod")) {
-			String[] mailToArr = { "choshsh@torayamk.com", "shj0322@torayamk.com" };
+			try {
+				String[] mailToArr = { "choshsh@torayamk.com", "shj0322@torayamk.com", "deliod085@torayamk.com",
+						"mdhong@torayamk.com" };
 
-			int failCnt = 0;
-			ArrayList<String> failList = new ArrayList<>();
+				title = "[백업 알림] " + strDate;
+				msg += strDate + " 기준,";
+				msg += "\n전일 19:00 ~ 금일 09:00 간 Networker 백업 실행 상태는 아래와 같습니다.\n";
 
-			BackupSearch backupSearch = new BackupSearch();
-			backupSearch.setNlCd("S");
-			@SuppressWarnings("unchecked")
-			List<BackupDTO> list = (List<BackupDTO>) backupSvc.getBackupList(backupSearch).get("list");
-			for (BackupDTO item : list) {
-				if (item.getWorkflowStatus().equalsIgnoreCase("failed")) {
-					failCnt++;
-					failList.add(item.getGroupName());
+				for (BackupDTO item : (List<BackupDTO>) backupSvc.getBackupCdList("location").get("location")) {
+					msg += backupSvc.getMailNotiContent(item.getNlCd(), item.getNlNm());
 				}
-			}
 
-			msg += strDate + " 기준,";
-			msg += "\n전일 19:00 ~ 금일 09:00 간 백업 실행 상태는 아래와 같습니다.";
-			msg += "\n\n전체: " + list.size();
-			msg += "\n\n성공: " + (list.size() - failCnt);
-			msg += "\n실패: " + failCnt;
-
-			if (failCnt > 0) {
-				msg += "\n\n실패 대상";
-				for (String s : failList) {
-					msg += "\n  " + s;
+				for (String s : mailToArr) {
+					mailSvc.mailSend(new MailDTO(s, title, msg));
 				}
-			}
-
-			title = "[본사 백업 알림] " + strDate;
-
-			for (String s : mailToArr) {
-				mailSvc.mailSend(new MailDTO(s, title, msg));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
