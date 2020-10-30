@@ -5,4 +5,4 @@ deploy-to-server:
   script:
     - echo 'hello world!'
   tags:
-    - jar CI
+    - deploy
