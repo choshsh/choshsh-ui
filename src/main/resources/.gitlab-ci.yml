@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - echo 'hello world!'
+    - echo 'hello world222222!'
   tags:
     - jar CI
