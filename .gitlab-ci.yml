@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - /root/docker/config/gitlab-runner/auto-deploy.sh
+    - ssh root@51.2.30.99 /root/docker/config/gitlab-runner/auto-deploy.sh
   tags:
     - deploy
