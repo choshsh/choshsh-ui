@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - cat /root/deploy.sh
+    - /root/deploy.sh
   tags:
     - deploy
