@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - sudo /root/deploy.sh
+    - /tmp/deploy.sh
   tags:
     - deploy
