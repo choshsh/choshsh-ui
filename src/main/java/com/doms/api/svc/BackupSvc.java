@@ -1,6 +1,7 @@
 package com.doms.api.svc;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -250,6 +251,40 @@ public class BackupSvc {
 
 	private String convertDate(String date) {
 		return date.substring(5, 7) + "/" + date.substring(8, 10) + "/" + date.substring(0, 4);
+	}
+
+	public String getMailNotiContent(String nlCd, String nlNm) {
+		String result = "";
+
+		int failCnt = 0;
+		ArrayList<String> failList = new ArrayList<>();
+
+		BackupSearch backupSearch = new BackupSearch();
+		backupSearch.setNlCd(nlCd);
+
+		@SuppressWarnings("unchecked")
+		List<BackupDTO> list = (List<BackupDTO>) this.getBackupList(backupSearch).get("list");
+		for (BackupDTO item : list) {
+			if (item.getWorkflowStatus().equalsIgnoreCase("failed")) {
+				failCnt++;
+				failList.add(item.getGroupName());
+			}
+		}
+
+		result += "\n\n[" + nlNm + "]";
+		result += "\n전체: " + list.size();
+		result += " (성공: " + (list.size() - failCnt);
+		result += " / 실패: " + failCnt;
+		result += ")";
+
+		if (failCnt > 0) {
+			result += "\n실패 대상:";
+			for (String s : failList) {
+				result += s + ", ";
+			}
+		}
+
+		return result;
 	}
 
 }
