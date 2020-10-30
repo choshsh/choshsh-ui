@@ -3,6 +3,7 @@ deploy-to-server:
   only:
     - master
   script:
-    - echo 'hello world!'
+    - hostname
+    - ip a
   tags:
     - deploy
