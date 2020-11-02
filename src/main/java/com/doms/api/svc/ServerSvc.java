@@ -25,6 +25,12 @@ public class ServerSvc {
 	@Autowired
 	private ServerRepo serverRepo;
 
+	@Autowired
+	private ExcelUtil exu;
+
+	@Autowired
+	private ChartUtil cu;
+
 	public List<ServerDTO> getServerList() throws Exception {
 		return serverRepo.getServerList();
 	}
@@ -65,8 +71,8 @@ public class ServerSvc {
 	}
 
 	public List<Integer> getServerChartYear(ServerSearch serverSearch) throws SQLException {
-		List<Integer> result = new ChartUtil().dataPerYear(serverRepo.getServerChartAll(serverSearch));
-		List<Integer> delChart = new ChartUtil().dataPerYear(serverRepo.getServerChartDel(serverSearch));
+		List<Integer> result = cu.dataPerYear(serverRepo.getServerChartAll(serverSearch));
+		List<Integer> delChart = cu.dataPerYear(serverRepo.getServerChartDel(serverSearch));
 
 		for (int i = 0; i < delChart.size(); i++) {
 			result.set(i, result.get(i) - delChart.get(i));
@@ -83,7 +89,7 @@ public class ServerSvc {
 				{ "mngDeptNm", "관리 부서" }, { "mngEmplNm", "관리 담당자" }, { "curStDate", "설치일자" } };
 		String[] shArr = { "본사", "구미", "기타" };
 
-		ExcelUtil exu = new ExcelUtil("물리서버_리스트");
+		exu.setWbNm("물리서버_리스트");
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */

@@ -21,6 +21,9 @@ public class EgressionSvc {
 	@Autowired
 	private EgressionRepo ergressionRepo;
 
+	@Autowired
+	private ExcelUtil exu;
+
 	public String getNow() throws Exception {
 		return ergressionRepo.getNow();
 	}
@@ -51,7 +54,8 @@ public class EgressionSvc {
 				{ "egObjectDtl", "직출 사유" }, { "siteWork", "직출 구분" }, { "egStatusNm", "현재 상태" } };
 		String[] shArr = { "정보_1팀" };
 
-		ExcelUtil exu = new ExcelUtil("외출_리스트");
+		exu.setWbNm("외출_리스트");
+
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
