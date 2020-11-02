@@ -74,7 +74,7 @@
               <br />
               <br />
               <span class="font-italic"
-                >※ 시작일 19:00 ~ 종료일 10:00 기준입니다.</span
+                >※ "시작일의 전일 18:00" ~ "종료일 11:00" 기준입니다.</span
               >
             </CCardBody>
           </CCard>
