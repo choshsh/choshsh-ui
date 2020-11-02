@@ -24,6 +24,12 @@ public class VmSvc {
 	@Autowired
 	private VmRepo vmRepo;
 
+	@Autowired
+	private ExcelUtil exu;
+
+	@Autowired
+	private ChartUtil cu;
+
 	public int getVmCount(VmSearch vmSearch) throws Exception {
 		return vmRepo.getVmCount(vmSearch);
 	}
@@ -74,7 +80,8 @@ public class VmSvc {
 				{ "vmComment", "Comment" } };
 		String[] shArr = { "본사", "구미", "삭제" };
 
-		ExcelUtil exu = new ExcelUtil("가상서버_리스트");
+		exu.setWbNm("가상서버_리스트");
+
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
@@ -128,8 +135,8 @@ public class VmSvc {
 	}
 
 	public List<Integer> getVmChartYear(VmSearch vmSearch) throws SQLException {
-		List<Integer> result = new ChartUtil().dataPerYear(vmRepo.getVmChartTotal(vmSearch));
-		List<Integer> delChart = new ChartUtil().delDataPerYear(vmRepo.getVmChartTotalDel(vmSearch));
+		List<Integer> result = cu.dataPerYear(vmRepo.getVmChartTotal(vmSearch));
+		List<Integer> delChart = cu.delDataPerYear(vmRepo.getVmChartTotalDel(vmSearch));
 		for (int i = 0; i < delChart.size(); i++) {
 			result.set(i, result.get(i) - delChart.get(i));
 		}

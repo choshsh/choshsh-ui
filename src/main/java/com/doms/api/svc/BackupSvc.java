@@ -26,6 +26,8 @@ public class BackupSvc {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private BackupRepo backupRepo;
+	@Autowired
+	private ExcelUtil exu;
 
 	public HashMap<String, Object> getBackupList(BackupSearch nmcSearch) {
 		HashMap<String, Object> hm = new HashMap<String, Object>();
@@ -87,7 +89,9 @@ public class BackupSvc {
 		}
 		String[] shArr = { "백업_리스트_" + nlNm + "_" + nmcSearch.getWorkflowStartDate().replace("/", ".") + "~"
 				+ nmcSearch.getWorkflowEndDate().replace("/", ".") };
-		ExcelUtil exu = new ExcelUtil("백업_리스트_" + nlNm);
+
+		exu.setWbNm("백업_리스트_" + nlNm);
+
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
@@ -139,7 +143,9 @@ public class BackupSvc {
 		}
 		String[] shArr = { "백업_리스트_" + nlNm + "_" + nmcSearch.getWorkflowStartDate().replace("/", ".") + "~"
 				+ nmcSearch.getWorkflowEndDate().replace("/", ".") };
-		ExcelUtil exu = new ExcelUtil("백업_리스트_" + nlNm);
+
+		exu.setWbNm("백업_리스트_상세_" + nlNm);
+
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
