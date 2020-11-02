@@ -96,31 +96,30 @@
         </CCol>
         <CCol col="4">
           <CCard>
-            <CCardHeader>성공한 백업 실행 수</CCardHeader>
+            <CCardHeader>성공한 백업 실행 수 (Level)</CCardHeader>
             <CCardBody>
-              <CChartBarAdvMulti
-                :label="['Full', 'Incr']"
-                :labels="['']"
-                :datas="[
-                  [
+              <CChartDoughnutAdv
+                :labels="[
+                  '전체: ' +
                     getChartData().filter((o) => o.backupLevel === 'full')
                       .length,
-                  ],
-                  [
-                    getChartData().filter((o) => o.backupLevel !== 'full')
+                  '증분: ' +
+                    getChartData().filter((o) => o.backupLevel === 'incr')
                       .length,
-                  ],
+                  '기타: ' +
+                    getChartData().filter(
+                      (o) =>
+                        o.backupLevel !== 'full' && o.backupLevel !== 'incr'
+                    ).length,
                 ]"
-                :maxValParam="
-                  getChartData().filter((o) => o.backupLevel === 'full')
-                    .length >
-                  getChartData().filter((o) => o.backupLevel !== 'full').length
-                    ? getChartData().filter((o) => o.backupLevel === 'full')
-                        .length
-                    : getChartData().filter((o) => o.backupLevel !== 'full')
-                        .length
-                "
-                :maxValParamTick="'100'" /></CCardBody
+                :datas="[
+                  getChartData().filter((o) => o.backupLevel === 'full').length,
+                  getChartData().filter((o) => o.backupLevel === 'incr').length,
+                  getChartData().filter(
+                    (o) => o.backupLevel !== 'full' && o.backupLevel !== 'incr'
+                  ).length,
+                ]"
+              /> </CCardBody
           ></CCard>
         </CCol>
       </CRow>
