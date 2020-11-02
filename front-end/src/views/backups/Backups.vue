@@ -43,6 +43,87 @@
           </CCol>
         </CRow>
       </form>
+      <CRow class="">
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>백업 정보</CCardHeader>
+            <CCardBody>
+              - 기간
+              <br />
+              <span class="ml-3">
+                {{ searchParam["workflowStartDate"] }} ~
+                {{ searchParam["workflowEndDate"] }}</span
+              >
+              <br />
+              <br />
+              - 백업 용량
+              <br />
+              <span class="ml-3">
+                {{
+                  Math.round(
+                    items
+                      .filter((o) => o.workflowStatus === "succeeded")
+                      .map((a) => a.saveSetSize)
+                      .reduce(function add(sum, val) {
+                        return sum + val;
+                      }, 0)
+                  )
+                }}
+                GB</span
+              >
+              <br />
+              <br />
+              <span class="font-italic"
+                >※ 시작일 19:00 ~ 종료일 10:00 기준입니다.</span
+              >
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>백업 상태</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '성공: ' + getChartData().length,
+                  '실패: ' + (items.length - getChartData().length),
+                ]"
+                :datas="[
+                  getChartData().length,
+                  items.length - getChartData().length,
+                ]" /></CCardBody
+          ></CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>성공한 백업 실행 수</CCardHeader>
+            <CCardBody>
+              <CChartBarAdvMulti
+                :label="['Full', 'Incr']"
+                :labels="['']"
+                :datas="[
+                  [
+                    getChartData().filter((o) => o.backupLevel === 'full')
+                      .length,
+                  ],
+                  [
+                    getChartData().filter((o) => o.backupLevel !== 'full')
+                      .length,
+                  ],
+                ]"
+                :maxValParam="
+                  getChartData().filter((o) => o.backupLevel === 'full')
+                    .length >
+                  getChartData().filter((o) => o.backupLevel !== 'full').length
+                    ? getChartData().filter((o) => o.backupLevel === 'full')
+                        .length
+                    : getChartData().filter((o) => o.backupLevel !== 'full')
+                        .length
+                "
+                :maxValParamTick="'100'" /></CCardBody
+          ></CCard>
+        </CCol>
+      </CRow>
       <CDataTable
         :items="items"
         :fields="fields"
@@ -116,6 +197,8 @@
 <script>
 import axios from "axios";
 import CTableWrapper from "../base/TableBasicBackupInfo.vue";
+import CChartDoughnutAdv from "../base/CChartDoughnutAdv";
+import CChartBarAdvMulti from "../base/CChartBarAdvMulti.vue";
 
 const fields = [
   { key: "clientName", label: "서버명", _style: "min-width:150px" },
@@ -143,7 +226,7 @@ const fieldsBackupChange = [
 
 export default {
   name: "Servers",
-  components: { CTableWrapper },
+  components: { CTableWrapper, CChartDoughnutAdv, CChartBarAdvMulti },
   data() {
     return {
       fields: fields,
@@ -161,6 +244,7 @@ export default {
       selectedOption: "S",
       searchParam: {},
       tableFilter: { label: "검색", placeholder: "검색어 입력..." },
+      backupChartKey: 0,
     };
   },
   methods: {
@@ -244,6 +328,9 @@ export default {
       let $form = document.getElementById("backupExcelForm");
       $form.action = "/api/backupExcelFull";
       $form.submit();
+    },
+    getChartData() {
+      return this.items.filter((o) => o.workflowStatus === "succeeded");
     },
   },
   created: function () {
