@@ -57,7 +57,6 @@ export default {
         { nm: "4공장", cd: "G3" },
         { nm: "군산", cd: "K1" }
       ],
-      datas: [40, 20, 12],
       datasParam: {},
       chartKey: 0
     };

@@ -16,12 +16,19 @@ export default {
   components: { CChartBar, ChartJsPluginDataLabels },
   data() {
     return {
-      colors: ["#007bff", "#DD1B16", "#41B883", "#E46651"]
+      colors: ["#007bff", "#DD1B16", "#41B883", "#E46651"],
     };
   },
   props: {
     datas: Array,
-    maxValParam: Number,
+    maxValParam: {
+      type: Number,
+      default: () => 100,
+    },
+    maxValParamTick: {
+      type: Number,
+      default: () => 50,
+    },
     label: Array,
     labels: {
       type: Array,
@@ -37,9 +44,9 @@ export default {
         "9월",
         "10월",
         "11월",
-        "12월"
-      ]
-    }
+        "12월",
+      ],
+    },
   },
   computed: {
     defaultDatasets() {
@@ -47,13 +54,13 @@ export default {
         {
           label: this.label[0],
           data: this.datas[0],
-          backgroundColor: this.colors[0]
+          backgroundColor: this.colors[0],
         },
         {
           label: this.label[1],
           data: this.datas[1],
-          backgroundColor: this.colors[1]
-        }
+          backgroundColor: this.colors[1],
+        },
       ];
     },
     defaultPlugins() {
@@ -65,40 +72,40 @@ export default {
           datalabels: {
             font: {
               weight: "bold",
-              size: 14
+              size: 14,
             },
-            align: "top"
-          }
+            align: "top",
+          },
         },
         legend: {
           display: true,
           position: "bottom",
           labels: {
-            boxWidth: 20
-          }
+            boxWidth: 20,
+          },
         },
         scales: {
           xAxes: [
             {
               display: true,
               gridLines: {
-                display: false
-              }
-            }
+                display: false,
+              },
+            },
           ],
           yAxes: [
             {
               display: true,
               ticks: {
                 min: 0,
-                max: 100,
-                maxTicksLimit: 3
-              }
-            }
-          ]
-        }
+                max: Math.ceil(this.maxValParam / this.maxValParamTick) * this.maxValParamTick,
+                maxTicksLimit: 3,
+              },
+            },
+          ],
+        },
       };
-    }
-  }
+    },
+  },
 };
 </script>
