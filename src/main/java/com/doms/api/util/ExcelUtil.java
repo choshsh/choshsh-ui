@@ -21,14 +21,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Component
 public class ExcelUtil {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -42,10 +40,11 @@ public class ExcelUtil {
 	XSSFRow row = null;
 	XSSFCell cell = null;
 
-	public ExcelUtil() {
+	public ExcelUtil(String name) {
 		this.wb = this.defaultWb();
 		this.cs = this.defaultCs();
 		this.headerCs = this.headerCs();
+		this.wbNm = name;
 	}
 
 	/* 워크북 생성 */

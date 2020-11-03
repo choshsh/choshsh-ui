@@ -26,9 +26,6 @@ public class ServerSvc {
 	private ServerRepo serverRepo;
 
 	@Autowired
-	private ExcelUtil exu;
-
-	@Autowired
 	private ChartUtil cu;
 
 	public List<ServerDTO> getServerList() throws Exception {
@@ -89,7 +86,7 @@ public class ServerSvc {
 				{ "mngDeptNm", "관리 부서" }, { "mngEmplNm", "관리 담당자" }, { "curStDate", "설치일자" } };
 		String[] shArr = { "본사", "구미", "기타" };
 
-		exu.setWbNm("물리서버_리스트");
+		ExcelUtil exu = new ExcelUtil("물리서버_리스트");
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
