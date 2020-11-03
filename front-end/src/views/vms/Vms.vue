@@ -1,7 +1,7 @@
 <template>
   <CCard>
     <CCardBody>
-      <CRow>
+      <CRow class="mb-3">
         <CCol col="10" class="mb-3 mb-xl-0"></CCol>
         <CCol col="1" class="mb-3 mb-xl-0">
           <router-link :to="'vmsForm'" v-if="Boolean(userRoleCd === 'M001')">
@@ -74,7 +74,6 @@
         hover
         column-filter
         sorter
-        :key="vmListKey"
       >
         <template #vmPowerOn="{ item }">
           <td>
@@ -185,11 +184,9 @@ export default {
       collapseDuration: 0,
       tabs: ["정보"],
       vertical: { vertical: true, navs: "col-md-1", content: "col-md-11" },
-      serverChangeKey: 0,
       pagination: { align: "end" },
       loading: true,
       userRoleCd: sessionStorage.getItem("userRoleCd"),
-      vmListKey: 0,
       chartDataCnt: { os: {}, power: {}, usage: {} },
     };
   },
