@@ -9,6 +9,80 @@
           </form>
         </CCol>
       </CRow>
+      <CRow class="">
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>서버 개수</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '서울 :' + chartDataCnt['location']['s'],
+                  '3공장: ' + chartDataCnt['location']['g3'],
+                  '1공장: ' + chartDataCnt['location']['g1'],
+                  '2공장: ' + chartDataCnt['location']['g2'],
+                  '4공장: ' + chartDataCnt['location']['g4'],
+                  '군산: ' + chartDataCnt['location']['gs'],
+                ]"
+                :datas="[
+                  chartDataCnt['location']['s'],
+                  chartDataCnt['location']['g3'],
+                  chartDataCnt['location']['g1'],
+                  chartDataCnt['location']['g2'],
+                  chartDataCnt['location']['g4'],
+                  chartDataCnt['location']['gs'],
+                ]"
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>운영 상태</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '지급사용 :' + chartDataCnt['opr']['op'],
+                  '폐기대상: ' + chartDataCnt['opr']['dis'],
+                  '보관: ' + chartDataCnt['opr']['keep'],
+                ]"
+                :datas="[
+                  chartDataCnt['opr']['op'],
+                  chartDataCnt['opr']['dis'],
+                  chartDataCnt['opr']['keep'],
+                ]"
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>OS 및 스토리지</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '윈도우 :' + chartDataCnt['os']['nt'],
+                  '리눅스: ' + chartDataCnt['os']['linux'],
+                  '스토리지: ' + chartDataCnt['os']['storage'],
+                  '기타: ' +
+                    (items.length -
+                      chartDataCnt['os']['nt'] -
+                      chartDataCnt['os']['linux'] -
+                      chartDataCnt['os']['storage']),
+                ]"
+                :datas="[
+                  chartDataCnt['os']['nt'],
+                  chartDataCnt['os']['linux'],
+                  chartDataCnt['os']['storage'],
+                  items.length -
+                    chartDataCnt['os']['nt'] -
+                    chartDataCnt['os']['linux'] -
+                    chartDataCnt['os']['storage'],
+                ]"
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
       <CDataTable
         :items="items"
         :fields="fields"
@@ -80,6 +154,7 @@
 import axios from "axios";
 import CTableWrapper from "../base/TableBasicServerInfo.vue";
 import ServersInfo from "./ServersInfo.vue";
+import CChartDoughnutAdv from "../base/CChartDoughnutAdv";
 
 const fields = [
   { key: "locationNm", label: "사업장", _style: "width:110px" },
@@ -111,7 +186,7 @@ const fieldsServerChange = [
 
 export default {
   name: "Servers",
-  components: { CTableWrapper, ServersInfo },
+  components: { CTableWrapper, ServersInfo, CChartDoughnutAdv },
   data() {
     return {
       fields: fields,
@@ -125,6 +200,7 @@ export default {
       serverChangeKey: 0,
       pagination: { align: "end" },
       loading: true,
+      chartDataCnt: { location: {}, os: {}, opr: {} },
     };
   },
   methods: {
@@ -171,9 +247,31 @@ export default {
                 [(item[key] = !item[key] ? "-" : item[key])];
             return { ...item, id };
           });
+          this.setChartData();
           this.loading = false;
         })
         .catch((e) => console.log(e));
+    },
+    setChartData() {
+      this.chartDataCnt["location"] = {
+        s: this.items.filter((o) => o.locationNm.indexOf("본사") > -1).length,
+        g1: this.items.filter((o) => o.locationNm === "1공장").length,
+        g2: this.items.filter((o) => o.locationNm === "2공장").length,
+        g3: this.items.filter((o) => o.locationNm === "3공장").length,
+        g4: this.items.filter((o) => o.locationNm === "4공장").length,
+        gs: this.items.filter((o) => o.locationNm === "군산").length,
+      };
+      this.chartDataCnt["opr"] = {
+        op: this.items.filter((o) => o.oprNm === "지급사용").length,
+        keep: this.items.filter((o) => o.oprNm === "보관").length,
+        dis: this.items.filter((o) => o.oprNm === "폐기대상").length,
+      };
+      this.chartDataCnt["os"] = {
+        nt: this.items.filter((o) => o.serverOsLine === "NT").length,
+        linux: this.items.filter((o) => o.serverOsLine === "Linux").length,
+        storage: this.items.filter((o) => o.serverOsLine === "Storage").length,
+      };
+      this.chartDataCnt["os"];
     },
   },
   created: function () {
