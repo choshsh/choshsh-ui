@@ -25,9 +25,6 @@ public class VmSvc {
 	private VmRepo vmRepo;
 
 	@Autowired
-	private ExcelUtil exu;
-
-	@Autowired
 	private ChartUtil cu;
 
 	public int getVmCount(VmSearch vmSearch) throws Exception {
@@ -80,8 +77,7 @@ public class VmSvc {
 				{ "vmComment", "Comment" } };
 		String[] shArr = { "본사", "구미", "삭제" };
 
-		exu.setWbNm("가상서버_리스트");
-
+		ExcelUtil exu = new ExcelUtil("가상서버_리스트");
 		for (String s : shArr) {
 			exu.addSheet(s);
 			/* 헤더 */
