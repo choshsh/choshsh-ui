@@ -41,6 +41,10 @@ export default {
           /* reverse: true */
         },
         rotation: 0.5 * Math.PI,
+        animation: {
+          duration: 0, // general animation time
+        },
+        // responsiveAnimationDuration: 0,
       };
     },
   },
