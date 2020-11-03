@@ -1,5 +1,9 @@
 <template>
-  <CChartDoughnut :datasets="defaultDatasets" :labels="labels" :options="defaultOptions" />
+  <CChartDoughnut
+    :datasets="defaultDatasets"
+    :labels="labels"
+    :options="defaultOptions"
+  />
 </template>
 
 <script>
@@ -10,20 +14,20 @@ export default {
   components: { CChartDoughnut },
   data() {
     return {
-      backgroundColor: ["#007bff", "#DD1B16", "#41B883", "#E46651"]
+      backgroundColor: ["#007bff", "#DD1B16", "#41B883", "#E46651", "#f9b115"],
     };
   },
   props: {
     datas: Array,
-    labels: Array
+    labels: Array,
   },
   computed: {
     defaultDatasets() {
       return [
         {
           data: this.datas,
-          backgroundColor: this.backgroundColor
-        }
+          backgroundColor: this.backgroundColor,
+        },
       ];
     },
     defaultOptions() {
@@ -32,13 +36,13 @@ export default {
           display: true,
           position: "top",
           labels: {
-            boxWidth: 20
-          }
+            boxWidth: 20,
+          },
           /* reverse: true */
         },
-        rotation: 0.5 * Math.PI
+        rotation: 0.5 * Math.PI,
       };
-    }
-  }
+    },
+  },
 };
 </script>

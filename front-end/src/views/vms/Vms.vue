@@ -14,6 +14,55 @@
           </form>
         </CCol>
       </CRow>
+      <CRow class="">
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>용도</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '운영: ' + chartDataCnt['usage']['op'],
+                  '개발: ' + chartDataCnt['usage']['old'],
+                  '조회: ' + chartDataCnt['usage']['dev'],
+                ]"
+                :datas="[
+                  chartDataCnt['usage']['op'],
+                  chartDataCnt['usage']['old'],
+                  chartDataCnt['usage']['dev'],
+                ]" /></CCardBody
+          ></CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>전원</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  'ON: ' + chartDataCnt['power']['on'],
+                  'OFF: ' + chartDataCnt['power']['off'],
+                ]"
+                :datas="[
+                  chartDataCnt['power']['on'],
+                  chartDataCnt['power']['off'],
+                ]" /></CCardBody
+          ></CCard>
+        </CCol>
+        <CCol col="4">
+          <CCard>
+            <CCardHeader>OS</CCardHeader>
+            <CCardBody>
+              <CChartDoughnutAdv
+                :labels="[
+                  '윈도우: ' + chartDataCnt['os']['nt'],
+                  '리눅스: ' + chartDataCnt['os']['linux'],
+                ]"
+                :datas="[
+                  chartDataCnt['os']['nt'],
+                  chartDataCnt['os']['linux'],
+                ]" /></CCardBody
+          ></CCard>
+        </CCol>
+      </CRow>
       <CDataTable
         :items="items"
         :fields="fields"
@@ -101,6 +150,7 @@
 <script>
 import axios from "axios";
 import VmsInfo from "./VmsInfo.vue";
+import CChartDoughnutAdv from "../base/CChartDoughnutAdv";
 
 const fields = [
   { key: "vmClusterLocationNm", label: "사업장", _style: "width:110px" },
@@ -125,7 +175,7 @@ const fields = [
 
 export default {
   name: "Vms",
-  components: { VmsInfo },
+  components: { VmsInfo, CChartDoughnutAdv },
   data() {
     return {
       fields: fields,
@@ -140,6 +190,7 @@ export default {
       loading: true,
       userRoleCd: sessionStorage.getItem("userRoleCd"),
       vmListKey: 0,
+      chartDataCnt: { os: {}, power: {}, usage: {} },
     };
   },
   methods: {
@@ -167,9 +218,25 @@ export default {
                 [(item[key] = !item[key] ? "-" : item[key])];
             return { ...item, id };
           });
+          this.setChartData();
           this.loading = false;
         })
         .catch((e) => console.log(e));
+    },
+    setChartData() {
+      this.chartDataCnt["os"] = {
+        nt: this.items.filter((o) => o.vmOsLine === "NT").length,
+        linux: this.items.filter((o) => o.vmOsLine === "LINUX").length,
+      };
+      this.chartDataCnt["power"] = {
+        on: this.items.filter((o) => o.vmPowerOn === "ON").length,
+        off: this.items.filter((o) => o.vmPowerOn === "OFF").length,
+      };
+      this.chartDataCnt["usage"] = {
+        op: this.items.filter((o) => o.vmUsageNm === "운영").length,
+        old: this.items.filter((o) => o.vmUsageNm === "조회").length,
+        dev: this.items.filter((o) => o.vmUsageNm === "개발").length,
+      };
     },
     delData(vmNoParam) {
       axios
