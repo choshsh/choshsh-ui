@@ -22,13 +22,13 @@
               <CChartDoughnutAdv
                 :labels="[
                   '운영: ' + chartDataCnt['usage']['op'],
-                  '개발: ' + chartDataCnt['usage']['old'],
-                  '조회: ' + chartDataCnt['usage']['dev'],
+                  '개발: ' + chartDataCnt['usage']['dev'],
+                  '조회: ' + chartDataCnt['usage']['old'],
                 ]"
                 :datas="[
                   chartDataCnt['usage']['op'],
-                  chartDataCnt['usage']['old'],
                   chartDataCnt['usage']['dev'],
+                  chartDataCnt['usage']['old'],
                 ]" /></CCardBody
           ></CCard>
         </CCol>
