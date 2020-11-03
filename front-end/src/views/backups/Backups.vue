@@ -50,7 +50,7 @@
             <CCardBody>
               - 기간
               <br />
-              <span class="ml-3">
+              <span class="ml-3 font-weight-bold">
                 {{ searchParam["workflowStartDate"] }} ~
                 {{ searchParam["workflowEndDate"] }}</span
               >
@@ -58,19 +58,15 @@
               <br />
               - 백업 용량
               <br />
-              <span class="ml-3">
+              <span class="ml-3 font-weight-bold">
                 {{
-                  Math.round(
-                    items
-                      .filter((o) => o.workflowStatus === "succeeded")
-                      .map((a) => a.saveSetSize)
-                      .reduce(function add(sum, val) {
-                        return sum + val;
-                      }, 0)
-                  )
+                  this.backupSizeTotal > 0
+                    ? Math.round(backupSizeTotal / 1024, 0)
+                    : 0
                 }}
-                GB</span
-              >
+                TB
+              </span>
+              <span class=""> ({{ backupSizeTotal }} GB) </span>
               <br />
               <br />
               <span class="font-italic"
@@ -244,6 +240,7 @@ export default {
       searchParam: {},
       tableFilter: { label: "검색", placeholder: "검색어 입력..." },
       backupChartKey: 0,
+      backupSizeTotal: 0,
     };
   },
   methods: {
@@ -308,6 +305,7 @@ export default {
             "-" +
             res.data.getBackupList.nmcSearch.workflowEndDate.substr(3, 2);
           this.searchParam["nlCd"] = res.data.getBackupList.nmcSearch.nlCd;
+          this.setBackupSize();
           this.loading = false;
         })
         .catch((e) => console.log(e));
@@ -330,6 +328,19 @@ export default {
     },
     getChartData() {
       return this.items.filter((o) => o.workflowStatus === "succeeded");
+    },
+    setBackupSize() {
+      this.backupSizeTotal =
+        this.items.length > 0
+          ? Math.round(
+              this.items
+                .filter((o) => o.workflowStatus === "succeeded")
+                .map((a) => a.saveSetSize)
+                .reduce(function add(sum, val) {
+                  return sum + val;
+                }, 0)
+            )
+          : 0;
     },
   },
   created: function () {

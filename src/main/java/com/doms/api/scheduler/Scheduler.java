@@ -87,7 +87,7 @@ public class Scheduler {
 
 				title = "[백업 알림] " + strDate;
 				msg += strDate + " 기준,";
-				msg += "\n전일 19:00 ~ 금일 09:00 간 Networker 백업 실행 상태는 아래와 같습니다.\n";
+				msg += "\n전일 18:00 ~ 금일 10:00 간 Networker 백업 실행 상태는 아래와 같습니다.\n";
 
 				for (BackupDTO item : (List<BackupDTO>) backupSvc.getBackupCdList("location").get("location")) {
 					msg += backupSvc.getMailNotiContent(item.getNlCd(), item.getNlNm());
