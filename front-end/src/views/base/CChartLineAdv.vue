@@ -16,7 +16,7 @@ export default {
   components: { CChartLine, ChartJsPluginDataLabels },
   data() {
     return {
-      backgroundColor: ["#007bff", "#DD1B16", "#41B883", "#E46651"]
+      backgroundColor: ["#007bff", "#DD1B16", "#41B883", "#E46651"],
     };
   },
   props: {
@@ -38,9 +38,9 @@ export default {
         "9월",
         "10월",
         "11월",
-        "12월"
-      ]
-    }
+        "12월",
+      ],
+    },
   },
   computed: {
     defaultDatasets() {
@@ -55,24 +55,24 @@ export default {
           display: true,
           position: "top",
           labels: {
-            boxWidth: 20
-          }
+            boxWidth: 20,
+          },
         },
         plugins: {
           datalabels: {
             color: this.color,
             font: {
               weight: "bold",
-              size: 12
+              size: 12,
             },
-            align: "top"
-          }
+            align: "top",
+          },
         },
         scales: {
           xAxes: [
             {
-              display: true
-            }
+              display: true,
+            },
           ],
           yAxes: [
             {
@@ -80,13 +80,16 @@ export default {
               ticks: {
                 min: 0,
                 max: this.yMax,
-                maxTicksLimit: 200 / 50 + 1
-              }
-            }
-          ]
-        }
+                maxTicksLimit: 200 / 50 + 1,
+              },
+            },
+          ],
+        },
+        animation: {
+           easing: "easeOutCirc",
+        },
       };
-    }
+    },
   },
   methods: {
     setData() {
@@ -100,11 +103,11 @@ export default {
           pointHoverBorderWidth: 6,
           data: o,
           fill: false,
-          steppedLine: this.steppedLine
+          steppedLine: this.steppedLine,
         });
       });
       return arr;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -128,6 +128,8 @@ export default {
         server: 0,
         vm: 0,
       },
+      tmpServer: [],
+      tmpVM: [],
     };
   },
   methods: {
@@ -135,8 +137,12 @@ export default {
       axios
         .post("/api/getServerChartYear", { plant: plantParam })
         .then((res) => {
-          this.chartItems[this.objList[0]].push(res.data);
-          if (init > 0) this.setServerChart("G");
+          if (init > 0) {
+            this.tmpServer = res.data;
+            this.setServerChart("G", 0);
+          } else {
+            this.chartItems[this.objList[0]] = [this.tmpServer, res.data];
+          }
         })
         .catch((e) => console.log(e));
     },
@@ -146,8 +152,12 @@ export default {
           vmClusterLocationNm: vmClusterLocationNmParam,
         })
         .then((res) => {
-          this.chartItems[this.objList[1]].push(res.data);
-          if (init > 0) this.setVmChart("구미");
+          if (init > 0) {
+            this.tmpVM = res.data;
+            this.setVmChart("구미", 0);
+          } else {
+            this.chartItems[this.objList[1]] = [this.tmpVM, res.data];
+          }
         })
         .catch((e) => console.log(e));
     },
@@ -260,7 +270,10 @@ export default {
 
         str += "<tr>";
         str += "<th>폐기일자</th>";
-        str += "<td>" + (item.vmDelDate ? item.vmDelDate.substr(0, 10) : "-") + "</td>";
+        str +=
+          "<td>" +
+          (item.vmDelDate ? item.vmDelDate.substr(0, 10) : "-") +
+          "</td>";
         str += "</tr>";
       }
 

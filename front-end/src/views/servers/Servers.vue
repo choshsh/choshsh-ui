@@ -1,7 +1,7 @@
 <template>
   <CCard>
     <CCardBody>
-      <CRow>
+      <CRow class="mb-3">
         <CCol col="10" sm="10" md="10" xl="11" class="mb-3 mb-xl-0"></CCol>
         <CCol col="1" class="mb-3 mb-xl-0">
           <form action="/api/serverExcel" method="POST">
