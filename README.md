@@ -1,60 +1,44 @@
 # ITSM-View
 
-## 1. 목표
+## 목표
 
 - SE 자원 관리
 - SE 업무 효율화
 
-## 2. 환경
+## 환경
 
-- Docker 환경
-- Front-End
-- Vue.js
-- Back-End
-- Spring 2.3.2
-- openjdk 14.0.2
-- 웹서버 / WAS / DB
-- nginx 1.19.3 / tomcat 10 / mysql 8
-- CI/CD
-- gitlab-runner(shell)
+### 기본 환경
+
+- 모두Docker 환경
+- 웹서버: nginx 1.19.3
+- WAS - Cluster: tomcat 10 * 2ea (로드밸런싱)
+- DBMS: mysql 8
+- CI/CD: gitlab-runner(shell)
+
+### Application
+
+- Front-End: Vue.js
+- Back-End: Spring 2.3.2, openjdk 14
 
 ## 3. 구조
 
-docker/
-├── backups
-│   ├── full_backup_20201028.sql
-│   ├── full_backup_20201029.sql
-│   ├── full_backup_20201030.sql
-│   ├── full_backup_20201031.sql
-│   ├── full_backup_20201101.sql
-│   ├── full_backup_20201102.sql
-│   ├── full_backup_20201103.sql
-│   ├── log
-│   ├── start-backup.sh
-│   └── start-restore.sh
+docker
 ├── config
-│   ├── gitlab-runner
-│   │   ├── auto-deploy.sh
-│   │   ├── config.toml
-│   │   └── deploy.sh
-│   ├── nginx
-│   │   ├── default.conf
-│   │   ├── nginx.conf
-│   │   ├── web-lb.conf
-│   │   ├── web-was1.conf
-│   │   └── web-was2.conf
-│   └── was
-│       ├── app.jar
-│       └── Dockerfile
-├── docker-compose.yml
-└── images
-    ├── gitlab-runner.tar
-    ├── mysql.tar
-    ├── nginx.tar
-    ├── node-exporter.tar
-    ├── openjdk-14.0.2.tar
-    └── portainer-ce.tar
-       
+│ ├── gitlab-runner
+│ │ ├── [auto-deploy.sh](http://auto-deploy.sh/)
+│ │ ├── config.toml
+│ │ └── [deploy.sh](http://deploy.sh/)
+│ ├── nginx
+│ │ ├── default.conf
+│ │ ├── nginx.conf
+│ │ ├── web-lb.conf
+│ │ ├── web-was1.conf
+│ │ └── web-was2.conf
+│ ├── was
+│    ├── app.jar
+│    └── Dockerfile
+└── docker-compose.yml
+
 ## 4. docker-compose
 
 ```yaml
