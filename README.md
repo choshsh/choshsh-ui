@@ -9,18 +9,30 @@
 
 ### 기본 환경
 
-- 모두Docker 환경
-- 웹서버: nginx 1.19.3
-- WAS - Cluster: tomcat 10 * 2ea (로드밸런싱)
-- DBMS: mysql 8
-- CI/CD: gitlab-runner(shell)
+### Docker 환경
 
 ### Application
 
 - Front-End: Vue.js
 - Back-End: Spring 2.3.2, openjdk 14
 
-## 3. 운영서버 구조
+### 웹서버
+
+- nginx 1.19.3
+
+### WAS - Clustering
+
+- tomcat 10 * 2ea (로드밸런싱)
+
+### DBMS
+
+- mysql 8
+
+### CI/CD
+
+- gitlab-runner(shell)로 gitlab에 merge 시 자동 deploy
+
+## 운영서버 구조
 
 ```yaml
 docker/
@@ -44,7 +56,7 @@ docker/
 └── docker-compose.yml
 ```
 
-## 4. docker-compose
+## docker-compose
 
 ```yaml
 version: '3.8'
