@@ -20,24 +20,29 @@
 - Front-End: Vue.js
 - Back-End: Spring 2.3.2, openjdk 14
 
-## 3. 구조
+## 3. 운영서버 구조
 
-docker
+```yaml
+docker/
+├── backups
+│   ├── start-backup.sh
+│   └── start-restore.sh
 ├── config
-│ ├── gitlab-runner
-│ │ ├── [auto-deploy.sh](http://auto-deploy.sh/)
-│ │ ├── config.toml
-│ │ └── [deploy.sh](http://deploy.sh/)
-│ ├── nginx
-│ │ ├── default.conf
-│ │ ├── nginx.conf
-│ │ ├── web-lb.conf
-│ │ ├── web-was1.conf
-│ │ └── web-was2.conf
-│ ├── was
-│    ├── app.jar
-│    └── Dockerfile
+│   ├── gitlab-runner
+│   │   ├── auto-deploy.sh
+│   │   ├── config.toml
+│   │   └── deploy.sh
+│   ├── nginx
+│   │   ├── default.conf
+│   │   ├── nginx.conf
+│   │   ├── web-lb.conf
+│   │   ├── web-was1.conf
+│   │   └── web-was2.conf
+│   └── was
+│       ├── app.jar
+│       └── Dockerfile
 └── docker-compose.yml
+```
 
 ## 4. docker-compose
 
