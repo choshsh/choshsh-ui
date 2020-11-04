@@ -30,10 +30,6 @@ public class Scheduler {
 	@Autowired
 	private BackupSvc backupSvc;
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	private Date now = new Date();
-	private String strDate = sdf.format(now);
-
 	private String title = "";
 	private String msg = "";
 
@@ -46,15 +42,23 @@ public class Scheduler {
 	@Scheduled(cron = "0 30 10 * * 1-5")
 	public void diSchedulerMorning() {
 		if (profiles.equalsIgnoreCase("prod")) {
-			String[] mailToArr = { "choshsh@torayamk.com", "jewoos16@torayamk.com", "shj0322@torayamk.com",
-					"deliod085@torayamk.com" };
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date now = new Date();
+				String strDate = sdf.format(now);
 
-			if (diSvc.getMnYn(strDate) < 1) {
-				title = "[본사 서버실 점검] " + strDate + " 오전 점검 요망";
-				msg = strDate + " 오전에 서버실 점검이 이루어지지 않았습니다.\n\n점검을 부탁드립니다.";
-				for (String s : mailToArr) {
-					mailSvc.mailSend(new MailDTO(s, title, msg));
+				String[] mailToArr = { "choshsh@torayamk.com", "jewoos16@torayamk.com", "shj0322@torayamk.com",
+						"deliod085@torayamk.com" };
+
+				if (diSvc.getMnYn(strDate) < 1) {
+					title = "[본사 서버실 점검] " + strDate + " 오전 점검 요망";
+					msg = strDate + " 오전에 서버실 점검이 이루어지지 않았습니다.\n\n점검을 부탁드립니다.";
+					for (String s : mailToArr) {
+						mailSvc.mailSend(new MailDTO(s, title, msg));
+					}
 				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
@@ -64,15 +68,22 @@ public class Scheduler {
 	@Scheduled(cron = "0 0 17 * * 1-5")
 	public void diSchedulerAfternoon() {
 		if (profiles.equalsIgnoreCase("prod")) {
-			String[] mailToArr = { "choshsh@torayamk.com", "jewoos16@torayamk.com", "shj0322@torayamk.com",
-					"deliod085@torayamk.com" };
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date now = new Date();
+				String strDate = sdf.format(now);
+				String[] mailToArr = { "choshsh@torayamk.com", "jewoos16@torayamk.com", "shj0322@torayamk.com",
+						"deliod085@torayamk.com" };
 
-			if (diSvc.getAftnYn(strDate) < 1) {
-				title = "[본사 서버실 점검] " + strDate + " 오후 점검 요망";
-				msg = strDate + " 오후에 서버실 점검이 이루어지지 않았습니다.\n\n점검을 부탁드립니다.";
-				for (String s : mailToArr) {
-					mailSvc.mailSend(new MailDTO(s, title, msg));
+				if (diSvc.getAftnYn(strDate) < 1) {
+					title = "[본사 서버실 점검] " + strDate + " 오후 점검 요망";
+					msg = strDate + " 오후에 서버실 점검이 이루어지지 않았습니다.\n\n점검을 부탁드립니다.";
+					for (String s : mailToArr) {
+						mailSvc.mailSend(new MailDTO(s, title, msg));
+					}
 				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
@@ -82,6 +93,10 @@ public class Scheduler {
 	public void backupNoti() {
 		if (profiles.equalsIgnoreCase("prod")) {
 			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date now = new Date();
+				String strDate = sdf.format(now);
+
 				String[] mailToArr = { "choshsh@torayamk.com", "shj0322@torayamk.com", "deliod085@torayamk.com",
 						"mdhong@torayamk.com" };
 
