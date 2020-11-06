@@ -115,8 +115,6 @@ services:
       - /root/docker/config/gitlab-runner:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/docker/config/gitlab-runner/deploy.sh:/tmp/deploy.sh
-        #      - /root/docker/config/gitlab-runner/id_rsa:/home/gitlab-runner/.ssh/id_rsa
-        #- /root/docker/config/gitlab-runner/id_rsa.pub:/home/gitlab-runner/.ssh/id_rsa.pub
     environment:
       TZ: Asia/Seoul
 ```
