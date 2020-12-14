@@ -3,11 +3,14 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'com.google.cloud.tools.jib' version '2.7.0'
+	id "com.github.node-gradle.node" version "1.5.3"
 }
 
 group = 'com.doms'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '14'
+targetCompatibility = '14'
 
 configurations {
 	compileOnly {
@@ -18,6 +21,15 @@ configurations {
 repositories {
 	mavenCentral()
 }
+
+node{
+	version = '14.15.1'
+	npmVersion = '6.14.8'
+	workDir = file("./nodejs")
+	npmWorkDir = file("./front-end")
+	nodeModulesDir = file("./front-end")
+}
+
 
 dependencies {
  	implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -35,6 +47,20 @@ dependencies {
 	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
 	compile group: 'com.oracle.ojdbc', name: 'orai18n', version: '19.3.0.0'
 }
+
+task setUp(type: NpmTask){
+	description = "Install Node.js pkg"
+	args = ['install']
+	inputs.files file('package.json')
+	outputs.files file('node_modules')
+}
+
+task buildFrontEnd(type: NpmTask, dependsOn: setUp){
+	description = "Build Vue.js"
+	args = ['run', 'build']
+}
+
+processResources.dependsOn 'buildFrontEnd'
 
 test {
 	useJUnitPlatform()
