@@ -48,14 +48,15 @@ dependencies {
 	compile group: 'com.oracle.ojdbc', name: 'orai18n', version: '19.3.0.0'
 }
 
-task setUp(type: NpmTask){
-	description = "Install Node.js pkg"
-	args = ['install']
-	inputs.files file('package.json')
-	outputs.files file('node_modules')
-}
+//task setUp(type: NpmTask){
+//	description = "Install Node.js pkg"
+//	args = ['install']
+//	inputs.files file('package.json')
+//	outputs.files file('node_modules')
+//}
 
-task buildFrontEnd(type: NpmTask, dependsOn: setUp){
+//task buildFrontEnd(type: NpmTask, dependsOn: setUp){
+task buildFrontEnd(type: NpmTask){
 	description = "Build Vue.js"
 	args = ['run', 'build']
 }
