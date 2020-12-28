@@ -1,10 +1,10 @@
 <template>
   <div>
-    <CCard>
-      <CCardHeader><strong>Navigation Menu</strong></CCardHeader>
-      <CCardBody>
-        <CRow>
-          <CCol sm="6">
+    <CRow>
+      <CCol sm="6">
+        <CCard>
+          <CCardHeader><strong>Navigation Menu</strong></CCardHeader>
+          <CCardBody>
             <table border="0" class="col-md-12">
               <tbody>
                 <tr>
@@ -53,15 +53,13 @@
                 저장
               </button>
             </div>
-          </CCol>
-        </CRow>
-      </CCardBody>
-    </CCard>
-    <CCard>
-      <CCardHeader><strong>Header Menu</strong></CCardHeader>
-      <CCardBody>
-        <CRow>
-          <CCol sm="6">
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol sm="6">
+        <CCard>
+          <CCardHeader><strong>Header Menu</strong></CCardHeader>
+          <CCardBody>
             <table border="0" class="col-md-12">
               <tbody>
                 <tr>
@@ -110,10 +108,10 @@
                 저장
               </button>
             </div>
-          </CCol>
-        </CRow></CCardBody
-      >
-    </CCard>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
   </div>
 </template>
 
