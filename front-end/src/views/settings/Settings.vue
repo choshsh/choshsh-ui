@@ -1,0 +1,189 @@
+<template>
+  <div>
+    <CCard>
+      <CCardHeader><strong>Navigation Menu</strong></CCardHeader>
+      <CCardBody>
+        <CRow>
+          <CCol sm="6">
+            <table border="0" class="col-md-12">
+              <tbody>
+                <tr>
+                  <th>
+                    Name
+                  </th>
+                  <th>Path</th>
+                  <th>Icon</th>
+                  <th style="width:5%;"></th>
+                </tr>
+                <tr v-for="(item, index) in nav" v-bind:key="index">
+                  <td>
+                    <CInput v-model="item.name" />
+                  </td>
+                  <td>
+                    <CInput v-model="item.to" />
+                  </td>
+                  <td>
+                    <CInput v-model="item.icon" />
+                  </td>
+                  <td
+                    class="align-top text-center"
+                    v-if="Boolean(index > 0 || nav.length > 1)"
+                  >
+                    <button class="btn btn-danger" @click="remove(nav, index)">
+                      <CIcon name="cil-minus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="align-top text-center">
+                    <button class="btn btn-success mb-2" @click="add(nav)">
+                      <CIcon name="cil-plus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center row-fluid mb-1 mt-4">
+              <button
+                id="saveBtn"
+                type="button"
+                class="btn btn-primary"
+                @click="save(nav, 'nav')"
+              >
+                저장
+              </button>
+            </div>
+          </CCol>
+        </CRow>
+      </CCardBody>
+    </CCard>
+    <CCard>
+      <CCardHeader><strong>Header Menu</strong></CCardHeader>
+      <CCardBody>
+        <CRow>
+          <CCol sm="6">
+            <table border="0" class="col-md-12">
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>URL</th>
+                  <th style="width:5%;"></th>
+                </tr>
+                <tr v-for="(item, index) in header" v-bind:key="index">
+                  <td>
+                    <CInput v-model="item.name" />
+                  </td>
+                  <td>
+                    <CInput
+                      v-model="item.url"
+                      placeholder="http(s)://www.choshsh.com"
+                    />
+                  </td>
+                  <td
+                    class="align-top text-center"
+                    v-if="Boolean(index > 0 || header.length > 1)"
+                  >
+                    <button
+                      class="btn btn-danger"
+                      @click="remove(header, index)"
+                    >
+                      <CIcon name="cil-minus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="align-top text-center">
+                    <button class="btn btn-success mb-2" @click="add(header)">
+                      <CIcon name="cil-plus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center row-fluid mb-1 mt-4">
+              <button
+                id="saveBtn"
+                type="button"
+                class="btn btn-primary"
+                @click="save(header, 'header')"
+              >
+                저장
+              </button>
+            </div>
+          </CCol>
+        </CRow></CCardBody
+      >
+    </CCard>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "Settings",
+  data() {
+    return {
+      nav: Array,
+      header: Array,
+    };
+  },
+  methods: {
+    getNav() {
+      axios
+        .get("/api/nav")
+        .then((res) => {
+          this.nav = res.data;
+        })
+        .catch((e) => console.log(e));
+    },
+    getHeaer() {
+      axios
+        .get("/api/header")
+        .then((res) => {
+          this.header = res.data;
+        })
+        .catch((e) => console.log(e));
+    },
+    add(array) {
+      var keys = Object.keys(array[array.length - 1]);
+      var newItem = new Object();
+
+      keys.forEach((el) => {
+        newItem[el] = "";
+      });
+
+      array.push(newItem);
+    },
+    remove(array, index) {
+      array.splice(index, 1);
+    },
+    save(array, entity) {
+      var url;
+      var param;
+
+      if (entity == "nav") {
+        url = "/api/navs";
+        param = array.map((el) => {
+          el._name = "CSidebarNavItem";
+          return el;
+        });
+      } else if (entity == "header") {
+        url = "/api/headers";
+        param = array;
+      }
+
+      axios
+        .post(url, param)
+        .then((res) => {
+          res.status == 200 ? alert("Success") : alert("Fail");
+        })
+        .catch((e) => console.log(e));
+    },
+  },
+  created() {
+    this.getNav();
+    this.getHeaer();
+  },
+};
+</script>

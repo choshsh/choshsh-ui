@@ -6,8 +6,8 @@
     @update:show="(value) => $store.commit('set', ['sidebarShow', value])"
   >
     <CSidebarBrand class="d-md-down-none" to="/">
-      <h3>ITSM-View</h3>
-<!--       <CIcon
+      <h3>ITSMV</h3>
+      <!--       <CIcon
         class="c-sidebar-brand-full"
         name="logo"
         size="custom-size"
@@ -23,7 +23,7 @@
       /> -->
     </CSidebarBrand>
 
-    <CRenderFunction flat :content-to-render="$options.nav"/>
+    <CRenderFunction flat :content-to-render="nav" />
     <CSidebarMinimizer
       class="d-md-down-none"
       @click.native="$store.commit('set', ['sidebarMinimize', !minimize])"
@@ -32,18 +32,33 @@
 </template>
 
 <script>
-import nav from './_nav'
+import axios from "axios";
 
 export default {
-  name: 'TheSidebar',
-  nav,
+  name: "TheSidebar",
+  data() {
+    return { nav: [{ _name: "CSidebarNav", _children: [] }] };
+  },
   computed: {
-    show () {
-      return this.$store.state.sidebarShow
+    show() {
+      return this.$store.state.sidebarShow;
     },
-    minimize () {
-      return this.$store.state.sidebarMinimize
-    }
-  }
-}
+    minimize() {
+      return this.$store.state.sidebarMinimize;
+    },
+  },
+  methods: {
+    setBoardList() {
+      axios
+        .get("/api/nav")
+        .then((res) => {
+          this.nav[0]["_children"] = res.data;
+        })
+        .catch((e) => console.log(e));
+    },
+  },
+  created() {
+    this.setBoardList();
+  },
+};
 </script>

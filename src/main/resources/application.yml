@@ -1,26 +1,13 @@
 spring: # default
-  db1:
-    datasource:
-      username: test
-      password: test
-  db2:
-    datasource:
-      jdbc-url: jdbc:oracle:thin:@127.0.0.1/SAMPLE
-      username: test
-      password: test
-  db3:
-    datasource:
-      jdbc-url: jdbc:postgresql://127.0.0.1/SAMPLE
-      username: test
-      password: test
-
-  mail:
-    host: 51.2.30.41
-    port: 25
-    protocol: smtp
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-admin-password: choshsh
 logging:
   pattern:
-    console: '%clr{faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+    console: '%date%clr{faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
 server:
   compression:
     enabled: true
@@ -29,36 +16,31 @@ server:
     context-path: /
     session:
       timeout: 14400
-linkedURL:
-  monitoring: http://127.0.0.1/
-  repo: http://127.0.0.1/
-  gitlab: http://127.0.0.1/
 --- 
 spring: # dev
   profiles: dev
-  db1:
-    datasource:
-      jdbc-url: jdbc:mysql://127.0.0.1:3307/SAMPLE?serverTimezone=UTC&characterEncoding=UTF-8
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: create-drop
+      use-new-id-generator-mappings: true
+  datasource:
+    url: jdbc:h2:mem:itsmv
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
 logging:
   level:
     com:
-      doms: debug
+      itsmv: debug
     root: info
 ---
 spring: # prod
   profiles:  prod
-  db1:
-    datasource:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/SAMPLE?serverTimezone=UTC&characterEncoding=UTF-8
 logging:
   level:
-    root: error
----
-spring: # prodSlave
-  profiles:  prodSlave
-  db1:
-    datasource:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/SAMPLE?serverTimezone=UTC&characterEncoding=UTF-8
-logging:
-  level:
-    root: error
+    com:
+      itsmv: info
+    root: info  

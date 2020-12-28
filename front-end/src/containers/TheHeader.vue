@@ -31,23 +31,11 @@
       </CHeaderNavItem>
       <CHeaderNavItem
         class="px-3"
-        v-if="Boolean(userRoleCd === 'M001' || userRoleCd === 'T001')"
+        v-for="(item, index) in data"
+        v-bind:key="index"
       >
-        <CHeaderNavLink to="/egressions">외출 관리</CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
         <CHeaderNavLink>
-          <div @click="monitoringLink()">통합 모니터링</div>
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink>
-          <div @click="repoLink()">자료실</div>
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink>
-          <div @click="gitlabLink()">GitLab</div>
+          <div @click="openTab(item.url)">{{ item.name }}</div>
         </CHeaderNavLink>
       </CHeaderNavItem>
     </CHeaderNav>
@@ -65,40 +53,27 @@ export default {
   },
   data() {
     return {
-      userRoleCd: sessionStorage.getItem("userRoleCd"),
-      monitoring: "",
-      repo: "",
-      gitlab: "",
+      data: Array,
     };
   },
   props: {
     functions: { type: Function },
   },
   methods: {
-    monitoringLink() {
-      const content = "모니터링 시스템 접속정보\n\nID : Guest\nPW : Guest";
-      alert(content);
-      window.open(this.monitoring, "_blank");
-    },
-    repoLink() {
-      window.open(this.repo, "_blank");
-    },
-    gitlabLink() {
-      window.open(this.gitlab, "_blank");
-    },
-    getLinkedURL() {
+    getData() {
       axios
-        .post("/api/linkedURL")
+        .get("/api/header")
         .then((res) => {
-          this.monitoring = res.data.monitoring;
-          this.repo = res.data.repo;
-          this.gitlab = res.data.gitlab;
+          this.data = res.data;
         })
         .catch((e) => console.log(e));
     },
+    openTab(url) {
+      window.open(url, "_blank");
+    },
   },
   created() {
-    this.getLinkedURL();
+    this.getData();
   },
 };
 </script>
