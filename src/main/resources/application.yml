@@ -1,11 +1,15 @@
 spring: # default
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        web-admin-password: choshsh
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      use-new-id-generator-mappings: true        
 logging:
+  level:
+    root: info
+    com:
+      itsmv: debug
+    '[org.springframework.web]': debug
   pattern:
     console: '%date%clr{faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
 server:
@@ -24,31 +28,36 @@ management:
         include:
         - metrics
         - health      
+        
 --- 
 spring: # dev
   profiles: dev
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
-    open-in-view: true
+    database-platform: org.hibernate.dialect.H2Dialect    
     hibernate:
       ddl-auto: create-drop
-      use-new-id-generator-mappings: true
   datasource:
-    url: jdbc:h2:mem:itsmv
+    initialization-mode: always    
     driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:itsmv
     username: sa
     password: 
-logging:
-  level:
-    com:
-      itsmv: debug
-    root: info
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-admin-password: itsmv    
 ---
 spring: # prod
   profiles:  prod
-logging:
-  level:
-    com:
-      itsmv: info
-    root: info  
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    initialization-mode: always
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    url: jdbc:mysql://127.0.0.1:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: itsmv

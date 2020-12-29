@@ -97,12 +97,12 @@ function configRoutes() {
           component: Dashboard,
         },
         {
-          path: "/settings",
+          path: "settings",
           name: "Settings",
           component: Settings,
         },
         {
-          path: "/monitoring",
+          path: "monitoring",
           name: "Monitoring",
           component: Monitoring,
         },
