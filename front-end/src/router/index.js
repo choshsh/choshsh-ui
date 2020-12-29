@@ -7,6 +7,7 @@ const TheContainer = () => import("@/containers/TheContainer");
 // Views
 const Dashboard = () => import("@/views/Dashboard");
 const Settings = () => import("@/views/settings/Settings");
+const Monitoring = () => import("@/views/monitoring/Monitoring");
 
 const Colors = () => import("@/views/theme/Colors");
 const Typography = () => import("@/views/theme/Typography");
@@ -99,6 +100,11 @@ function configRoutes() {
           path: "/settings",
           name: "Settings",
           component: Settings,
+        },
+        {
+          path: "/monitoring",
+          name: "Monitoring",
+          component: Monitoring,
         },
         {
           path: "theme",

@@ -3,13 +3,14 @@ Navigation sidebar
  */
 INSERT INTO nav (id, _name, name, to, icon) VALUES
      ('1', 'CSidebarNavItem', 'Dashboard', '/dashboard', 'cil-speedometer'),
-     ('2', 'CSidebarNavItem', 'Physical server', '/servers', 'cil-laptop'),
-     ('3', 'CSidebarNavItem', 'Virtual server', '/vms', 'cil-cloud'),
-     ('4', 'CSidebarNavItem', 'Backup', '/backups', 'cil-data-transfer-down'),
-     ('5', 'CSidebarNavItem', 'Chart', '/vmsChart', 'cil-chart-pie'),
-     ('6', 'CSidebarNavItem', 'SE Calendar', '/dailyInspection', 'cil-pencil'),
-     ('7', 'CSidebarNavItem', 'Meeting', '/seMonthConf', 'cil-people'),
-     ('8', 'CSidebarNavItem', 'Settings', '/settings', 'cil-settings');
+     ('2', 'CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
+     ('3', 'CSidebarNavItem', 'Physical server', '/servers', 'cil-laptop'),
+     ('4', 'CSidebarNavItem', 'Virtual server', '/vms', 'cil-cloud'),
+     ('5', 'CSidebarNavItem', 'Backup', '/backups', 'cil-data-transfer-down'),
+     ('6', 'CSidebarNavItem', 'Chart', '/vmsChart', 'cil-chart-pie'),
+     ('7', 'CSidebarNavItem', 'SE Calendar', '/dailyInspection', 'cil-pencil'),
+     ('8', 'CSidebarNavItem', 'Meeting', '/seMonthConf', 'cil-people'),
+     ('9', 'CSidebarNavItem', 'Settings', '/settings', 'cil-settings');
      
 
 /* 

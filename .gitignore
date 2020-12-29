@@ -6,6 +6,7 @@ build
 !**/src/test/**/build/
 bin/
 src/main/resources/static/
+front-end/npm-v*
 
 ### STS ###
 .apt_generated
