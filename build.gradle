@@ -57,7 +57,8 @@ npmSetup.onlyIf{
 
 task setUp(type: NpmTask){
 	description = "Install Node.js pkg"
-	args = ['install']
+	args = ['install', 'chromedriver', '--unsafe-perm=true', '--cache', '.']
+	args = ['install', '--cache', '.']
 	inputs.files file('package.json')
 	outputs.files file('node_modules')
 }
