@@ -174,10 +174,14 @@ export default {
       axios
         .post(url, param)
         .then((res) => {
-          res.status == 200 ? alert("Success") : alert("Fail");
+          res.status == 200 ? this.onSuccess(entity) : alert("Fail");
         })
         .catch((e) => console.log(e));
     },
+    onSuccess(entity) {
+      alert("Success");
+      this.$emit("on-save-setting", entity);
+    }
   },
   created() {
     this.getNav();

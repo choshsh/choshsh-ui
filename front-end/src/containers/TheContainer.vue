@@ -1,13 +1,16 @@
 <template>
   <div class="c-app">
-    <TheSidebar />
+    <TheSidebar ref="sidebar" />
     <CWrapper>
-      <TheHeader :functions="reload" />
+      <TheHeader 
+        ref="header"
+        :functions="reload" 
+      />
       <div class="c-body">
         <main class="c-main">
           <CContainer fluid :key="mainKey">
             <transition name="fade">
-              <router-view></router-view>
+              <router-view @on-save-setting="refresh"></router-view>
             </transition>
           </CContainer>
         </main>
@@ -37,6 +40,12 @@ export default {
   methods: {
     reload() {
       this.mainKey++;
+    },
+    refresh(entity) {
+      if (entity === "nav")
+        this.$refs.sidebar.setBoardList();
+      else if (entity === "header")
+        this.$refs.header.getData();
     }
   }
 };
