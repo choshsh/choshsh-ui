@@ -55,9 +55,15 @@ npmSetup.onlyIf{
 	!npmSetup.npmDir.exists()
 }
 
-task setUp(type: NpmTask){
+task setUp01(type: NpmTask){
 	description = "Install Node.js pkg"
 	args = ['install', 'chromedriver', '--unsafe-perm=true', '--cache', '.']
+	inputs.files file('package.json')
+	outputs.files file('node_modules')
+}
+
+task setUp02(type: NpmTask, dependsOn: setUp01){
+	description = "Install Node.js pkg"
 	args = ['install', '--cache', '.']
 	inputs.files file('package.json')
 	outputs.files file('node_modules')
