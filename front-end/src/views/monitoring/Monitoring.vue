@@ -2,12 +2,22 @@
   <CCard>
     <CCardBody>
       <CTabs variant="pills" :active-tab="0">
-        <CTab class="mb-3" v-for="(item, index) in slot" v-bind:key="item">
-          <template slot="title">{{ item }}</template>
+        <CTab class="mb-3" v-for="(item, index) in data" v-bind:key="index">
+          <template slot="title">{{ item.name }}</template>
           <CRow>
             <CCol>
               <CCard>
-                <CCardBody>{{ content[index] }}</CCardBody>
+                <CCardBody>
+                  <iframe
+                    :src="item.url"
+                    class="embed-responsive-item"
+                    :height="item.height"
+                    width="100%"
+                    allowfullscreen
+                    frameborder="0"
+                    scrolling="no"
+                  />
+                </CCardBody>
               </CCard>
             </CCol>
           </CRow>
@@ -20,18 +30,26 @@
 <script>
 import axios from "axios";
 
-const slot = ["menu01", "menu02", "menu03"];
-
-const content = ["content01", "content02", "content03"];
-
 export default {
   name: "Monitoring",
   data() {
     return {
-      slot: slot,
-      content: content,
+      data: Array,
     };
   },
-  methods: {},
+  methods: {
+    getData() {
+      axios
+        .get("/api/monitoring")
+        .then((res) => {
+          this.data = res.data;
+          console.log(this.data);
+        })
+        .catch((e) => console.log(e));
+    },
+  },
+  created() {
+    this.getData();
+  },
 };
 </script>

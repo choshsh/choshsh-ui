@@ -110,6 +110,66 @@
             </div>
           </CCardBody>
         </CCard>
+        <CCard>
+          <CCardHeader><strong>Monitoring Menu</strong></CCardHeader>
+          <CCardBody>
+            <table border="0" class="col-md-12">
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Height</th>
+                  <th>URL</th>
+                  <th style="width:5%;"></th>
+                </tr>
+                <tr v-for="(item, index) in monitoring" v-bind:key="index">
+                  <td>
+                    <CInput v-model="item.name" />
+                  </td>
+                  <td>
+                    <CInput v-model="item.height" placeholder="px" />
+                  </td>
+                  <td>
+                    <CInput
+                      v-model="item.url"
+                      placeholder="http(s)://www.choshsh.com"
+                    />
+                  </td>
+                  <td
+                    class="align-top text-center"
+                    v-if="Boolean(index > 0 || header.length > 1)"
+                  >
+                    <button
+                      class="btn btn-danger"
+                      @click="remove(monitoring, index)"
+                    >
+                      <CIcon name="cil-minus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="align-top text-center">
+                    <button
+                      class="btn btn-success mb-2"
+                      @click="add(monitoring)"
+                    >
+                      <CIcon name="cil-plus" size="sm" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center row-fluid mb-1 mt-4">
+              <button
+                id="saveBtn"
+                type="button"
+                class="btn btn-primary"
+                @click="save(monitoring, 'monitoring')"
+              >
+                저장
+              </button>
+            </div>
+          </CCardBody>
+        </CCard>
       </CCol>
     </CRow>
   </div>
@@ -124,6 +184,7 @@ export default {
     return {
       nav: Array,
       header: Array,
+      monitoring: Array,
     };
   },
   methods: {
@@ -140,6 +201,15 @@ export default {
         .get("/api/header")
         .then((res) => {
           this.header = res.data;
+        })
+        .catch((e) => console.log(e));
+    },
+    getMonitoring() {
+      axios
+        .get("/api/monitoring")
+        .then((res) => {
+          this.monitoring = res.data;
+          console.log(this.data);
         })
         .catch((e) => console.log(e));
     },
@@ -169,6 +239,9 @@ export default {
       } else if (entity == "header") {
         url = "/api/headers";
         param = array;
+      } else if (entity == "monitoring") {
+        url = "/api/monitorings";
+        param = array;
       }
 
       axios
@@ -181,11 +254,12 @@ export default {
     onSuccess(entity) {
       alert("Success");
       this.$emit("on-save-setting", entity);
-    }
+    },
   },
   created() {
     this.getNav();
     this.getHeaer();
+    this.getMonitoring();
   },
 };
 </script>
