@@ -1,7 +1,7 @@
 <template>
   <CCard>
     <CCardBody>
-      <CTabs variant="pills" :active-tab="0">
+      <CTabs variant="pills" :active-tab="0" @update:activeTab="setUrl">
         <CTab class="mb-3" v-for="(item, index) in data" v-bind:key="index">
           <template slot="title">{{ item.name }}</template>
           <CRow>
@@ -9,7 +9,7 @@
               <CCard>
                 <CCardBody>
                   <iframe
-                    :src="item.url"
+                    :src="urls[index]"
                     class="embed-responsive-item"
                     :height="item.height"
                     width="100%"
@@ -34,7 +34,8 @@ export default {
   name: "Monitoring",
   data() {
     return {
-      data: Array,
+      data: [],
+      urls: [],
     };
   },
   methods: {
@@ -43,9 +44,12 @@ export default {
         .get("/api/monitoring")
         .then((res) => {
           this.data = res.data;
-          console.log(this.data);
+          this.setUrl(0);
         })
         .catch((e) => console.log(e));
+    },
+    setUrl(index) {
+      this.$set(this.urls, index, this.data[index].url);
     },
   },
   created() {
