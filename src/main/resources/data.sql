@@ -1,7 +1,7 @@
 INSERT INTO nav (_name, name, url, icon) VALUES
      --('CSidebarNavItem', 'Dashboard', '/dashboard', 'cil-speedometer'),
-     ('CSidebarNavItem', 'Server', '/server', 'cil-laptop'),
      ('CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
+     ('CSidebarNavItem', 'Server', '/server', 'cil-laptop'),
      --('CSidebarNavItem', 'Backup', '/backups', 'cil-data-transfer-down'),
      --('CSidebarNavItem', 'Chart', '/vmsChart', 'cil-chart-pie'),
      ('CSidebarNavItem', 'Calendar', '/calendar', 'cil-calendar'),
