@@ -12,28 +12,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.itsmv.api.code.DeptEntity;
 import com.itsmv.api.code.LocationEntity;
 import com.itsmv.api.code.OprEntity;
 import com.itsmv.api.code.OsEntity;
 import com.itsmv.api.code.UsageEntity;
+import com.itsmv.api.config.BaseTimeEntity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Table(name = "server")
-public class ServerEntity {
+public class ServerEntity extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "server_id")
+	private Long serverId;
 
 	@Column(name = "server_nm", nullable = false)
 	private String serverNm;
@@ -53,15 +55,24 @@ public class ServerEntity {
 	@Column(name = "maker_nm")
 	private String makerNm;
 
+	@Column(name = "maker_model_nm")
+	private String makerModelNm;
+
+	@Column(name = "warranty")
+	private Integer warranty;
+
 	@Column
 	private Integer price;
 
 	@Column
 	private String serial;
 
+	@Column
+	private String spec;
+
 	@Column(name = "buy_date", nullable = false, updatable = false)
-	@CreationTimestamp
 	private Date buyDate;
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dept_cd", insertable = false, updatable = false)
 	private DeptEntity deptEntity;
@@ -81,5 +92,12 @@ public class ServerEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "os_cd", insertable = false, updatable = false)
 	private OsEntity osEntity;
+
+	private String deptNm;
+	private String locationNm;
+	private String oprNm;
+	private String usageNm;
+	private String osNm;
+	private String osDetail;
 
 }

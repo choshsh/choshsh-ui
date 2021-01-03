@@ -1,8 +1,12 @@
 package com.itsmv.api.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServerCtrl {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ServerSvc serverSvc;
+
 	@Autowired
 	private ServerRepo serverRepo;
 
 	@GetMapping(value = "/api/server")
 	List<ServerEntity> list() {
-		List<ServerEntity> list = new ArrayList<>();
-		Iterable<ServerEntity> it = serverRepo.findAll();
-		it.forEach(o -> list.add(o));
-		return list;
+		return serverSvc.list();
 	}
 
 	@PostMapping(value = "/api/server")
@@ -32,16 +38,9 @@ public class ServerCtrl {
 		return created;
 	}
 
-	@PostMapping(value = "/api/servers")
-	List<ServerEntity> create(@RequestBody Iterable<ServerEntity> serverEntities) {
-		serverRepo.deleteAll();
-		serverRepo.saveAll(serverEntities);
-		return this.list();
-	}
-
 	@PutMapping(value = "/api/server/{id}")
 	ServerEntity update(@PathVariable("id") Long id, @RequestBody ServerEntity serverEntity) {
-		serverEntity.setId(id);
+		serverEntity.setServerId(id);
 		ServerEntity updated = serverRepo.save(serverEntity);
 		return updated;
 	}
@@ -49,5 +48,14 @@ public class ServerCtrl {
 	@DeleteMapping(value = "/api/server/{id}")
 	public void delete(@PathVariable("id") Long id) {
 		serverRepo.deleteById(id);
+	}
+
+	@PostMapping(value = "/api/server/excel")
+	public void excel(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			serverSvc.excel(req, res);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		}
 	}
 }

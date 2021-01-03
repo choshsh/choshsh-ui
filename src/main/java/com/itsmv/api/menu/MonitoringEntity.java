@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.itsmv.api.config.BaseTimeEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,14 +17,14 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "monitoring", uniqueConstraints = @UniqueConstraint(columnNames = { "name", "url" }))
-public class MonitoringEntity {
+public class MonitoringEntity extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String url;
 

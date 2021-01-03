@@ -18,7 +18,7 @@
     <CHeaderBrand class="mx-auto d-lg-none" to="/"></CHeaderBrand>
     <CHeaderNav class="d-md-down-none mr-auto">
       <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/dashboard">
+        <CHeaderNavLink to="/">
           <CIcon name="cil-home" />
         </CHeaderNavLink>
       </CHeaderNavItem>

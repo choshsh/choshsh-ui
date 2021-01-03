@@ -12,8 +12,8 @@ const Monitoring = () => import("@/views/monitoring/Monitoring");
 const Colors = () => import("@/views/theme/Colors");
 const Typography = () => import("@/views/theme/Typography");
 
-const Servers = () => import("@/views/servers/Servers");
-const ServersChart = () => import("@/views/servers/ServersChart");
+const Server = () => import("@/views/server/Server");
+const ServerChart = () => import("@/views/server/ServerChart");
 const Vms = () => import("@/views/vms/Vms");
 const VmsForm = () => import("@/views/vms/VmsForm");
 const VmsChart = () => import("@/views/vms/VmsChart");
@@ -22,10 +22,10 @@ const Egressions = () => import("@/views/egressions/Egressions");
 
 const Backups = () => import("@/views/backups/Backups");
 
-const DailyInspection = () => import("@/views/dailyInspection/DailyInspection");
+const Calendar = () => import("@/views/calendar/Calendar");
 
-const SeMonthConf = () => import("@/views/seMonthConf/SeMonthConf");
-const SeMonthConfForm = () => import("@/views/seMonthConf/SeMonthConfForm");
+const Editor = () => import("@/views/editor/Editor");
+const SeMonthConfForm = () => import("@/views/editor/SeMonthConfForm");
 
 const Charts = () => import("@/views/charts/Charts");
 const Widgets = () => import("@/views/widgets/Widgets");
@@ -87,7 +87,7 @@ function configRoutes() {
   return [
     {
       path: "/",
-      redirect: "/dashboard",
+      redirect: "/server",
       name: "Home",
       component: TheContainer,
       children: [
@@ -129,14 +129,14 @@ function configRoutes() {
           ],
         },
         {
-          path: "servers",
-          name: "물리서버",
-          component: Servers,
+          path: "server",
+          name: "서버",
+          component: Server,
         },
         {
-          path: "serversChart",
+          path: "serverChart",
           name: "물리서버 차트",
-          component: ServersChart,
+          component: ServerChart,
         },
         {
           path: "vms",
@@ -164,14 +164,14 @@ function configRoutes() {
           component: Backups,
         },
         {
-          path: "dailyInspection",
-          name: "dailyInspection",
-          component: DailyInspection,
+          path: "calendar",
+          name: "calendar",
+          component: Calendar,
         },
         {
-          path: "seMonthConf",
-          name: "seMonthConf",
-          component: SeMonthConf,
+          path: "editor",
+          name: "editor",
+          component: Editor,
         },
         {
           path: "seMonthConfForm",

@@ -5,15 +5,15 @@
         <tbody>
           <tr>
             <th style="width: 10%">관리번호</th>
-            <td style="width: 20%">{{ item.ciNo }}</td>
+            <td style="width: 20%">{{ item.id }}</td>
             <th style="width: 10%">업무명</th>
-            <td style="width: 20%">{{ item.nickname }}</td>
+            <td style="width: 20%">{{ item.serverNm }}</td>
             <th style="width: 10%">호스트명</th>
-            <td style="width: 30%">{{ item.astNm }}</td>
+            <td style="width: 30%">{{ item.hostname }}</td>
           </tr>
           <tr>
             <th>관리 부서</th>
-            <td>{{ item.mngDeptNm }}</td>
+            <td>{{ item.deptNm }}</td>
             <th>관리 담당자</th>
             <td>{{ item.mngEmplNm }}</td>
             <th>위치</th>
@@ -21,33 +21,25 @@
           </tr>
           <tr>
             <th>제조사</th>
-            <td>{{ item.serverMakerNm }}</td>
+            <td>{{ item.makerNm }}</td>
             <th>모델명</th>
-            <td>{{ item.ciModel }}</td>
+            <td>{{ item.makerModelNm }}</td>
             <th>시리얼 번호</th>
-            <td>{{ item.serialNo }}</td>
+            <td>{{ item.serial }}</td>
           </tr>
           <tr>
             <th>구입일자</th>
-            <td>{{ item.buyDate }}</td>
+            <td>{{ dateFormatter(item.buyDate) }}</td>
             <th>구입금액</th>
-            <td>{{ item.buyAmt }}</td>
-            <th>유지보수</th>
-            <td>{{ item.mngAgree }}</td>
-          </tr>
-          <tr>
-            <th>구입부서</th>
-            <td>{{ item.buyDeptNm }}</td>
-            <th>구입거래선</th>
-            <td>{{ item.buyPartnerNm }}</td>
+            <td>{{ item.price }}</td>
+            <th>보증기간</th>
+            <td>{{ item.warranty + "년" }}</td>
           </tr>
           <tr>
             <th>OS 계열</th>
-            <td>{{ item.serverOsLine }}</td>
+            <td>{{ item.osNm }}</td>
             <th>OS 상세</th>
-            <td>{{ item.serverOs }}</td>
-            <th>DBMS</th>
-            <td>{{ item.serverDbms }}</td>
+            <td colspan="3">{{ item.osDetail }}</td>
           </tr>
           <tr>
             <th>스펙 요약</th>
@@ -60,10 +52,17 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "ServersInfo",
   props: {
     item: Object,
+  },
+  methods: {
+    dateFormatter(date) {
+      return moment(date).format("YYYY-MM-DD");
+    },
   },
 };
 </script>

@@ -1,4 +1,4 @@
-package com.itsmv.api.menu;
+package com.itsmv.api.editor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.itsmv.api.config.BaseTimeEntity;
 
 import lombok.Getter;
@@ -18,22 +18,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "nav", uniqueConstraints = @UniqueConstraint(columnNames = { "name", "url" }))
-public class NavEntity extends BaseTimeEntity {
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@Table(name = "editor")
+public class EditorEntity extends BaseTimeEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long entityId;
 
 	@Column(nullable = false)
-	private String _name;
+	private String title;
 
-	@Column(nullable = false)
+	@Column
+	private String keyword;
 
-	private String name;
+	@Column(nullable = false, length = 5000)
+	private String content;
 
-	@Column(name = "url", nullable = false)
-	private String to;
-
-	@Column(nullable = false)
-	private String icon;
 }
