@@ -227,6 +227,11 @@ export default {
       array.splice(index, 1);
     },
     save(array, entity) {
+      if (true) {
+        alert("권한이 없습니다.");
+        return;
+      }
+      
       var url;
       var param;
 

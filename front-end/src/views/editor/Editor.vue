@@ -196,6 +196,10 @@ export default {
         .catch((e) => console.log(e));
     },
     deleteData(entityId) {
+      if (true) {
+        alert("권한이 없습니다.");
+        return;
+      }
       axios
         .delete("/api/editor/" + entityId)
         .then((res) => {
