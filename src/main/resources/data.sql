@@ -16,7 +16,7 @@ INSERT INTO header (url, name) VALUES
 INSERT INTO monitoring (url, name, height) VALUES
      ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/hb7fSE0Zz/choshsh-monitoring-sample?orgId=1&refresh=1m', 'Grafana', '2200'),
      ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/Vw_UfM-Gk/alert?orgId=1&refresh=1m', 'Grafana-Alert', '1000'),
-     ('http://choshsh.koreacentral.cloudapp.azure.com:5601/app/dashboards#/view/e985b760-4d02-11eb-b6c2-270578c3d43b?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-query-input=true', 'Kibana', '1300');
+     ('http://choshsh.koreacentral.cloudapp.azure.com:5601/app/dashboards#/view/57e3d5f0-4e0e-11eb-929a-dffa52227728?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!f%2Cvalue%3A30000)%2Ctime%3A(from%3Anow-30m%2Cto%3Anow))&show-query-input=true&hide-filter-bar=true', 'Kibana', '1300');
 
 INSERT INTO dept (dept_cd, dept_nm) VALUES
      ('D001', '정보1팀'),
