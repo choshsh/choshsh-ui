@@ -17,19 +17,11 @@
               <CChartDoughnutAdv
                 :labels="[
                   '서울 :' + chartDataCnt['location']['s'],
-                  '3공장: ' + chartDataCnt['location']['g3'],
-                  '1공장: ' + chartDataCnt['location']['g1'],
-                  '2공장: ' + chartDataCnt['location']['g2'],
-                  '4공장: ' + chartDataCnt['location']['g4'],
-                  '군산: ' + chartDataCnt['location']['gs'],
+                  '구미: ' + chartDataCnt['location']['g'],
                 ]"
                 :datas="[
                   chartDataCnt['location']['s'],
-                  chartDataCnt['location']['g3'],
-                  chartDataCnt['location']['g1'],
-                  chartDataCnt['location']['g2'],
-                  chartDataCnt['location']['g4'],
-                  chartDataCnt['location']['gs'],
+                  chartDataCnt['location']['g'],
                 ]"
               />
             </CCardBody>
@@ -158,15 +150,15 @@ import CChartDoughnutAdv from "../base/CChartDoughnutAdv";
 
 const fields = [
   { key: "locationNm", label: "사업장", _style: "width:110px" },
-  { key: "nickname", label: "업무명", _style: "min-width:180px" },
-  { key: "astNm", label: "호스트명", _style: "min-width:180px" },
+  { key: "serverNm", label: "업무명", _style: "min-width:180px" },
+  { key: "hostname", label: "호스트명", _style: "min-width:180px" },
   { key: "oprNm", label: "운영상태", _style: "width:100px" },
-  { key: "serverIp", label: "IP", _style: "width:140px" },
-  { key: "serverMakerNm", label: "제조사", _style: "width:100px" },
-  { key: "serverOsLine", label: "OS계열", _style: "width:85px" },
-  { key: "serverUsage", label: "용도", _style: "width:80px" },
+  { key: "ipAddr", label: "IP", _style: "width:140px" },
+  { key: "makerNm", label: "제조사", _style: "width:100px" },
+  { key: "osNm", label: "OS계열", _style: "width:85px" },
+  { key: "usageNm", label: "용도", _style: "width:80px" },
   { key: "mngEmplNm", label: "담당자", _style: "width:100px" },
-  { key: "ciNo", label: "관리번호", _style: "width:160px" },
+  { key: "id", label: "관리번호", _style: "width:160px" },
   {
     key: "show_details",
     label: "",
@@ -239,12 +231,13 @@ export default {
     },
     setData() {
       axios
-        .get("/api/servers")
+        .get("/api/server")
         .then((res) => {
           this.items = res.data.map((item, id) => {
-            for (const key in item)
-              if (item.hasOwnProperty(key))
-                [(item[key] = !item[key] ? "-" : item[key])];
+            item["locationNm"] = item.locationEntity.locationNm;
+            item["oprNm"] = item.oprEntity.oprNm;
+            item["usageNm"] = item.usageEntity.usageNm;
+            item["osNm"] = item.osEntity.osNm;
             return { ...item, id };
           });
           this.setChartData();
@@ -254,12 +247,8 @@ export default {
     },
     setChartData() {
       this.chartDataCnt["location"] = {
-        s: this.items.filter((o) => o.locationNm.indexOf("본사") > -1).length,
-        g1: this.items.filter((o) => o.locationNm === "1공장").length,
-        g2: this.items.filter((o) => o.locationNm === "2공장").length,
-        g3: this.items.filter((o) => o.locationNm === "3공장").length,
-        g4: this.items.filter((o) => o.locationNm === "4공장").length,
-        gs: this.items.filter((o) => o.locationNm === "군산").length,
+        s: this.items.filter((o) => o.locationNm.indexOf("서울") > -1).length,
+        g: this.items.filter((o) => o.locationNm === "구미").length,
       };
       this.chartDataCnt["opr"] = {
         op: this.items.filter((o) => o.oprNm === "지급사용").length,
@@ -267,14 +256,14 @@ export default {
         dis: this.items.filter((o) => o.oprNm === "폐기대상").length,
       };
       this.chartDataCnt["os"] = {
-        nt: this.items.filter((o) => o.serverOsLine === "NT").length,
-        linux: this.items.filter((o) => o.serverOsLine === "Linux").length,
-        storage: this.items.filter((o) => o.serverOsLine === "Storage").length,
+        nt: this.items.filter((o) => o.osNm === "Windows").length,
+        linux: this.items.filter((o) => o.osNm === "Linux").length,
+        storage: this.items.filter((o) => o.osNm === "Storage").length,
       };
       this.chartDataCnt["os"];
     },
   },
-  created: function () {
+  created: function() {
     this.setData();
   },
 };

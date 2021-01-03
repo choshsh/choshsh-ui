@@ -1,1 +1,2 @@
 *.{zip,jar} filter=lfs diff=lfs merge=lfs -text
+*.encoding=utf-8
