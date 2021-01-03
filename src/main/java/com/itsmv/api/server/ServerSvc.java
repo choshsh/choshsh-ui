@@ -37,17 +37,17 @@ public class ServerSvc {
 
 	@SuppressWarnings("unchecked")
 	void excel(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		String[][] dKey = { { "id", "°ü¸®¹øÈ£" }, { "locationNm", "»ç¾÷Àå" }, { "serverNm", "¾÷¹«¸í" }, { "hostname", "È£½ºÆ®¸í" },
-				{ "oprNm", "¿î¿µ »óÅÂ" }, { "usageNm", "¿ëµµ" }, { "ipAddr", "¼­ºñ½º IP" }, { "osNm", "OS°è¿­" },
-				{ "osDetail", "OS»ó¼¼" }, { "makerNm", "Á¦Á¶»ç" }, { "makerModelNm", "¸ğµ¨¸í" }, { "serial", "½Ã¸®¾ó¹øÈ£" },
-				{ "spec", "½ºÆå" }, { "warranty", "À¯Áöº¸¼ö" }, { "locationDetail", "¼³Ä¡Àå¼Ò" }, { "deptNm", "°ü¸® ºÎ¼­" },
-				{ "mngEmplNm", "°ü¸® ´ã´çÀÚ" }, { "buyDate", "¼³Ä¡ÀÏÀÚ" } };
-		String[] shArr = { "¼­¿ï", "±¸¹Ì" };
+		String[][] dKey = { { "id", "ê´€ë¦¬ë²ˆí˜¸" }, { "locationNm", "ì‚¬ì—…ì¥" }, { "serverNm", "ì—…ë¬´ëª…" }, { "hostname", "í˜¸ìŠ¤íŠ¸ëª…" },
+				{ "oprNm", "ìš´ì˜ ìƒíƒœ" }, { "usageNm", "ìš©ë„" }, { "ipAddr", "ì„œë¹„ìŠ¤ IP" }, { "osNm", "OSê³„ì—´" },
+				{ "osDetail", "OSìƒì„¸" }, { "makerNm", "ì œì¡°ì‚¬" }, { "makerModelNm", "ëª¨ë¸ëª…" }, { "serial", "ì‹œë¦¬ì–¼ë²ˆí˜¸" },
+				{ "spec", "ìŠ¤í™" }, { "warranty", "ìœ ì§€ë³´ìˆ˜" }, { "locationDetail", "ì„¤ì¹˜ì¥ì†Œ" }, { "deptNm", "ê´€ë¦¬ ë¶€ì„œ" },
+				{ "mngEmplNm", "ê´€ë¦¬ ë‹´ë‹¹ì" }, { "buyDate", "ì„¤ì¹˜ì¼ì" } };
+		String[] shArr = { "ì„œìš¸", "êµ¬ë¯¸" };
 
-		ExcelUtil exu = new ExcelUtil("¹°¸®¼­¹ö_¸®½ºÆ®");
+		ExcelUtil exu = new ExcelUtil("ë¬¼ë¦¬ì„œë²„_ë¦¬ìŠ¤íŠ¸");
 		for (String s : shArr) {
 			exu.addSheet(s);
-			/* Çì´õ */
+			/* í—¤ë” */
 			exu.addRow();
 			for (int i = 0; i < dKey.length; i++) {
 				exu.addCell(i, dKey[i][1]);
@@ -56,7 +56,7 @@ public class ServerSvc {
 			exu.getSh().createFreezePane(5, 1);
 		}
 
-		/* ¹Ùµğ */
+		/* ë°”ë”” */
 		ObjectMapper mapper = new ObjectMapper();
 		for (ServerEntity o : this.list()) {
 			exu.setSh(exu.getWb().getSheet(o.getLocationEntity().getLocationNm()));
@@ -66,14 +66,14 @@ public class ServerSvc {
 				exu.addCell(i, m.get(dKey[i][0]) == null ? "-" : m.get(dKey[i][0]).toString());
 			}
 		}
-		/* ³Êºñ Á¶Á¤ */
+		/* ë„ˆë¹„ ì¡°ì • */
 		IntStream.range(0, shArr.length).forEach(i -> {
 			exu.setWidth(exu.getWb().getSheetAt(i).getRow(0), i);
 		});
-		/* 1Çà ÇÊÅÍ »ı¼º */
+		/* 1í–‰ í•„í„° ìƒì„± */
 		exu.setFilter();
 
-		/* ´Ù¿î·Îµå */
+		/* ë‹¤ìš´ë¡œë“œ */
 		exu.download(req, res);
 	}
 }
