@@ -1,4 +1,4 @@
-FROM openjdk:14.0.2
+FROM openjdk:15.0.1
 
 EXPOSE 8080
 
@@ -10,5 +10,5 @@ ARG JAR_FILE=target/*.jar
 
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Xms1024m","-Xmx4096m","-jar","/app.jar"]
-CMD ["--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+CMD ["--spring.profiles.active=dev"]
