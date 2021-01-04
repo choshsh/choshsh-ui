@@ -77,7 +77,7 @@ const User = () => import("@/views/users/User");
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: "hash",
   linkActiveClass: "active",
   scrollBehavior: () => ({ y: 0 }),
   routes: configRoutes(),
