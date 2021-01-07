@@ -5,8 +5,6 @@
 
 # 프로젝트 정보
 
-### Docker 환경
-
 ### **Application**
 
 - Spring Boot 2.4.1
