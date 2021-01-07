@@ -1,9 +1,6 @@
 INSERT INTO nav (_name, name, url, icon) VALUES
-     --('CSidebarNavItem', 'Dashboard', '/dashboard', 'cil-speedometer'),
      ('CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
      ('CSidebarNavItem', 'Server', '/server', 'cil-laptop'),
-     --('CSidebarNavItem', 'Backup', '/backups', 'cil-data-transfer-down'),
-     --('CSidebarNavItem', 'Chart', '/vmsChart', 'cil-chart-pie'),
      ('CSidebarNavItem', 'Calendar', '/calendar', 'cil-calendar'),
      ('CSidebarNavItem', 'Editor', '/editor', 'cil-pencil'),
      ('CSidebarNavItem', 'Settings', '/settings', 'cil-settings');
@@ -16,7 +13,7 @@ INSERT INTO header (url, name) VALUES
 INSERT INTO monitoring (url, name, height) VALUES
      ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/hb7fSE0Zz/choshsh-monitoring-sample?orgId=1&refresh=1m', 'Grafana', '2200'),
      ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/Vw_UfM-Gk/alert?orgId=1&refresh=1m', 'Grafana-Alert', '1000'),
-     ('http://choshsh.koreacentral.cloudapp.azure.com:5601/app/dashboards#/view/57e3d5f0-4e0e-11eb-929a-dffa52227728?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-query-input=true', 'Kibana', '1300');
+     ('http://choshsh.koreacentral.cloudapp.azure.com:5602/app/dashboards#/view/a9dbe9c0-50b0-11eb-b4f7-fdd31496e7d4?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-query-input=true', 'Kibana', '1500');
 
 INSERT INTO dept (dept_cd, dept_nm) VALUES
      ('D001', '정보1팀'),
@@ -66,3 +63,6 @@ INSERT INTO calendar_child  (calendar_date, server_id, comment) VALUES
      ('2021-01-01', '1', '디스크 Fault 1EA'),
      ('2021-01-04', '3', '메모리 Warning 1EA'),
      ('2021-01-04', '4', '크리티컬 에러 (온도)');
+
+INSERT INTO user  (user_no, user_id, user_pw) VALUES
+     ('1', 'choshsh', 'choshsh');

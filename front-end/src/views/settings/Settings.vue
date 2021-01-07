@@ -185,6 +185,7 @@ export default {
       nav: Array,
       header: Array,
       monitoring: Array,
+      isAdmin: sessionStorage.getItem("userNo") === "1",
     };
   },
   methods: {
@@ -227,11 +228,11 @@ export default {
       array.splice(index, 1);
     },
     save(array, entity) {
-      if (true) {
+      if (!this.isAdmin) {
         alert("권한이 없습니다.");
         return;
       }
-      
+
       var url;
       var param;
 

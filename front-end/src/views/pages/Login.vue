@@ -12,7 +12,7 @@
                   <CInput
                     placeholder="ID"
                     autocomplete="username email"
-                    v-model="userId"
+                    v-model="form.userId"
                     autofocus
                   >
                     <template #prepend-content>
@@ -23,7 +23,7 @@
                     placeholder="Password"
                     type="password"
                     autocomplete="curent-password"
-                    v-model="userPw"
+                    v-model="form.userPw"
                   >
                     <template #prepend-content>
                       <CIcon name="cil-lock-locked" />
@@ -35,10 +35,6 @@
                         >Login</CButton
                       >
                     </CCol>
-                    <!--                     <CCol col="6" class="text-right">
-                      <CButton color="link" class="px-0">Forgot password?</CButton>
-                      <CButton color="link" class="d-lg-none">Register now!</CButton>
-                    </CCol>-->
                   </CRow>
                 </CForm>
               </CCardBody>
@@ -55,13 +51,6 @@
                   정보팀 SE가 관리하는 리소스들의 현황, 데이터, 차트 등을 확인할
                   수 있습니다.
                 </p>
-                <!--            <CButton
-                  color="light"
-                  variant="outline"
-                  size="lg"
-                >
-                  Register Now!
-                </CButton>-->
               </CCardBody>
             </CCard>
           </CCardGroup>
@@ -78,23 +67,22 @@ export default {
   name: "Login",
   data() {
     return {
-      userId: "",
-      userPw: "",
+      form: {
+        userId: "",
+        userPw: "",
+      },
     };
   },
   methods: {
     login() {
       axios
-        .post("/api/login", {
-          userId: this.userId,
-          userPw: this.userPw,
-        })
+        .post("/api/user/info", this.form)
         .then((res) => {
-          if (res.data.check > 0) {
-            sessionStorage.setItem("userId", res.data.getUser.userId);
-            sessionStorage.setItem("userName", res.data.getUser.userName);
-            sessionStorage.setItem("userRoleCd", res.data.getUser.userRoleCd);
-            sessionStorage.setItem("userSeq", res.data.getUser.userSeq);
+          var userNo = res.data.userNo;
+          var check = userNo > 0;
+
+          if (check) {
+            sessionStorage.setItem("userNo", userNo);
             this.$router.push("/");
           } else alert("로그인 실패입니다.");
         })
