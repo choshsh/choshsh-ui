@@ -19,7 +19,9 @@ server:
   servlet:
     context-path: /
     session:
-      timeout: 14400
+      timeout: 14400    encoding:      charset: UTF-8
+      enabled: true
+      force: true
 management:
   endpoints:
     web:
@@ -28,7 +30,6 @@ management:
         include:
         - metrics
         - health      
-        
 --- 
 spring: # dev
   profiles: dev
