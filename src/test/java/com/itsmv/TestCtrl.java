@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Component
 public class TestCtrl {
 
-	@GetMapping("/api/test")
+	@GetMapping("/api/test1")
 	public void test() {
 		try {
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
