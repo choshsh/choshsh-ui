@@ -26,11 +26,11 @@ jobs:
             ${{ runner.OS }}-
       - name: Install NPM Dependencies
         run: npm install
-        working-directory: ~/front-end
+        working-directory: ./front-end
 
       - name: Build Front-end
         run: npm run build
-        working-directory: ~/front-end
+        working-directory: ./front-end
         
       - name: Set up JDK 15
         uses: actions/setup-java@v1
