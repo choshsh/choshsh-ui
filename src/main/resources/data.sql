@@ -1,6 +1,6 @@
 INSERT INTO nav (_name, name, url, icon) VALUES
-     ('CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
      ('CSidebarNavItem', 'Server', '/server', 'cil-laptop'),
+     ('CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
      ('CSidebarNavItem', 'Calendar', '/calendar', 'cil-calendar'),
      ('CSidebarNavItem', 'Editor', '/editor', 'cil-pencil'),
      ('CSidebarNavItem', 'Settings', '/settings', 'cil-settings');

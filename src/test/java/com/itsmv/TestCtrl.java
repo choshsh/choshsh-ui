@@ -1,4 +1,4 @@
-package com.doms;
+package com.itsmv;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;

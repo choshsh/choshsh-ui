@@ -1,4 +1,4 @@
-package com.doms;
+package com.itsmv;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

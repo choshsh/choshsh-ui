@@ -87,7 +87,7 @@ function configRoutes() {
   return [
     {
       path: "/",
-      redirect: "/monitoring",
+      redirect: "/server",
       name: "Home",
       component: TheContainer,
       children: [
