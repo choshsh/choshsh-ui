@@ -6,7 +6,9 @@ name: Java CI with Gradle to Prod
 on:
   push:
     branches: [master]
-
+  pull_request:
+    branches: [master]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -54,5 +56,5 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle using jib plugin.
+      - name: Build Back-end & Create Docker image & Push to Docker Hub
         run: ./gradlew clean jib
