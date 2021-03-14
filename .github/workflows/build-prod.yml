@@ -6,7 +6,7 @@ name: Java CI with Gradle to Prod
 on:
   push:
     branches: [ master ]
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,8 +25,8 @@ jobs:
           path: ~/front-end/.npm
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
 
       - name: Install NPM Dependencies
         run: npm install
