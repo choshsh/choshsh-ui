@@ -19,43 +19,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServerCtrl {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private ServerSvc serverSvc;
+    @Autowired
+    private ServerSvc serverSvc;
 
-	@Autowired
-	private ServerRepo serverRepo;
+    @Autowired
+    private ServerRepo serverRepo;
 
-	@GetMapping(value = "/api/server")
-	List<ServerEntity> list() {
-		return serverSvc.list();
-	}
+    @GetMapping(value = "/api/server")
+    List<ServerEntity> list() {
+        return serverSvc.list();
+    }
 
-	@PostMapping(value = "/api/server")
-	ServerEntity create(@RequestBody ServerEntity serverEntity) {
-		ServerEntity created = serverRepo.save(serverEntity);
-		return created;
-	}
+    @PostMapping(value = "/api/server")
+    ServerEntity create(@RequestBody ServerEntity serverEntity) {
+        ServerEntity created = serverRepo.save(serverEntity);
+        return created;
+    }
 
-	@PutMapping(value = "/api/server/{id}")
-	ServerEntity update(@PathVariable("id") Long id, @RequestBody ServerEntity serverEntity) {
-		serverEntity.setServerId(id);
-		ServerEntity updated = serverRepo.save(serverEntity);
-		return updated;
-	}
+    @PutMapping(value = "/api/server/{id}")
+    ServerEntity update(@PathVariable("id") Long id, @RequestBody ServerEntity serverEntity) {
+        serverEntity.setServerId(id);
+        ServerEntity updated = serverRepo.save(serverEntity);
+        return updated;
+    }
 
-	@DeleteMapping(value = "/api/server/{id}")
-	public void delete(@PathVariable("id") Long id) {
-		serverRepo.deleteById(id);
-	}
+    @DeleteMapping(value = "/api/server/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        serverRepo.deleteById(id);
+    }
 
-	@PostMapping(value = "/api/server/excel")
-	public void excel(HttpServletRequest req, HttpServletResponse res) {
-		try {
-			serverSvc.excel(req, res);
-		} catch (Exception e) {
-			logger.info(e.getMessage());
-		}
-	}
+    @PostMapping(value = "/api/server/excel")
+    public void excel(HttpServletRequest req, HttpServletResponse res) {
+        try {
+            serverSvc.excel(req, res);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
+    }
 }
