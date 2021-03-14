@@ -22,7 +22,7 @@ repositories {
 
 jib {
     from {
-        image = "amazoncorretto:8u282-alpine-jre"
+        image = "amazoncorretto:8u282-alpine"
     }
     to {
         image = "choshsh/itsmv"
