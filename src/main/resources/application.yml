@@ -3,7 +3,7 @@ spring: # default
     show-sql: false
     open-in-view: true
     hibernate:
-      use-new-id-generator-mappings: true        
+      use-new-id-generator-mappings: true
 logging:
   level:
     root: info
@@ -19,7 +19,9 @@ server:
   servlet:
     context-path: /
     session:
-      timeout: 14400    encoding:      charset: UTF-8
+      timeout: 14400
+    encoding:
+      charset: UTF-8
       enabled: true
       force: true
 management:
@@ -28,30 +30,30 @@ management:
       base-path: /manage
       exposure:
         include:
-        - metrics
-        - health      
---- 
+          - metrics
+          - health
+---
 spring: # dev
   profiles: dev
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect    
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
   datasource:
-    initialization-mode: always    
+    initialization-mode: always
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:itsmv
     username: sa
-    password: 
+    password:
   h2:
     console:
       enabled: false
       path: /h2-console
       settings:
-        web-admin-password: itsmv    
+        web-admin-password: itsmv
 ---
 spring: # prod
-  profiles:  prod
+  profiles: prod
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
