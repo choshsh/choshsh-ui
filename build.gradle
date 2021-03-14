@@ -22,7 +22,7 @@ repositories {
 
 jib {
     from {
-        image = "amazoncorretto:8u282-alpine"
+        image = "amazoncorretto:8u282"
     }
     to {
         image = "choshsh/itsmv"
@@ -30,7 +30,7 @@ jib {
     }
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
-        jvmFlags = ['-Dspring.profiles.active=dev', '-Djava.awt.headless=true','-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
+        jvmFlags = ['-Dspring.profiles.active=dev', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
         ports = ['8080']
         labels = [maintainer: 'SHsteak <cho911115@gmail.com>']
         user = "1000:1000"
