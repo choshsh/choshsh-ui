@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.itsmv.api.config.BaseTimeEntity;
+import com.itsmv.config.BaseDateEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Table(name = "editor")
-public class EditorEntity extends BaseTimeEntity {
+public class EditorEntity extends BaseDateEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,26 +1,28 @@
 package com.itsmv.api.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itsmv.api.util.ExcelUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itsmv.api.util.ExcelUtil;
-
 @Service
 public class ServerSvc {
 
-    @Autowired
-    private ServerRepo serverRepo;
+    private final ServerRepo serverRepo;
 
-    List<ServerEntity> list() {
+    @Autowired
+    private ServerSvc(ServerRepo serverRepo) {
+        this.serverRepo = serverRepo;
+    }
+
+    public List<ServerEntity> list() {
         List<ServerEntity> list = new ArrayList<>();
         Iterable<ServerEntity> it = serverRepo.findAll();
         it.forEach(o -> {
@@ -36,8 +38,8 @@ public class ServerSvc {
     }
 
     @SuppressWarnings("unchecked")
-    void excel(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String[][] dKey = {{"id", "관리번호"}, {"locationNm", "사업장"}, {"serverNm", "업무명"}, {"hostname", "호스트명"},
+    public void excel(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        String[][] dKey = {{"serverId", "관리번호"}, {"locationNm", "사업장"}, {"serverNm", "업무명"}, {"hostname", "호스트명"},
                 {"oprNm", "운영 상태"}, {"usageNm", "용도"}, {"ipAddr", "서비스 IP"}, {"osNm", "OS계열"},
                 {"osDetail", "OS상세"}, {"makerNm", "제조사"}, {"makerModelNm", "모델명"}, {"serial", "시리얼번호"},
                 {"spec", "스펙"}, {"warranty", "유지보수"}, {"locationDetail", "설치장소"}, {"deptNm", "관리 부서"},
@@ -67,9 +69,7 @@ public class ServerSvc {
             }
         }
         /* 너비 조정 */
-        IntStream.range(0, shArr.length).forEach(i -> {
-            exu.setWidth(exu.getWb().getSheetAt(i).getRow(0), i);
-        });
+        IntStream.range(0, shArr.length).forEach(i -> exu.setWidth(exu.getWb().getSheetAt(i).getRow(0), i));
         /* 1행 필터 생성 */
         exu.setFilter();
 

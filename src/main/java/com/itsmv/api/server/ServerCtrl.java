@@ -1,48 +1,43 @@
 package com.itsmv.api.server;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestController
 public class ServerCtrl {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final ServerSvc serverSvc;
+
+    private final ServerRepo serverRepo;
 
     @Autowired
-    private ServerSvc serverSvc;
-
-    @Autowired
-    private ServerRepo serverRepo;
+    private ServerCtrl(ServerSvc serverSvc, ServerRepo serverRepo) {
+        this.serverSvc = serverSvc;
+        this.serverRepo = serverRepo;
+    }
 
     @GetMapping(value = "/api/server")
-    List<ServerEntity> list() {
+    public List<ServerEntity> list() {
         return serverSvc.list();
     }
 
     @PostMapping(value = "/api/server")
-    ServerEntity create(@RequestBody ServerEntity serverEntity) {
-        ServerEntity created = serverRepo.save(serverEntity);
-        return created;
+    public ServerEntity create(@RequestBody ServerEntity serverEntity) {
+        return serverRepo.save(serverEntity);
     }
 
     @PutMapping(value = "/api/server/{id}")
-    ServerEntity update(@PathVariable("id") Long id, @RequestBody ServerEntity serverEntity) {
+    public ServerEntity update(@PathVariable("id") Long id, @RequestBody ServerEntity serverEntity) {
         serverEntity.setServerId(id);
-        ServerEntity updated = serverRepo.save(serverEntity);
-        return updated;
+        return serverRepo.save(serverEntity);
     }
 
     @DeleteMapping(value = "/api/server/{id}")

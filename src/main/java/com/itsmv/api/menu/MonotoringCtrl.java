@@ -1,53 +1,49 @@
 package com.itsmv.api.menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MonotoringCtrl {
 
-	@Autowired
-	private MonitoringRepo monitoringRepo;
+    private final MonitoringRepo monitoringRepo;
 
-	@GetMapping(value = "/api/monitoring")
-	List<MonitoringEntity> list() {
-		List<MonitoringEntity> list = new ArrayList<>();
-		Iterable<MonitoringEntity> it = monitoringRepo.findAll();
-		it.forEach(o -> list.add(o));
-		return list;
-	}
+    @Autowired
+    private MonotoringCtrl(MonitoringRepo monitoringRepo) {
+        this.monitoringRepo = monitoringRepo;
+    }
 
-	@PostMapping(value = "/api/monitoring")
-	MonitoringEntity create(@RequestBody MonitoringEntity monitoringEntity) {
-		MonitoringEntity created = monitoringRepo.save(monitoringEntity);
-		return created;
-	}
+    @GetMapping(value = "/api/monitoring")
+    public List<MonitoringEntity> list() {
+        List<MonitoringEntity> list = new ArrayList<>();
+        Iterable<MonitoringEntity> it = monitoringRepo.findAll();
+        it.forEach(list::add);
+        return list;
+    }
 
-	@PostMapping(value = "/api/monitorings")
-	List<MonitoringEntity> create(@RequestBody Iterable<MonitoringEntity> monitoringEntities) throws Exception {
-		monitoringRepo.deleteAll();
-		monitoringRepo.saveAll(monitoringEntities);
-		return this.list();
-	}
+    @PostMapping(value = "/api/monitoring")
+    public MonitoringEntity create(@RequestBody MonitoringEntity monitoringEntity) {
+        return monitoringRepo.save(monitoringEntity);
+    }
 
-	@PutMapping(value = "/api/monitoring/{id}")
-	MonitoringEntity update(@PathVariable("id") Long id, @RequestBody MonitoringEntity monitoringEntity) {
-		monitoringEntity.setId(id);
-		MonitoringEntity updated = monitoringRepo.save(monitoringEntity);
-		return updated;
-	}
+    @PostMapping(value = "/api/monitorings")
+    public List<MonitoringEntity> create(@RequestBody Iterable<MonitoringEntity> monitoringEntities) throws Exception {
+        monitoringRepo.deleteAll();
+        monitoringRepo.saveAll(monitoringEntities);
+        return this.list();
+    }
 
-	@DeleteMapping(value = "/api/monitoring/{id}")
-	public void delete(@PathVariable("id") Long id) {
-		monitoringRepo.deleteById(id);
-	}
+    @PutMapping(value = "/api/monitoring/{id}")
+    public MonitoringEntity update(@PathVariable("id") Long id, @RequestBody MonitoringEntity monitoringEntity) {
+        monitoringEntity.setId(id);
+        return monitoringRepo.save(monitoringEntity);
+    }
+
+    @DeleteMapping(value = "/api/monitoring/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        monitoringRepo.deleteById(id);
+    }
 }

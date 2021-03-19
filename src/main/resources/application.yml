@@ -1,17 +1,69 @@
-spring: # default
+spring:
+  application:
+    name: "file-attachment"
+  profiles:
+    group:
+      "prod": "prod, default"
+      "dev": "dev, default"
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    initialization-mode: always
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:itsmv
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+      settings:
+        web-admin-password: itsmv
+  devtools:
+    restart:
+      enabled: true
+logging:
+  level:
+    web: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    initialization-mode: never
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: itsmv
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+  jpa:
+    show-sql: true
     open-in-view: true
     hibernate:
       use-new-id-generator-mappings: true
 logging:
-  level:
-    root: info
-    com:
-      itsmv: debug
-    '[org.springframework.web]': debug
   pattern:
-    console: '%date%clr{faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 server:
   compression:
     enabled: true
@@ -32,35 +84,3 @@ management:
         include:
           - metrics
           - health
----
-spring: # dev
-  profiles: dev
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create-drop
-  datasource:
-    initialization-mode: always
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:itsmv
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: false
-      path: /h2-console
-      settings:
-        web-admin-password: itsmv
----
-spring: # prod
-  profiles: prod
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: create-drop
-  datasource:
-    initialization-mode: always
-    driver-class-name: "com.mysql.cj.jdbc.Driver"
-    url: jdbc:mysql://127.0.0.1:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: itsmv
