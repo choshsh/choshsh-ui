@@ -1,52 +1,48 @@
 package com.itsmv.api.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserCtrl {
 
-	@Autowired
-	private UserRepo userRepo;
+    private final UserRepo userRepo;
 
-	@GetMapping(value = "/api/user")
-	List<UserEntity> list() {
-		List<UserEntity> list = new ArrayList<>();
-		Iterable<UserEntity> it = userRepo.findAll();
-		it.forEach(o -> list.add(o));
-		return list;
-	}
+    @Autowired
+    private UserCtrl(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
-	@PostMapping(value = "/api/user/info")
-	UserEntity info(@RequestBody UserEntity userEntity) {
-		return userRepo.findByUserIdAndUserPw(userEntity.getUserId(), userEntity.getUserPw());
-	}
+    @GetMapping(value = "/api/user")
+    List<UserEntity> list() {
+        List<UserEntity> list = new ArrayList<>();
+        Iterable<UserEntity> it = userRepo.findAll();
+        it.forEach(list::add);
+        return list;
+    }
 
-	@PostMapping(value = "/api/user")
-	UserEntity create(@RequestBody UserEntity userEntity) {
-		UserEntity created = userRepo.save(userEntity);
-		return created;
-	}
+    @PostMapping(value = "/api/user/info")
+    UserEntity info(@RequestBody UserEntity userEntity) {
+        return userRepo.findByUserIdAndUserPw(userEntity.getUserId(), userEntity.getUserPw());
+    }
 
-	@PutMapping(value = "/api/user/{id}")
-	UserEntity update(@PathVariable("id") Long id, @RequestBody UserEntity userEntity) {
-		userEntity.setUserNo(id);
-		UserEntity updated = userRepo.save(userEntity);
-		return updated;
-	}
+    @PostMapping(value = "/api/user")
+    UserEntity create(@RequestBody UserEntity userEntity) {
+        return userRepo.save(userEntity);
+    }
 
-	@DeleteMapping(value = "/api/user/{id}")
-	public void delete(@PathVariable("id") Long id) {
-		userRepo.deleteById(id);
-	}
+    @PutMapping(value = "/api/user/{id}")
+    UserEntity update(@PathVariable("id") Long id, @RequestBody UserEntity userEntity) {
+        userEntity.setUserNo(id);
+        return userRepo.save(userEntity);
+    }
+
+    @DeleteMapping(value = "/api/user/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        userRepo.deleteById(id);
+    }
 
 }

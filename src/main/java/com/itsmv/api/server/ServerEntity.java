@@ -18,7 +18,7 @@ import com.itsmv.api.code.LocationEntity;
 import com.itsmv.api.code.OprEntity;
 import com.itsmv.api.code.OsEntity;
 import com.itsmv.api.code.UsageEntity;
-import com.itsmv.api.config.BaseTimeEntity;
+import com.itsmv.config.BaseDateEntity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ import lombok.Setter;
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Table(name = "server")
-public class ServerEntity extends BaseTimeEntity {
+public class ServerEntity extends BaseDateEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

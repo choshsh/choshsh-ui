@@ -1,4 +1,4 @@
-package com.itsmv.api.config;
+package com.itsmv.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

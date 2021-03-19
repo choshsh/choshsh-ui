@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.itsmv.api.config.BaseTimeEntity;
+import com.itsmv.config.BaseDateEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "header", uniqueConstraints = @UniqueConstraint(columnNames = { "url", "name" }))
-public class HeaderEntity extends BaseTimeEntity {
+public class HeaderEntity extends BaseDateEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
