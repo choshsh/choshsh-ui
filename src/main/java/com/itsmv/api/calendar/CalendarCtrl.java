@@ -23,13 +23,14 @@ public class CalendarCtrl {
 
     @GetMapping(value = "/api/calendar")
     public List<CalendarEntity> list() {
-        List<CalendarEntity> list = new ArrayList<>();
-        Iterable<CalendarEntity> it = calendarRepo.findAll();
-        it.forEach(o -> {
-            o.setErrorCnt(o.getCalendarChildEntity().size());
-            list.add(o);
-        });
-        return list;
+//        List<CalendarEntity> list = new ArrayList<>();
+//        Iterable<CalendarEntity> it = calendarRepo.findAll();
+//        it.forEach(o -> {
+//            o.setErrorCnt(o.getCalendarChildEntity().size());
+//            list.add(o);
+//        });
+//        return list;
+        return calendarRepo.findAll();
     }
 
     @PostMapping(value = "/api/calendar")

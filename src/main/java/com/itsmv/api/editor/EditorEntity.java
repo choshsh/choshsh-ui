@@ -1,38 +1,36 @@
 package com.itsmv.api.editor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.itsmv.api.enums.DeptGroup;
 import com.itsmv.config.BaseDateEntity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "editor")
 public class EditorEntity extends BaseDateEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long entityId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long entityId;
 
-	@Column(nullable = false)
-	private String title;
+    @Column(nullable = false)
+    private String title;
 
-	@Column
-	private String keyword;
+    @Column
+    private String keyword;
 
-	@Column(nullable = false, length = 5000)
-	private String content;
+    @Column(nullable = false, length = 5000)
+    private String content;
+
+    @Column
+    private DeptGroup dept;
 
 }
