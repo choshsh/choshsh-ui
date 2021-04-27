@@ -5,5 +5,5 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum DeptGroup {
     TEAM01,
-    TEAM02;
+    TEAM02
 }

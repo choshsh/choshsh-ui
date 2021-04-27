@@ -9,8 +9,8 @@ public enum ServerOsGroup {
     CENT8("Linux", "CentOS", "'CentOS-8.3.2011"),
     SUSE12SP5("Linux", "SUSE", "SUSE Linux Enterprise Server 12 SP5");
 
-    private String osLine;
-    private String osCategory;
-    private String osDetail;
+    private final String osLine;
+    private final String osCategory;
+    private final String osDetail;
 
 }

@@ -8,7 +8,7 @@ plugins {
 group = 'com.itsmv'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = '1.8'
+sourceCompatibility = '15'
 
 configurations {
     compileOnly {
@@ -22,7 +22,7 @@ repositories {
 
 jib {
     from {
-        image = "amazoncorretto:8u282"
+        image = "amazoncorretto:15.0.2"
     }
     to {
         image = "choshsh/itsmv"
