@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.itsmv.config.BaseDateEntity;
 
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "monitoring", uniqueConstraints = @UniqueConstraint(columnNames = { "name", "url" }))
+@Table(name = "monitoring")
 public class MonitoringEntity extends BaseDateEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class MonitoringEntity extends BaseDateEntity {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false, length = 3000)
+	@Column(nullable = false, length = 5000)
 	private String url;
 
 	@Column(nullable = false)
