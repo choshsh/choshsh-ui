@@ -1,103 +1,60 @@
 package com.itsmv.api.server;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.itsmv.api.code.DeptEntity;
-import com.itsmv.api.code.LocationEntity;
-import com.itsmv.api.code.OprEntity;
-import com.itsmv.api.code.OsEntity;
-import com.itsmv.api.code.UsageEntity;
+import com.itsmv.api.enums.LocationGroup;
+import com.itsmv.api.enums.ServerOperationGroup;
+import com.itsmv.api.enums.ServerOsGroup;
+import com.itsmv.api.enums.ServerUsageGroup;
 import com.itsmv.config.BaseDateEntity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "server")
 public class ServerEntity extends BaseDateEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "server_id")
-	private Long serverId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "server_nm", nullable = false)
-	private String serverNm;
+    @Column(nullable = false)
+    private String serverNm;
 
-	@Column(nullable = false)
-	private String hostname;
+    @Column(nullable = false)
+    private String hostname;
 
-	@Column(name = "mng_empl_nm")
-	private String mngEmplNm;
+    private String mngEmplNm;
 
-	@Column(name = "location_detail")
-	private String locationDetail;
 
-	@Column(name = "ip_addr")
-	private String ipAddr;
+    private String ipAddr;
 
-	@Column(name = "maker_nm")
-	private String makerNm;
+    private String makerNm;
 
-	@Column(name = "maker_model_nm")
-	private String makerModelNm;
+    private String makerModelNm;
 
-	@Column(name = "warranty")
-	private Integer warranty;
+    private Integer warranty;
 
-	@Column
-	private Integer price;
+    private Integer price;
 
-	@Column
-	private String serial;
+    private String spec;
 
-	@Column
-	private String spec;
+    @Column(nullable = false, updatable = false)
+    private Date buyDate;
 
-	@Column(name = "buy_date", nullable = false, updatable = false)
-	private Date buyDate;
+    private ServerOsGroup os;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dept_cd", insertable = false, updatable = false)
-	private DeptEntity deptEntity;
+    private LocationGroup location;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "location_cd", insertable = false, updatable = false)
-	private LocationEntity locationEntity;
+    private ServerUsageGroup serverUsage;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "opr_cd", insertable = false, updatable = false)
-	private OprEntity oprEntity;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usage_cd", insertable = false, updatable = false)
-	private UsageEntity usageEntity;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "os_cd", insertable = false, updatable = false)
-	private OsEntity osEntity;
-
-	private String deptNm;
-	private String locationNm;
-	private String oprNm;
-	private String usageNm;
-	private String osNm;
-	private String osDetail;
+    private ServerOperationGroup opr;
 
 }

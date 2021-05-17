@@ -1,10 +1,8 @@
 package com.itsmv.api.calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +21,14 @@ public class CalendarCtrl {
 
     @GetMapping(value = "/api/calendar")
     public List<CalendarEntity> list() {
-        List<CalendarEntity> list = new ArrayList<>();
-        Iterable<CalendarEntity> it = calendarRepo.findAll();
-        it.forEach(o -> {
-            o.setErrorCnt(o.getCalendarChildEntity().size());
-            list.add(o);
-        });
-        return list;
+//        List<CalendarEntity> list = new ArrayList<>();
+//        Iterable<CalendarEntity> it = calendarRepo.findAll();
+//        it.forEach(o -> {
+//            o.setErrorCnt(o.getCalendarChildEntity().size());
+//            list.add(o);
+//        });
+//        return list;
+        return calendarRepo.findAll();
     }
 
     @PostMapping(value = "/api/calendar")
@@ -44,9 +43,7 @@ public class CalendarCtrl {
     @PutMapping(value = "/api/calendar/{id}")
     public CalendarEntity update(@PathVariable("id") String id, @RequestBody CalendarEntity calendarEntity) {
         Optional<CalendarEntity> old = calendarRepo.findById(id);
-        if (old.get().getCalendarChildEntity().size() > 0) {
-            calendarChildRepo.deleteAll(old.get().getCalendarChildEntity());
-        }
+        old.ifPresent(entity -> calendarChildRepo.deleteAll(entity.getCalendarChildEntity()));
 
         if (calendarEntity.getCalendarChildEntity().size() > 0) {
             calendarChildRepo.saveAll(calendarEntity.getCalendarChildEntity());

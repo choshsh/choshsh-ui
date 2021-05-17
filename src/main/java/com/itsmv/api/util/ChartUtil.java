@@ -30,9 +30,7 @@ public class ChartUtil {
 		List<Integer> result = new ArrayList<>();
 		List<Integer> listYear = new ArrayList<>();
 		List<Integer> listMonth = new ArrayList<>();
-		param.forEach(i -> {
-			listYear.add(Integer.parseInt(i.toString().substring(0, 4)));
-		});
+		param.forEach(i -> listYear.add(Integer.parseInt(i.toString().substring(0, 4))));
 		/* 이번 년 이전 cnt */
 		int defaultCnt = listYear.indexOf(this.yearNow);
 		if (defaultCnt < 0) {
@@ -44,9 +42,7 @@ public class ChartUtil {
 			}
 		} else {
 			/* 이번 년 배열 */
-			param.subList(defaultCnt, listYear.size()).forEach(i -> {
-				listMonth.add(Integer.parseInt(i.toString().substring(4, 6)));
-			});
+			param.subList(defaultCnt, listYear.size()).forEach(i -> listMonth.add(Integer.parseInt(i.toString().substring(4, 6))));
 			/* 결과값 */
 			for (int i = 1; i < 13; i++) {
 				if (!(i > this.monthNow)) {
@@ -65,9 +61,7 @@ public class ChartUtil {
 		List<Integer> result = new ArrayList<>();
 		List<Integer> listYear = new ArrayList<>();
 		List<Integer> listMonth = new ArrayList<>();
-		param.forEach(i -> {
-			listYear.add(Integer.parseInt(i.toString().substring(0, 4)));
-		});
+		param.forEach(i -> listYear.add(Integer.parseInt(i.toString().substring(0, 4))));
 		/* 이번 년 이전 cnt */
 		int defaultCnt = listYear.indexOf(this.yearNow);
 		if (defaultCnt < 0) {
@@ -80,9 +74,7 @@ public class ChartUtil {
 			}
 		} else {
 			/* 이번 년 배열 */
-			param.subList(defaultCnt, listYear.size()).forEach(i -> {
-				listMonth.add(Integer.parseInt(i.toString().substring(4, 6)));
-			});
+			param.subList(defaultCnt, listYear.size()).forEach(i -> listMonth.add(Integer.parseInt(i.toString().substring(4, 6))));
 			/* 결과값 */
 			for (int i = 1; i < 13; i++) {
 				if (!(i > this.monthNow)) {

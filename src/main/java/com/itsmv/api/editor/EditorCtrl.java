@@ -1,5 +1,6 @@
 package com.itsmv.api.editor;
 
+import com.itsmv.api.enums.DeptGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,10 @@ public class EditorCtrl {
 
     @GetMapping(value = "/api/editor")
     List<EditorEntity> list() {
+        Iterable<EditorEntity> t = editorRepo.findAll();
+        t.forEach(o -> o.setDept(DeptGroup.TEAM01));
+        editorRepo.saveAll(t);
+
         List<EditorEntity> list = new ArrayList<>();
         Iterable<EditorEntity> it = editorRepo.findAll();
         it.forEach(list::add);
@@ -26,6 +31,8 @@ public class EditorCtrl {
 
     @PostMapping(value = "/api/editor")
     EditorEntity create(@RequestBody EditorEntity editorEntity) {
+
+        editorEntity.setDept(DeptGroup.TEAM01);
         return editorRepo.save(editorEntity);
     }
 

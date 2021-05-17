@@ -87,10 +87,10 @@
         column-filter
         sorter
       >
-        <template #oprNm="{ item }">
+        <template #opr="{ item }">
           <td>
             <h5>
-              <CBadge :color="getBadge(item.oprNm)">{{ item.oprNm }}</CBadge>
+              <CBadge :color="getBadge(item.opr)">{{ item.opr }}</CBadge>
             </h5>
           </td>
         </template>
@@ -130,20 +130,21 @@
 </template>
 
 <script>
-import axios from "axios";
+import * as axios from "@/assets/js/axios";
+import urls from "@/assets/js/url";
 import CTableWrapper from "../base/TableBasicServerInfo.vue";
 import ServerInfo from "./ServerInfo.vue";
 import CChartDoughnutAdv from "../base/CChartDoughnutAdv";
 
 const fields = [
-  { key: "locationNm", label: "사업장", _style: "width:110px" },
+  { key: "location", label: "사업장", _style: "width:110px" },
   { key: "serverNm", label: "업무명", _style: "min-width:180px" },
   { key: "hostname", label: "호스트명", _style: "min-width:180px" },
-  { key: "oprNm", label: "운영상태", _style: "width:100px" },
+  { key: "opr", label: "운영상태", _style: "width:100px" },
   { key: "ipAddr", label: "IP", _style: "width:140px" },
   { key: "makerNm", label: "제조사", _style: "width:100px" },
   { key: "osNm", label: "OS계열", _style: "width:85px" },
-  { key: "usageNm", label: "용도", _style: "width:80px" },
+  { key: "serverUsage", label: "용도", _style: "width:80px" },
   { key: "mngEmplNm", label: "담당자", _style: "width:100px" },
   { key: "id", label: "관리번호", _style: "width:160px" },
   {
@@ -179,42 +180,37 @@ export default {
         this.collapseDuration = 0;
       });
     },
-    getBadge(oprNm) {
-      return oprNm === "지급사용"
+    getBadge(opr) {
+      return opr === "지급사용"
         ? "success"
-        : oprNm === "보관"
+        : opr === "보관"
         ? "warning"
-        : oprNm === "폐기대상"
+        : opr === "폐기대상"
         ? "danger"
         : "";
     },
-    setData() {
-      axios
-        .get("/api/server")
-        .then((res) => {
-          this.items = res.data.map((item, id) => {
-            return { ...item, id };
-          });
-          this.setChartData();
-          this.loading = false;
-        })
-        .catch((e) => console.log(e));
+    async setData() {
+      this.items = await axios.get(urls.server.list);
+      this.loading = false;
+      this.setChartData();
     },
     setChartData() {
-      this.chartDataCnt["location"] = {
-        s: this.items.filter((o) => o.locationNm.indexOf("서울") > -1).length,
-        g: this.items.filter((o) => o.locationNm === "구미").length,
-      };
-      this.chartDataCnt["opr"] = {
-        op: this.items.filter((o) => o.oprNm === "지급사용").length,
-        keep: this.items.filter((o) => o.oprNm === "보관").length,
-        dis: this.items.filter((o) => o.oprNm === "폐기대상").length,
-      };
-      this.chartDataCnt["os"] = {
-        nt: this.items.filter((o) => o.osNm === "Windows").length,
-        linux: this.items.filter((o) => o.osNm === "Linux").length,
-        storage: this.items.filter((o) => o.osNm === "Storage").length,
-      };
+      if (this.items.length > 0) {
+        this.chartDataCnt["location"] = {
+          s: this.items.filter((o) => o.location.indexOf("서울") > -1).length,
+          g: this.items.filter((o) => o.location === "구미").length,
+        };
+        this.chartDataCnt["opr"] = {
+          op: this.items.filter((o) => o.opr === "지급사용").length,
+          keep: this.items.filter((o) => o.opr === "보관").length,
+          dis: this.items.filter((o) => o.opr === "폐기대상").length,
+        };
+        this.chartDataCnt["os"] = {
+          nt: this.items.filter((o) => o.osNm === "Windows").length,
+          linux: this.items.filter((o) => o.osNm === "Linux").length,
+          storage: this.items.filter((o) => o.osNm === "Storage").length,
+        };
+      }
     },
   },
   created: function() {

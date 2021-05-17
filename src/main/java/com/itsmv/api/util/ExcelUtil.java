@@ -2,6 +2,7 @@ package com.itsmv.api.util;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.IntStream;
@@ -133,11 +134,11 @@ public class ExcelUtil {
 
 		// 파일이름 인코딩작업
 		try {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < fileName.length(); i++) {
 				char c = fileName.charAt(i);
 				if (c > '~') {
-					sb.append(URLEncoder.encode("" + c, "UTF-8"));
+					sb.append(URLEncoder.encode("" + c, StandardCharsets.UTF_8));
 				} else {
 					sb.append(c);
 				}

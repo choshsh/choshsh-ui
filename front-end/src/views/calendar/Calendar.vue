@@ -57,14 +57,14 @@
                       <td class="align-top">
                         <model-select
                           :options="options"
-                          v-model="item.serverId"
+                          v-model="item.id"
                           placeholder="검색어 입력  (업무명 or 호스트명 or IP or 사업장)"
                         />
                       </td>
                       <td>
                         <CInput
                           v-model="item.comment"
-                          :readonly="Boolean(!item.serverId)"
+                          :readonly="Boolean(!item.id)"
                         />
                       </td>
                       <td
@@ -126,6 +126,8 @@ import { formatDate } from "@fullcalendar/vue";
 import { ModelSelect } from "vue-search-select";
 import "vue-search-select/dist/VueSearchSelect.css";
 import axios from "axios";
+import * as axios2 from "@/assets/js/axios";
+import urls from "@/assets/js/url";
 
 export default {
   components: {
@@ -167,7 +169,7 @@ export default {
       calendarChildEntity: [
         {
           calendarDate: "",
-          serverId: "",
+          id: "",
           comment: "",
         },
       ],
@@ -238,45 +240,40 @@ export default {
       this.calendarChildEntity = [
         {
           calendarDate: "",
-          serverId: "",
+          id: "",
           comment: "",
         },
       ];
     },
     // 일일점검 리스트
-    getData() {
+    async getData() {
       this.calendarOptions["events"] = [];
-      axios
-        .get("/api/calendar")
-        .then((res) => {
-          if (res.data.length > 0) {
-            this.items = res.data;
-            this.items.forEach((o) => {
-              this.calendarOptions["events"].push({
-                date: o.calendarDate,
-                title: "1. 점검 여부: " + (o.startTime ? "O" : "X"),
-                backgroundColor: "#FFFFFF",
-                borderColor: "#FFFFFF",
-                textColor: "#000000",
-              });
-              this.calendarOptions["events"].push({
-                date: o.calendarDate,
-                title: "2. 장애: " + o.errorCnt + "건",
-                backgroundColor: "#FFFFFF",
-                borderColor: "#FFFFFF",
-                textColor: o.errorCnt > 0 ? "#e55353" : "#000000",
-              });
-              this.calendarOptions["events"].push({
-                date: o.calendarDate,
-                title: "3. 작업: " + (o.comment ? 1 : 0) + "건",
-                backgroundColor: "#FFFFFF",
-                borderColor: "#FFFFFF",
-                textColor: (o.comment ? 1 : 0) > 0 ? "#321fdb" : "#000000",
-              });
-            });
-          }
-        })
-        .catch((e) => console.log(e));
+
+      this.items = await axios2.get(urls.calendar.list);
+
+      this.items.forEach((o) => {
+        this.calendarOptions["events"].push({
+          date: o.calendarDate,
+          title: "1. 점검 여부: " + (o.startTime ? "O" : "X"),
+          backgroundColor: "#FFFFFF",
+          borderColor: "#FFFFFF",
+          textColor: "#000000",
+        });
+        this.calendarOptions["events"].push({
+          date: o.calendarDate,
+          title: "2. 장애: " + o.calendarChildEntity.length + "건",
+          backgroundColor: "#FFFFFF",
+          borderColor: "#FFFFFF",
+          textColor: o.calendarChildEntity.length > 0 ? "#e55353" : "#000000",
+        });
+        this.calendarOptions["events"].push({
+          date: o.calendarDate,
+          title: "3. 작업: " + (o.comment ? 1 : 0) + "건",
+          backgroundColor: "#FFFFFF",
+          borderColor: "#FFFFFF",
+          textColor: (o.comment ? 1 : 0) > 0 ? "#321fdb" : "#000000",
+        });
+      });
     },
     // 서버 select list 데이터
     setServers() {
@@ -285,7 +282,7 @@ export default {
         .then((res) => {
           this.options = res.data.map((o) => {
             return {
-              value: o.serverId,
+              value: o.id,
               text:
                 o.serverNm +
                 " / " +
@@ -293,7 +290,7 @@ export default {
                 " / " +
                 o.ipAddr +
                 " / " +
-                o.locationNm,
+                o.location,
             };
           });
         })
@@ -302,7 +299,7 @@ export default {
     save() {
       this.form.calendarDate = this.selectedDate;
       this.form.calendarChildEntity = this.calendarChildEntity.map((el) => {
-        if (el.serverId != "") {
+        if (el.id != "") {
           el.calendarDate = this.selectedDate;
           return el;
         }
