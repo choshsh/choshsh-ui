@@ -22,7 +22,7 @@ repositories {
 
 jib {
     from {
-        image = "amazoncorretto:15.0.2"
+        image = "amazoncorretto:16.0.1"
     }
     to {
         image = "choshsh/itsmv"
