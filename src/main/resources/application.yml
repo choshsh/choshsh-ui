@@ -30,6 +30,8 @@ spring:
   devtools:
     restart:
       enabled: true
+    livereload:
+      enabled: true
 logging:
   level:
     web: debug
@@ -40,6 +42,7 @@ spring:
       on-profile: prod
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
     show-sql: true
     hibernate:
       ddl-auto: create-drop
@@ -54,9 +57,6 @@ logging:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 ---
 spring:
-  devtools:
-    livereload:
-      enabled: true
   config:
     activate:
       on-profile: default
