@@ -1,14 +1,14 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.4'
+    id 'org.springframework.boot' version '2.5.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'com.google.cloud.tools.jib' version '2.8.0'
+    id "com.google.cloud.tools.jib" version "3.1.1"
 }
 
 group = 'com.itsmv'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = '15'
+sourceCompatibility = '16'
 
 configurations {
     compileOnly {
@@ -22,7 +22,7 @@ repositories {
 
 jib {
     from {
-        image = "amazoncorretto:15.0.2"
+        image = "amazoncorretto:16.0.1"
     }
     to {
         image = "choshsh/itsmv"
@@ -46,9 +46,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
     compileOnly 'org.projectlombok:lombok'
-    compileOnly 'org.springframework.boot:spring-boot-devtools'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
