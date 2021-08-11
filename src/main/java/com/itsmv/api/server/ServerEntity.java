@@ -6,15 +6,15 @@ import com.itsmv.api.enums.ServerOperationGroup;
 import com.itsmv.api.enums.ServerOsGroup;
 import com.itsmv.api.enums.ServerUsageGroup;
 import com.itsmv.config.BaseDateEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})

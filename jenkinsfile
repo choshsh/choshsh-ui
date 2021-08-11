@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    stages {
+        stage('Code') {
+            steps {
+                updateGitlabCommitStatus name: 'code', state: 'pending'
+                git credentialsId: 'gitlab-root', url: 'http://192.168.0.11:82/root/itsmv.git'
+            }
+            post {
+            	success {
+            	  echo 'posting success to GitLab'
+                  updateGitlabCommitStatus(name: 'code', state: 'success')
+              	}
+            	failure {
+            	  echo 'postinng failure to GitLab'
+                  updateGitlabCommitStatus(name: 'code', state: 'failed')
+              	}
+            }
+        }
+        stage('Execute permission for gradlew') {
+            steps {
+                sh 'chmod +x gradlew'
+            }
+        }
+        stage('Gradle Task - Clean') {
+            tools {
+                jdk 'amazon-corretto-15'
+            }
+            steps {
+                echo 'Run gradle task'
+                updateGitlabCommitStatus name: 'build', state: 'pending'
+                sh './gradlew clean'
+            }
+            post {
+            	success {
+            	  echo 'posting success to GitLab'
+                  updateGitlabCommitStatus(name: 'build', state: 'success')
+              	}
+            	failure {
+            	  echo 'postinng failure to GitLab'
+                  updateGitlabCommitStatus(name: 'build', state: 'failed')
+              	}
+            }
+        }
+    }
+}

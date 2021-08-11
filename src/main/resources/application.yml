@@ -7,9 +7,7 @@ spring:
       "dev": "dev, default"
 ---
 spring:
-  config:
-    activate:
-      on-profile: dev
+  config.activate.on-profile: dev
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
@@ -37,9 +35,7 @@ logging:
     web: debug
 ---
 spring:
-  config:
-    activate:
-      on-profile: prod
+  config.activate.on-profile: prod
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: true
@@ -57,15 +53,18 @@ logging:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 ---
 spring:
-  config:
-    activate:
-      on-profile: default
+  config.activate.on-profile: default
   jpa:
     show-sql: true
     open-in-view: true
     hibernate:
       use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        format_sql: true
 logging:
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 server:
