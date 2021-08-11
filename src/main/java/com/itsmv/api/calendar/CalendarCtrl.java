@@ -13,7 +13,7 @@ public class CalendarCtrl {
 
     private final CalendarChildRepo calendarChildRepo;
 
-    @Autowired
+
     private CalendarCtrl(CalendarRepo calendarRepo, CalendarChildRepo calendarChildRepo) {
         this.calendarRepo = calendarRepo;
         this.calendarChildRepo = calendarChildRepo;

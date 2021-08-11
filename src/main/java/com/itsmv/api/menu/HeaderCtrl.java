@@ -11,7 +11,7 @@ public class HeaderCtrl {
 
     private final HeaderRepo headerRepo;
 
-    @Autowired
+
     private HeaderCtrl(HeaderRepo headerRepo) {
         this.headerRepo = headerRepo;
     }
