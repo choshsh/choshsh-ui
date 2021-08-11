@@ -11,7 +11,7 @@ public class UserCtrl {
 
     private final UserRepo userRepo;
 
-    @Autowired
+
     private UserCtrl(UserRepo userRepo) {
         this.userRepo = userRepo;
     }

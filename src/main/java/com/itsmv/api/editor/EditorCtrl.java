@@ -12,7 +12,7 @@ public class EditorCtrl {
 
     private final EditorRepo editorRepo;
 
-    @Autowired
+
     private EditorCtrl(EditorRepo editorRepo) {
         this.editorRepo = editorRepo;
     }

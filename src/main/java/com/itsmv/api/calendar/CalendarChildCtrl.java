@@ -11,7 +11,7 @@ public class CalendarChildCtrl {
 
     private final CalendarChildRepo calendarChildRepo;
 
-    @Autowired
+
     private CalendarChildCtrl(CalendarChildRepo calendarChildRepo) {
         this.calendarChildRepo = calendarChildRepo;
     }

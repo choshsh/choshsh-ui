@@ -11,7 +11,6 @@ public class MonotoringCtrl {
 
     private final MonitoringRepo monitoringRepo;
 
-    @Autowired
     private MonotoringCtrl(MonitoringRepo monitoringRepo) {
         this.monitoringRepo = monitoringRepo;
     }

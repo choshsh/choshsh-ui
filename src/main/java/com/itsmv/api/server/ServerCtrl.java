@@ -1,7 +1,6 @@
 package com.itsmv.api.server;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +10,8 @@ import java.util.List;
 public class ServerCtrl {
 
     private final ServerSvc serverSvc;
-
     private final ServerRepo serverRepo;
 
-    @Autowired
     private ServerCtrl(ServerSvc serverSvc, ServerRepo serverRepo) {
         this.serverSvc = serverSvc;
         this.serverRepo = serverRepo;

@@ -11,7 +11,7 @@ public class NavCtrl {
 
     private final NavRepo navRepo;
 
-    @Autowired
+
     private NavCtrl(NavRepo navRepo) {
         this.navRepo = navRepo;
     }

@@ -11,7 +11,7 @@ public class ServerSvc {
 
     private final ServerRepo serverRepo;
 
-    @Autowired
+
     private ServerSvc(ServerRepo serverRepo) {
         this.serverRepo = serverRepo;
     }
