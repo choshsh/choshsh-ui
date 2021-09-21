@@ -1,143 +1,152 @@
 <template>
-  <CCard>
-    <CCardBody>
-      <CRow>
-        <CCol col="11" class="mb-3 mb-xl-0"></CCol>
-        <CCol col="1" class="mb-3 mb-xl-0">
-          <CButton @click="formModal = true" color="primary">New</CButton>
-          <CModal
-            title="Editor Form"
-            color="primary"
-            :show.sync="formModal"
-            :size="'xl'"
-          >
-            <CRow>
-              <CCol col="12">
-                <CCard>
-                  <CCardBody>
-                    <form id="boardForm">
-                      <CRow>
-                        <CCol sm="12">
-                          <CInput
-                            label="제목"
-                            v-model="form.title"
-                            placeholder="Enter 제목"
-                          />
-                        </CCol>
-                      </CRow>
-                      <CRow>
-                        <CCol sm="12">
-                          <CInput
-                            label="키워드"
-                            v-model="form.keyword"
-                            placeholder="Enter 키워드"
-                          />
-                        </CCol>
-                      </CRow>
-                      <CRow>
-                        <CCol sm="12">
-                          <CKeditor
-                            ref="ClassicEditorForm"
-                            :dataParam="form.content"
-                            :key="ckKey"
-                          />
-                        </CCol>
-                      </CRow>
-                      <div class="text-center row-fluid mb-1 mt-3">
-                        <button
-                          id="saveBtn"
-                          type="button"
-                          class="btn btn-primary"
-                          @click="modalSave(form.entityId)"
-                        >
-                          저장
-                        </button>
-                        <button
-                          id="cancelBtn"
-                          type="button"
-                          class="btn btn-secondary ml-4"
-                          @click="modalClose"
-                        >
-                          취소
-                        </button>
-                      </div>
-                    </form>
-                  </CCardBody>
-                </CCard>
-              </CCol>
-            </CRow>
-            <div slot="footer" />
-          </CModal>
-        </CCol>
-      </CRow>
-      <CDataTable
-        :items="items"
-        :fields="fields"
-        :items-per-page="10"
-        :table-filter="tableFilter"
-        :loading="loading"
-        :pagination="pagination"
-        :itemsPerPageSelect="{ values: [10, 50, 100, 500] }"
-        :sorterValue="{ column: 'regDate', asc: false }"
-        hover
-        sorter
-      >
-        >
-        <template #show_details="{ item, index }">
-          <td class="py-2">
-            <CButton
+  <div>
+    <CToaster :autohide="3000">
+      <template v-for="toast in fixedToasts">
+        <CToast :key="'toast' + toast" :show="true" header="알림" :color="'info'">
+          Content is successfully saved.
+        </CToast>
+      </template>
+    </CToaster>
+    <CCard>
+      <CCardBody>
+        <CRow>
+          <CCol col="11" class="mb-3 mb-xl-0"></CCol>
+          <CCol col="1" class="mb-3 mb-xl-0">
+            <CButton @click="formModal = true" color="primary">New</CButton>
+            <CModal
+              title="Editor Form"
               color="primary"
-              variant="outline"
-              square
-              size="sm"
-              @click="toggleDetails(item, index)"
-              >{{ Boolean(item._toggled) ? "Hide" : "Show" }}</CButton
+              :show.sync="formModal"
+              :size="'xl'"
             >
-          </td>
-        </template>
-        <template #details="{ item }">
-          <CCollapse
-            :show="Boolean(item._toggled)"
-            :duration="collapseDuration"
-          >
-            <CCardBody>
-              <CTabs variant="pills" :vertical="vertical">
-                <CTab active>
-                  <template slot="title">{{ tabs[0] }}</template>
-                  <template>
-                    <CCol lg="12">
-                      <CCard>
-                        <CCardBody>
-                          <CKeditor
-                            ref="ClassicEditor"
-                            :dataParam="item.content"
-                            :disable="true"
-                            :hideToolbar="true"
-                          />
-                        </CCardBody>
-                        <div class="text-center row-fluid mb-1">
-                          <CButton
-                            @click="modalEdit(item)"
-                            class="btn btn-success"
-                            >수정</CButton
+              <CRow>
+                <CCol col="12">
+                  <CCard>
+                    <CCardBody>
+                      <form id="boardForm">
+                        <CRow>
+                          <CCol sm="12">
+                            <CInput
+                              label="제목"
+                              v-model="form.title"
+                              placeholder="Enter 제목"
+                            />
+                          </CCol>
+                        </CRow>
+                        <CRow>
+                          <CCol sm="12">
+                            <CInput
+                              label="키워드"
+                              v-model="form.keyword"
+                              placeholder="Enter 키워드"
+                            />
+                          </CCol>
+                        </CRow>
+                        <CRow>
+                          <CCol sm="12">
+                            <CKeditor
+                              ref="ClassicEditorForm"
+                              :dataParam="form.content"
+                              :key="ckKey"
+                            />
+                          </CCol>
+                        </CRow>
+                        <div class="text-center row-fluid mb-1 mt-3">
+                          <button
+                            id="saveBtn"
+                            type="button"
+                            class="btn btn-primary"
+                            @click="modalSave(form.entityId)"
                           >
-                          <CButton
-                            @click="deleteData(item.entityId)"
-                            class="btn btn-danger ml-3"
-                            >삭제</CButton
+                            저장
+                          </button>
+                          <button
+                            id="cancelBtn"
+                            type="button"
+                            class="btn btn-secondary ml-4"
+                            @click="modalClose"
                           >
+                            취소
+                          </button>
                         </div>
-                      </CCard>
-                    </CCol>
-                  </template>
-                </CTab>
-              </CTabs>
-            </CCardBody>
-          </CCollapse>
-        </template>
-      </CDataTable>
-    </CCardBody>
-  </CCard>
+                      </form>
+                    </CCardBody>
+                  </CCard>
+                </CCol>
+              </CRow>
+              <div slot="footer" />
+            </CModal>
+          </CCol>
+        </CRow>
+        <CDataTable
+          :items="items"
+          :fields="fields"
+          :items-per-page="10"
+          :table-filter="tableFilter"
+          :loading="loading"
+          :pagination="pagination"
+          :itemsPerPageSelect="{ values: [10, 50, 100, 500] }"
+          :sorterValue="{ column: 'regDate', asc: false }"
+          hover
+          sorter
+        >
+          >
+          <template #show_details="{ item, index }">
+            <td class="py-2">
+              <CButton
+                color="primary"
+                variant="outline"
+                square
+                size="sm"
+                @click="toggleDetails(item, index)"
+                >{{ Boolean(item._toggled) ? "Hide" : "Show" }}</CButton
+              >
+            </td>
+          </template>
+          <template #details="{ item }">
+            <CCollapse
+              :show="Boolean(item._toggled)"
+              :duration="collapseDuration"
+            >
+              <CCardBody>
+                <CTabs variant="pills" :vertical="vertical">
+                  <CTab active>
+                    <template slot="title">{{ tabs[0] }}</template>
+                    <template>
+                      <CCol lg="12">
+                        <CCard>
+                          <CCardBody>
+                            <CKeditor
+                              ref="ClassicEditor"
+                              :dataParam="item.content"
+                              :disable="true"
+                              :hideToolbar="true"
+                            />
+                          </CCardBody>
+                          <div class="text-center row-fluid mb-1">
+                            <CButton
+                              @click="modalEdit(item)"
+                              class="btn btn-success"
+                              >수정</CButton
+                            >
+                            <CButton
+                              @click="deleteData(item.entityId)"
+                              class="btn btn-danger ml-3"
+                              >삭제</CButton
+                            >
+                          </div>
+                        </CCard>
+                      </CCol>
+                    </template>
+                  </CTab>
+                </CTabs>
+              </CCardBody>
+            </CCollapse>
+          </template>
+        </CDataTable>
+      </CCardBody>
+    </CCard>
+  </div>
 </template>
 
 <script>
@@ -180,9 +189,13 @@ export default {
         content: "",
       },
       ckKey: 0,
+      fixedToasts: 0,
     };
   },
   methods: {
+    addFixedToast() {
+      this.fixedToasts++;
+    },
     getData() {
       axios
         .get("/api/editor")
@@ -249,7 +262,7 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss");
     },
     onSuccess() {
-      alert("Success");
+      this.addFixedToast()
       this.clear();
       this.getData();
       this.formModal = false;

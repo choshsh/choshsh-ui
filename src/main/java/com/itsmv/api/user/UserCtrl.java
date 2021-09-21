@@ -1,6 +1,5 @@
 package com.itsmv.api.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 public class UserCtrl {
 
     private final UserRepo userRepo;
-
 
     private UserCtrl(UserRepo userRepo) {
         this.userRepo = userRepo;
