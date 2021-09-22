@@ -25,14 +25,6 @@ spring:
       path: /h2-console
       settings:
         web-admin-password: itsmv
-  devtools:
-    restart:
-      enabled: true
-    livereload:
-      enabled: true
-logging:
-  level:
-    web: debug
 ---
 spring:
   config.activate.on-profile: prod

@@ -1,19 +1,13 @@
-INSERT INTO nav (_name, name, url, icon) VALUES
-     ('CSidebarNavItem', 'Server', '/server', 'cil-laptop'),
-     ('CSidebarNavItem', 'Monitoring', '/monitoring', 'cil-monitor'),
-     ('CSidebarNavItem', 'Calendar', '/calendar', 'cil-calendar'),
-     ('CSidebarNavItem', 'Editor', '/editor', 'cil-pencil'),
-     ('CSidebarNavItem', 'Settings', '/settings', 'cil-settings');
+INSERT INTO header (url, name, sort, is_blank) VALUES
+     ('https://github.com/choshsh', 'SH-GitHub', 1, 'Y'),
+     ('https://www.notion.so/choshsh/9019293e1d86475fb19fe0a5d1149f0d', 'SH-Notion', 2, 'Y'),
+     ('https://jenkins.choshsh.com', 'Jenkins', 3, 'Y'),
+     ('/settings', '설정', 99, 'N');
 
-
-INSERT INTO header (url, name) VALUES
-     ('https://github.com/SHsteak', 'SH-github'),
-     ('https://www.notion.so/choshsh/9019293e1d86475fb19fe0a5d1149f0d', 'SH-notion');
-
-INSERT INTO monitoring (url, name, height) VALUES
-     ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/hb7fSE0Zz/choshsh-monitoring-sample?orgId=1&refresh=1m', 'Grafana', '2200'),
-     ('http://choshsh.koreacentral.cloudapp.azure.com:3000/d/Vw_UfM-Gk/alert?orgId=1&refresh=1m', 'Grafana-Alert', '1000'),
-     ('http://choshsh.koreacentral.cloudapp.azure.com:5602/app/dashboards#/view/a9dbe9c0-50b0-11eb-b4f7-fdd31496e7d4?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-query-input=true', 'Kibana', '1500');
+INSERT INTO iframe (category, url, name, height, sort) VALUES
+     ('log', 'http://loki-grafana.choshsh.com/d/XeS0yvN7z/loki-dashboard?orgId=1&refresh=5s&from=now-30m&to=now', 'Loki', '1500', 1),
+     ('metric', 'http://loki-grafana.choshsh.com/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'Pod', '1000', 2),
+     ('metric', 'http://loki-grafana.choshsh.com/d/1XRIUDN7k/linux?orgId=1&from=now-30m&to=now', 'Node', '2200', 1);
 
 INSERT INTO server (server_nm, hostname, mng_empl_nm, ip_addr, maker_nm, maker_model_nm, warranty, buy_date, price, spec, os, location, server_usage, opr) VALUES
      ('Server Room #1', 'server-01-op', 'Cho Sanghyun', '123.123.123.1', 'HP', 'HPE ProLiant DL360 Gen9', '3', '2020-01-03', '50000', 'Intel Xeon Gold 6328H / DDR4-3200 128GB / 500GB / 2EA / RAID 1 / SATA 3.5inch / 5U / 10Gb Ethernet Network Adapter', 1, 0, 0, 0),
@@ -33,5 +27,5 @@ INSERT INTO calendar_child  (calendar_date, server_id, comment) VALUES
      ('2021-03-02', '3', 'Memory Warning 1EA'),
      ('2021-03-02', '4', 'Critical error');
 
-INSERT INTO user  (user_no, user_id, user_pw) VALUES
-     ('1', 'choshsh', 'choshsh');
+INSERT INTO user  (id, user_id, user_name, user_pw, role) VALUES
+     ('1', 'choshsh', '조상현', 'choshsh', 'ADMIN');

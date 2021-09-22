@@ -1,16 +1,16 @@
 package com.itsmv.api.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class UserCtrl {
 
     private final UserRepo userRepo;
-
 
     private UserCtrl(UserRepo userRepo) {
         this.userRepo = userRepo;
@@ -22,6 +22,18 @@ public class UserCtrl {
         Iterable<UserEntity> it = userRepo.findAll();
         it.forEach(list::add);
         return list;
+    }
+
+    @PostMapping(value = "/api/user/login")
+    public UserEntity login(@RequestBody UserEntity userEntity) {
+        try {
+            UserEntity user = userRepo.findByUserIdAndUserPw(userEntity.getUserId(), userEntity.getUserPw());
+            user.setUserPw("");
+            return user;
+        } catch (Exception e) {
+            log.warn("로그인 실패 ===> {}", userEntity.getUserId());
+            return null;
+        }
     }
 
     @PostMapping(value = "/api/user/info")
@@ -36,7 +48,7 @@ public class UserCtrl {
 
     @PutMapping(value = "/api/user/{id}")
     UserEntity update(@PathVariable("id") Long id, @RequestBody UserEntity userEntity) {
-        userEntity.setUserNo(id);
+        userEntity.setId(id);
         return userRepo.save(userEntity);
     }
 

@@ -1,18 +1,13 @@
 package com.itsmv.api.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.itsmv.api.enums.UserRole;
 import com.itsmv.config.BaseDateEntity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -24,13 +19,13 @@ public class UserEntity extends BaseDateEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_no")
-	private Long userNo;
+	private Long id;
 
-	@Column(name = "user_id", nullable = false)
 	private String userId;
-
-	@Column(name = "user_pw", nullable = false)
+	private String userName;
 	private String userPw;
+
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 
 }
