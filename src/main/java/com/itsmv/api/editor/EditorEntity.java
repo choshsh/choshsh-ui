@@ -1,7 +1,6 @@
 package com.itsmv.api.editor;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.itsmv.api.enums.DeptGroup;
 import com.itsmv.config.BaseDateEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +28,5 @@ public class EditorEntity extends BaseDateEntity {
 
     @Column(nullable = false, length = 5000)
     private String content;
-
-    @Column
-    private DeptGroup dept;
 
 }
