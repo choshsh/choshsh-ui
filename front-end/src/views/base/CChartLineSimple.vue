@@ -20,11 +20,9 @@ export default {
     };
   },
   props: {
-    // [ arr1, arr2 ]
     datas: Array,
-    // [ 'arr1-legend','arr2-legend' ]
-    legends: Array,
-    legendsShow: { type: Boolean, default: true },
+    legendName: String,
+    maxTicksLimit: { type: Number, default: 4 },
     yMax: { type: Number, default: 200 },
     steppedLine: { type: Boolean, default: false },
     labels: {
@@ -55,7 +53,7 @@ export default {
     defaultOptions() {
       return {
         legend: {
-          display: this.legendsShow,
+          display: true,
           position: "top",
           labels: {
             boxWidth: 20,
@@ -83,33 +81,32 @@ export default {
               ticks: {
                 min: 0,
                 max: this.yMax,
-                maxTicksLimit: 4,
+                maxTicksLimit: this.maxTicksLimit,
               },
             },
           ],
         },
         animation: {
-           easing: "easeOutCirc",
+          easing: "easeOutCirc",
         },
       };
     },
   },
   methods: {
     setData() {
-      const arr = new Array();
-      this.datas.map((o, index) => {
-        arr.push({
-          label: this.legends[index],
-          backgroundColor: this.backgroundColor[index],
-          borderColor: this.backgroundColor[index],
+      return [
+        {
+          label: this.legendName,
+          backgroundColor: "rgb(228,102,81,0.9)",
+          data: this.datas,
+          backgroundColor: "#007bff",
+          borderColor: "#007bff",
           pointBorderWidth: 2,
           pointHoverBorderWidth: 6,
-          data: o,
           fill: false,
           steppedLine: this.steppedLine,
-        });
-      });
-      return arr;
+        },
+      ];
     },
   },
 };

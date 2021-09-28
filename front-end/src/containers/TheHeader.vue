@@ -18,7 +18,7 @@
     <CHeaderBrand class="mx-auto d-lg-none" to="/"></CHeaderBrand>
     <CHeaderNav class="d-md-down-none mr-auto">
       <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/">
+        <CHeaderNavLink to="/dashboard">
           <CIcon name="cil-home" />
         </CHeaderNavLink>
       </CHeaderNavItem>
@@ -31,11 +31,23 @@
       </CHeaderNavItem>
       <CHeaderNavItem
         class="px-3"
-        v-for="(item, index) in data"
+        v-for="(item, index) in headers"
         v-bind:key="index"
       >
         <CHeaderNavLink>
-          <div @click="openTab(item.url)">{{ item.name }}</div>
+          <div @click="openTab(item)" class="font-weight-bold">{{ item.name }}</div>
+        </CHeaderNavLink>
+      </CHeaderNavItem>
+    </CHeaderNav>
+    <CHeaderNav class="mr-3">
+      <CHeaderNavItem class="d-md-down-none mx-2">
+        <CHeaderNavLink>
+          <a @click="login()" v-if="!isLogin">
+            <CIcon name="cil-lock-locked" /> Login
+          </a>
+          <a @click="logout()" v-else>
+            <CIcon name="cil-lock-unlocked" /> Logout
+          </a>
         </CHeaderNavLink>
       </CHeaderNavItem>
     </CHeaderNav>
@@ -43,37 +55,45 @@
 </template>
 
 <script>
-import TheHeaderDropdownAccnt from "./TheHeaderDropdownAccnt";
-import axios from "axios";
+import * as axios from "@/assets/js/axios";
+import urls from "@/assets/js/urls";
 
 export default {
   name: "TheHeader",
-  components: {
-    TheHeaderDropdownAccnt,
-  },
   data() {
     return {
-      data: Array,
+      headers: [],
+      isLogin: sessionStorage.getItem("userId") ? true : false,
     };
   },
   props: {
     functions: { type: Function },
   },
   methods: {
-    getData() {
-      axios
-        .get("/api/header")
-        .then((res) => {
-          this.data = res.data;
-        })
-        .catch((e) => console.log(e));
+    async setData() {
+      let data = await axios.get(urls.admin.header);
+      this.headers = data;
     },
-    openTab(url) {
-      window.open(url, "_blank");
+    openTab(item) {
+      if (item.isBlank === "Y") {
+        window.open(item.url, "_blank");
+      } else {
+        this.$router.push(item.url);
+      }
+    },
+    logout() {
+      if (confirm("로그아웃하시겠습니까?")) {
+        sessionStorage.clear();
+        this.isLogin = false;
+        this.$router.push("/");
+      }
+    },
+    login() {
+      this.$router.push("/pages/login");
     },
   },
   created() {
-    this.getData();
+    this.setData();
   },
 };
 </script>

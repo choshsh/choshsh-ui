@@ -1,19 +1,21 @@
 <template>
   <CCard>
     <CCardHeader v-if="Boolean(caption)">
-      <slot name="header">{{caption}}</slot>
+      <slot name="header">{{ caption }}</slot>
     </CCardHeader>
     <CCardBody>
       <CDataTable
         :fields="fields"
-        :items="Boolean(show) ? items[workflowJobId] : null"
+        :items="items"
         :hover="hover"
         :bordered="bordered"
         :small="small"
-        :items-per-page="5"
-        pagination
+        :items-per-page="10"
+        :pagination="{ align: 'center' }"
         :table-filter="tableFilter"
-        :itemsPerPageSelect="Boolean(itemsPerPageSelect) ? {values:[5,20,50,100]} : false"
+        :itemsPerPageSelect="
+          Boolean(itemsPerPageSelect) ? { values: [10, 50, 100] } : false
+        "
       ></CDataTable>
     </CCardBody>
   </CCard>
@@ -28,8 +30,6 @@ export default {
     hover: Boolean,
     bordered: Boolean,
     small: Boolean,
-    workflowJobId: Number,
-    show: Boolean,
     caption: String,
     tableFilter: Object,
     itemsPerPageSelect: Boolean,
