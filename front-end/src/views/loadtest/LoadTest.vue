@@ -64,46 +64,53 @@
                       )"
                       v-bind:key="index"
                     >
-                      <span class="badge badge-light badge-pill">
-                        {{ s }}</span
-                      >
+                      <span class="badge badge-light"> {{ s }}</span>
                     </li>
                   </ul>
                 </td>
               </template>
-              <template #nickname="{ item }">
+              <template #duration="{ item }">
                 <td>
-                  <a
-                    href="javascript:;"
-                    class="link-primary"
-                    @click="modalHandler(item.id)"
-                  >
-                    {{ item.nickname }}
-                  </a>
+                  {{
+                    item.duration > 0
+                      ? new Date(item.duration).toISOString().substr(11, 8)
+                      : "-"
+                  }}
                 </td>
               </template>
-
-              <template #vmPower="{ item }">
+              <template #result="{ item }">
                 <td>
-                  <h5>
-                    <CBadge :color="getBadge(item.vmPower)">{{
-                      item.vmPower
-                    }}</CBadge>
+                  <h5 v-if="item.result">
+                    <CBadge :color="getBadge(item.result)">
+                      {{ item.result }}
+                    </CBadge>
                   </h5>
+                  <CSpinner v-else color="success" size="sm" />
                 </td>
               </template>
-
-              <!-- <template #licenseUseCount="{ item }">
-          <td>
-            <a
-              href="javascript:;"
-              class="link-primary"
-              @click="openLicenseModal('vm', item.id)"
-            >
-              {{ item.licenseUseCount ? item.licenseUseCount : 0 }}
-            </a>
-          </td>
-        </template> -->
+              <template #artifacts="{ item }">
+                <td>
+                  <ul style="list-style: none; -webkit-padding-start:0px">
+                    <li v-for="(s, index) in item.artifacts" v-bind:key="index">
+                      <a
+                        :href="
+                          jenkinsURL +
+                            '/job/' +
+                            jenkinsJob +
+                            '/' +
+                            item.buildNumber +
+                            '/artifact/' +
+                            s
+                        "
+                      >
+                        <span class="badge badge-light badge-pill">
+                          {{ s }}
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </td>
+              </template>
             </CDataTable>
           </CCardBody>
         </CCard>
@@ -125,13 +132,14 @@ import ToasterCustom from "../base/ToasterCustom";
 import LoadTestForm from "./LoadTestForm";
 
 const fields = [
+  { key: "result", label: "결과", _style: "width:7%" },
   { key: "title", label: "제목", _style: "width:15%" },
   { key: "buildNumber", label: "빌드번호", _style: "width:10%" },
   { key: "jobName", label: "Job", _style: "width:15%" },
   { key: "params", label: "파라미터", _style: "width:20%" },
-  { key: "regDate", label: "시작일자", _style: "width:70px" },
-  { key: "duration", label: "소요시간", _style: "width:70px" },
-  { key: "result", label: "결과", _style: "width:80px" },
+  { key: "regDate", label: "시작시간", _style: "width:12%" },
+  { key: "duration", label: "소요시간(HH:mm:ss)", _style: "width:10%" },
+  { key: "artifacts", label: "아티팩트(Click)" },
 ];
 
 export default {
@@ -157,19 +165,18 @@ export default {
         number: 0,
         msg: "",
       },
+      jenkinsURL: "",
+      jenkinsJob: "",
     };
   },
   methods: {
-    getBadge(vmPower) {
-      return vmPower === "ON"
-        ? "success"
-        : vmPower === "OFF"
-        ? "danger"
-        : "primary";
+    getBadge(result) {
+      if (result === "SUCCESS") return "success";
+      if (result === "FAILURE") return "danger";
     },
     // 데이터 설정
     async setData() {
-      let data = await axios.get("/jenkins/job");
+      let data = await axios.get("/jenkins/build");
       console.log(data);
       this.jobs = data;
       this.loading = false;
@@ -187,9 +194,17 @@ export default {
     formatParams(ks, vs) {
       return ks.map((v, i) => v + " = " + vs[i]);
     },
+    // 환경변수 값 가져오기
+    async setEnv() {
+      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
+      this.jenkinsURL = data.value;
+      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
+      this.jenkinsJob = data.value;
+    },
   },
 
   created() {
+    this.setEnv();
     this.setData();
   },
 };

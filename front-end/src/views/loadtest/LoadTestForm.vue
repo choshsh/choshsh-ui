@@ -16,7 +16,7 @@
             <th style="width: 10%">
               Jenkins Job
               <a
-                :href="jenkinsLink"
+                :href="jenkinsURL"
                 target="_black"
                 v-c-tooltip="{
                   content: 'GitHub에서 Jenkinsfile 보기',
@@ -217,7 +217,7 @@ export default {
         increase: 0,
         pyscript: "",
       },
-      jenkinsLink: "",
+      jenkinsURL: "",
       jenkinsJob: "",
       toaster: {
         number: 0,
@@ -289,7 +289,7 @@ export default {
     // 환경변수 값 가져오기
     async setEnv() {
       let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
-      this.jenkinsLink = data.value;
+      this.jenkinsURL = data.value;
       data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
       this.jenkinsJob = data.value;
       this.entity.jobName = data.value;
