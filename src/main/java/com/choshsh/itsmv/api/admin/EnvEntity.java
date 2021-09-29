@@ -14,22 +14,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-@Table(name = "iframe")
-public class IframeEntity {
+@Table(name = "envvar")
+public class EnvEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String category;
-
-  private String name;
+  private String key;
 
   @Column(length = 500)
-  private String url;
-
-  private int height;
-
-  private int sort;
+  private String value;
 
 }

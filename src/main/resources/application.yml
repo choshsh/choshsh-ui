@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "file-attachment"
+    name: "itsmv"
   profiles:
     group:
       "prod": "prod, default"
@@ -51,9 +51,7 @@ spring:
     open-in-view: true
     hibernate:
       use-new-id-generator-mappings: true
-    properties:
-      hibernate:
-        format_sql: true
+    properties.hibernate.format_sql: false
 logging:
   level:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE

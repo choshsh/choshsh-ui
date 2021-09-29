@@ -5,7 +5,7 @@ plugins {
     id 'com.google.cloud.tools.jib' version '3.1.4'
 }
 
-group = 'com.choshsh.itsmv'
+group = 'com.choshsh'
 version = '0.0.1-SNAPSHOT'
 
 sourceCompatibility = '16'
@@ -43,6 +43,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
@@ -59,6 +60,5 @@ test {
 
 bootRun {
     String activeProfile = System.properties['spring.profiles.active']
-    println("Profile ===> " + activeProfile)
     systemProperty "spring.profiles.active", activeProfile
 }

@@ -32,6 +32,7 @@ export default {
   admin: {
     header: ADMIN + "/header",
     iframe: ADMIN + "/iframe",
+    env: ADMIN + "/env",
   },
   vm: {
     list: VM,

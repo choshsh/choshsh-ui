@@ -17,6 +17,7 @@ const Log = () => import("@/views/monitoring/Log");
 
 // 부하 테스트
 const LoadTest = () => import("@/views/loadtest/LoadTest");
+const LoadTestInfo = () => import("@/views/loadtest/LoadTestInfo");
 
 const Settings = () => import("@/views/settings/Settings");
 const Script = () => import("@/views/script/Script");
@@ -61,6 +62,11 @@ function configRoutes() {
           path: "loadtest",
           name: "부하 테스트",
           component: LoadTest,
+        },
+        {
+          path: "loadTestInfo",
+          name: "부하 테스트 상세",
+          component: LoadTestInfo,
         },
         {
           path: "charts",

@@ -1,18 +1,15 @@
 <template>
-  <CModal
-    color="primary"
-    :show.sync="modal.show"
-    :closeOnBackdrop="false"
-    :size="'m'"
-  >
+  <CModal color="primary" :show.sync="modal.show" :closeOnBackdrop="false">
+    <!-- 알림 -->
+    <ToasterCustom :msg="toaster.msg" :fixedToasts="toaster.number" />
+
     <div slot="header"><strong>부하 테스트 등록</strong></div>
     <!-- 상단 알람 -->
     <CAlert color="danger" :show.sync="alert.show" closeButton>
       {{ alert.msg }}
     </CAlert>
     <!-- 본문 -->
-    <form :id="formName">
-      <input type="hidden" v-model="vm.id" name="id" />
+    <form :id="formId">
       <table border="1" class="col-md-12 table-outline info-table">
         <tbody>
           <tr>
@@ -25,12 +22,12 @@
                   content: 'GitHub에서 Jenkinsfile 보기',
                 }"
               >
-                <CIcon name="cil-external-link" v- />
+                <CIcon name="cil-external-link" />
               </a>
             </th>
             <td style="width: 20%">
               <CInput
-                v-model="entity.jobName"
+                v-model="this.entity.jobName"
                 name="jobName"
                 style="margin:0"
                 readonly
@@ -65,7 +62,7 @@
             </th>
             <td style="width: 20%">
               <CInput
-                v-model="entity.host"
+                v-model="params.host"
                 name="host"
                 style="margin:0"
                 placeholder="https://<url>"
@@ -87,7 +84,7 @@
             </th>
             <td style="width: 20%">
               <CInput
-                v-model="entity.pyscript"
+                v-model="params.pyscript"
                 name="pyscript"
                 style="margin:0"
                 placeholder="/path/script.py"
@@ -100,7 +97,7 @@
             <td style="width: 20%">
               <CSelect
                 :options="options['duration']"
-                :value.sync="entity.duration"
+                :value.sync="params.duration"
                 name="duration"
                 placeholder="..."
                 style="margin:0"
@@ -121,7 +118,7 @@
             </th>
             <td style="width: 20%">
               <CSelect
-                :value.sync="entity.max"
+                :value.sync="params.max"
                 :options="options['max']"
                 name="max"
                 placeholder="..."
@@ -142,7 +139,7 @@
             </th>
             <td style="width: 20%">
               <CSelect
-                :value.sync="entity.increase"
+                :value.sync="params.increase"
                 :options="options['increase']"
                 name="increase"
                 placeholder="..."
@@ -157,16 +154,19 @@
     <!-- 하단 버튼 -->
     <div class="text-center row-fluid mb-1 mt-3">
       <button
+        v-if="!runBuild"
         id="saveBtn"
         type="button"
         class="btn btn-primary"
-        v-if="Boolean(editable)"
-        @click="save()"
+        @click="build()"
         v-c-tooltip="{
           content: '너무 과하게 사용하면 슬퍼요😂\n(AWS 비용..)',
         }"
       >
         시작
+      </button>
+      <button v-else type="button" class="btn btn-primary" @click="inBuild">
+        요청 중 <CSpinner color="success" size="sm" />
       </button>
       <button
         id="cancelBtn"
@@ -185,17 +185,14 @@
 import * as axios from "@/assets/js/axios";
 import urls from "@/assets/js/urls";
 import * as validate from "@/assets/js/validate";
-import * as util from "@/assets/js/util";
+import ToasterCustom from "../base/ToasterCustom";
 
 export default {
-  name: "Form",
+  name: "LoadTestForm",
+  components: { ToasterCustom },
   data() {
     return {
       options: {
-        vmHost: [],
-        os: [],
-        location: [],
-        vmUsage: [],
         duration: ["10s", "30s", "1m"],
         max: [1, 10, 100, 200],
         increase: [1, 5, 10, 30, 50],
@@ -208,130 +205,98 @@ export default {
         show: false,
         msg: "",
       },
-      formName: "loadtestForm",
-      jenkinsLink: "http://jenkins.choshsh.com",
+      formId: "loadtestForm",
       entity: {
-        jobName: "load-test",
+        jobName: "",
         title: "",
+      },
+      params: {
         host: "",
         duration: "",
         max: 0,
         increase: 0,
         pyscript: "",
       },
-      vm: {},
-      vmEntity: {
-        id: -1,
-        name: "",
-        nickname: "",
-        ip: "",
-        cpu: 0,
-        memory: 0,
-        disk: 0,
-        user: "",
-        manager: "",
-        comment: "",
-        location: "",
-        vmHost: "",
-        os: "",
-        vmPower: "",
-        vmUsage: "",
-        locationName: "",
-        vmHostName: "",
-        osName: "",
-        vmUsageName: "",
-        licenseUseCount: 0,
-        regUser: { id: "" },
-        modUser: { id: "" },
+      jenkinsLink: "",
+      jenkinsJob: "",
+      toaster: {
+        number: 0,
+        msg: "",
       },
+      runBuild: false,
     };
-  },
-  props: {
-    editable: { default: false, type: Boolean },
   },
   methods: {
     // Info 모달 컨트롤
-    modalHandler(vmId) {
-      document.getElementById(this.formName).classList.remove("was-validated");
+    modalHandler() {
+      if (document.getElementById(this.formId)) {
+        document.getElementById(this.formId).classList.remove("was-validated");
+      }
       this.alertHandler();
-      if (vmId) this.setData(vmId);
+      this.entity.params = {};
+      this.params = {};
+      this.runBuild = false;
       this.modal.show = !this.modal.show;
     },
     // 알람 컨트롤
     alertHandler(color, msg, bool) {
-      this.alert.color = color;
-      this.alert.msg = msg;
-      this.alert.show = bool;
       if (!color) this.alert.show = false;
-    },
-    async setData(vmId) {
-      if (vmId > 0) {
-        this.vm = await axios.get(urls.vm.info + "/" + vmId);
-      } else {
-        this.vm = util.cloneObject(this.vmEntity);
+      else {
+        this.alert.color = color;
+        this.alert.msg = msg;
+        this.alert.show = bool;
       }
     },
-    // select 데이터 설정
-    async setOption() {
-      this.options.location = await axios.get(urls.code.location);
-      this.options.vmHost = await axios.get(urls.code.vmHost);
-      this.options.vmOs = await axios.get(urls.code.vmOs);
-      this.options.vmPower = await axios.get(urls.code.vmPower);
-      this.options.vmUsage = await axios.get(urls.code.vmUsage);
-      this.options.yn = await axios.get(urls.code.yn);
+    // 토스트 컨트롤
+    toastHandler(msg) {
+      this.toaster.msg = msg;
+      this.toaster.number++;
     },
     // 저장
-    async save() {
-      // 필수 값 체크
-      let form = document.getElementById(this.formName);
+    async build() {
+      // 유효성 검사
+      let form = document.getElementById(this.formId);
       let checkValidation = validate.check(form);
       if (!checkValidation) {
         this.alertHandler("danger", "필수 값을 입력해주세요", true);
         return;
       }
 
-      this.vm.regUser.id = sessionStorage.getItem("id");
-      this.vm.modUser.id = sessionStorage.getItem("id");
+      // 알람
+      this.toastHandler(
+        "빌드를 요청을 완료했어요.\n잠시만 기다려주시면 페이지 이동해요."
+      );
+      this.runBuild = true;
 
-      let add =
-        this.vm.id > 0
-          ? await axios.put(urls.vm.update + "/" + this.vm.id, this.vm)
-          : await axios.post(urls.vm.update, this.vm);
+      // api 요청
+      this.entity.params = this.params;
+      let buildNumber = await axios.post("/jenkins/build", this.entity);
 
-      if (add.id > 0) {
-        this.vm = add;
-        this.$emit("setData");
-        this.$emit(
-          "alertHandler",
-          "[ " + add.nickname + " ] is successfully updated"
-        );
-        this.modalHandler();
+      // 완료 후 이동
+      if (buildNumber > 0) {
+        this.$router.push({
+          path: "/loadTestInfo",
+          query: { buildNumber: buildNumber },
+        });
       } else {
-        alert("실패");
-        return;
+        this.modalHandler();
       }
     },
-    async remove() {
-      let confirm = window.confirm("정말 삭제하겠습니까?");
-      if (confirm) {
-        let result = await axios.del(urls.vm.delete + "/" + this.vm.id);
-        if (result > 0) {
-          // 삭제 성공
-          this.$emit("setData");
-          this.$emit(
-            "alertHandler",
-            "[ " + this.vm.nickname + " ] is successfully deleted"
-          );
-          this.modalHandler();
-        } else {
-          // 삭제 실패
-          this.alertHandler("danger", "삭제 실패.", true);
-        }
-      }
+    // 중복실행 방지
+    async inBuild() {
+      this.toastHandler("이미 실행 중이에요.\n잠시만 기다려주세요");
+    },
+    // 환경변수 값 가져오기
+    async setEnv() {
+      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
+      this.jenkinsLink = data.value;
+      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
+      this.jenkinsJob = data.value;
+      this.entity.jobName = data.value;
     },
   },
   created() {
-    this.setOption();
+    this.setEnv();
   },
 };
 </script>

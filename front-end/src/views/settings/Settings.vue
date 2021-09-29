@@ -133,6 +133,42 @@
           </CCard>
         </CCol>
       </CRow>
+      <CRow>
+        <CCol sm="6">
+          <CCard>
+            <CCardHeader><strong>환경변수</strong></CCardHeader>
+            <CCardBody>
+              <table border="0" class="col-md-12">
+                <tbody>
+                  <tr>
+                    <th style="width: 30%">키</th>
+                    <th>값</th>
+                    <th style="width: 10%"></th>
+                  </tr>
+                  <tr v-for="(item, index) in envs" v-bind:key="index">
+                    <td>
+                      <CInput v-model="item.key" readonly />
+                    </td>
+                    <td>
+                      <CInput v-model="item.value" />
+                    </td>
+                    <td class="align-top text-center">
+                      <button
+                        id="saveBtn"
+                        type="button"
+                        class="btn btn-primary"
+                        @click="saveEnv(item)"
+                      >
+                        저장
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
     </CCardBody>
   </CCard>
 </template>
@@ -141,37 +177,16 @@
 import * as axios from "@/assets/js/axios";
 import * as elHandler from "@/assets/js/elHandler";
 import urls from "@/assets/js/urls";
-
-const fields = [
-  { key: "promLabel", label: "라벨", _style: "min-width:100px" },
-  { key: "serverNm", label: "업무명", _style: "min-width:150px" },
-  { key: "promIp", label: "IP", _style: "min-width:120px" },
-  { key: "promServerEnv", label: "서버환경", _style: "min-width:80px" },
-  { key: "serverLocation", label: "사업장", _style: "min-width:80px" },
-  {
-    key: "edit",
-    label: "",
-    _style: "width:1%",
-    filter: false,
-    sorter: false,
-  },
-  {
-    key: "delete",
-    label: "",
-    _style: "width:1%",
-    filter: false,
-    sorter: false,
-  },
-];
+import * as util from "@/assets/js/util";
 
 export default {
   name: "Settings",
-  components: {},
   data() {
     return {
       headers: [],
       iframes: [],
-      role: sessionStorage.getItem("role"),
+      envs: {},
+      loadTestScripts: [],
     };
   },
   methods: {
@@ -184,6 +199,7 @@ export default {
     setData() {
       this.getMenu();
       this.getIframe();
+      this.getEnv();
     },
     async getMenu() {
       this.headers = await axios.get(urls.admin.header);
@@ -191,8 +207,11 @@ export default {
     async getIframe() {
       this.iframes = await axios.get(urls.admin.iframe);
     },
+    async getEnv() {
+      this.envs = await axios.get(urls.admin.env);
+    },
     async save(category) {
-      if (this.role === "ADMIN") {
+      if (util.roleCheck()) {
         let url;
         let param;
 
@@ -207,8 +226,19 @@ export default {
         let data = await axios.post(url, param);
         alert(data > 0 ? "성공" : "실패");
         this.setData();
-      } else {
-        alert("권한이 부족합니다.");
+      }
+    },
+    async saveEnv(env) {
+      if (util.roleCheck()) {
+        if (env.id > 0) {
+          let data = await axios.put(urls.admin.env + "/" + env.id, env);
+          if (data.id > 0) {
+            alert("성공");
+            this.getEnv;
+          } else {
+            alert("실패");
+          }
+        }
       }
     },
   },

@@ -4,7 +4,7 @@ module.exports = {
     port: 8082,
     proxy: {
       "/api": { target: "http://localhost:8080" },
-      "/interface": { target: "http://localhost:8081" },
+      "/jenkins": { target: "http://localhost:8081" },
     },
   },
   lintOnSave: false,
