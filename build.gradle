@@ -20,13 +20,17 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('now', new Date().format('yyyyMMdd'))
+}
+
 jib {
     from {
         image = "amazoncorretto:17"
     }
     to {
-        image = "choshsh/itsmv"
-        tags = ["latest", "${project.name}-${project.version}".toString()]
+        image = "choshsh/choshsh-ui"
+        tags = ["latest", "${project.name}-${now}".toString()]
     }
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
