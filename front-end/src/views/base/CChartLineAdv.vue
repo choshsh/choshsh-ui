@@ -20,8 +20,11 @@ export default {
     };
   },
   props: {
+    // [ arr1, arr2 ]
     datas: Array,
-    label: Array,
+    // [ 'arr1-legend','arr2-legend' ]
+    legends: Array,
+    legendsShow: { type: Boolean, default: true },
     yMax: { type: Number, default: 200 },
     steppedLine: { type: Boolean, default: false },
     labels: {
@@ -52,7 +55,7 @@ export default {
     defaultOptions() {
       return {
         legend: {
-          display: true,
+          display: this.legendsShow,
           position: "top",
           labels: {
             boxWidth: 20,
@@ -80,7 +83,7 @@ export default {
               ticks: {
                 min: 0,
                 max: this.yMax,
-                maxTicksLimit: 200 / 50 + 1,
+                maxTicksLimit: 4,
               },
             },
           ],
@@ -96,7 +99,7 @@ export default {
       const arr = new Array();
       this.datas.map((o, index) => {
         arr.push({
-          label: this.label[index],
+          label: this.legends[index],
           backgroundColor: this.backgroundColor[index],
           borderColor: this.backgroundColor[index],
           pointBorderWidth: 2,

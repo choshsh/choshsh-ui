@@ -5,15 +5,6 @@
 <script>
 export default {
   name: "App",
-  methods: {
-    sessionCheck() {
-      if (!sessionStorage.getItem("userSeq") > 0)
-        this.$router.push("/pages/login");
-    },
-  },
-  created() {
-    //this.sessionCheck();
-  },
 };
 </script>
 

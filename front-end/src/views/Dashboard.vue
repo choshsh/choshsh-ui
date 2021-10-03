@@ -5,14 +5,21 @@
         <CRow>
           <CCol col="5">
             <h4 id="traffic" class="card-title mb-0">정보팀 서버 현황</h4>
-            <div class="small text-muted">2020</div>
+            <div class="small text-muted">{{ thisYear }}</div>
           </CCol>
         </CRow>
         <CRow>
-          <CCol col="6" v-for="i in this.objList" v-bind:key="i">
+          <CCol col="6">
             <CChartLineAdv
-              :datas="chartItems[i]"
-              :label="chartLabel[i]"
+              :datas="chartItems['server']"
+              :legends="chartLabel['server']"
+              style="margin-top: 2%"
+            />
+          </CCol>
+          <CCol col="6">
+            <CChartLineAdv
+              :datas="chartItems['vm']"
+              :legends="chartLabel['vm']"
               style="margin-top: 2%"
             />
           </CCol>
@@ -65,20 +72,16 @@
                                   ? Boolean(iAdd.locationNm === "본사(서울)")
                                     ? "본사"
                                     : iAdd.locationNm
-                                  : iAdd.vmClusterLocationNm
+                                  : iAdd.locationName
                               }}
                             </td>
                             <td>
-                              <CIcon
-                                name="cil-info"
-                                class="mr-1 mb-1"
+                              <a
+                                href="javascript:;"
                                 v-c-popover="getPopoverTemplate(i, iAdd)"
-                                style="cursor: pointer"
-                              />{{
-                                Boolean(i === "server")
-                                  ? iAdd.nickname
-                                  : iAdd.vmNickname
-                              }}
+                              >
+                                {{ iAdd.nickname }}
+                              </a>
                             </td>
                           </tr>
                         </table>
@@ -97,7 +100,8 @@
 
 <script>
 import CChartLineAdv from "./base/CChartLineAdv.vue";
-import axios from "axios";
+import * as axios from "@/assets/js/axios";
+import urls from "@/assets/js/urls";
 
 export default {
   name: "Dashboard",
@@ -130,52 +134,41 @@ export default {
       },
       tmpServer: [],
       tmpVM: [],
+      thisYear: new Date().getFullYear(),
     };
   },
   methods: {
-    setServerChart(plantParam, init) {
-      axios
-        .post("/api/getServerChartYear", { plant: plantParam })
-        .then((res) => {
-          if (init > 0) {
-            this.tmpServer = res.data;
-            this.setServerChart("G", 0);
-          } else {
-            this.chartItems[this.objList[0]] = [this.tmpServer, res.data];
-          }
-        })
-        .catch((e) => console.log(e));
+    // 차트 물리서버 설정
+    async setServerChart(plantParam) {
+      let data = await axios.post("/interface/getServerChartYear", {
+        plant: plantParam,
+      });
+      this.chartItems["server"].push(data);
     },
-    setVmChart(vmClusterLocationNmParam, init) {
-      axios
-        .post("/api/getVmChartYear", {
-          vmClusterLocationNm: vmClusterLocationNmParam,
-        })
-        .then((res) => {
-          if (init > 0) {
-            this.tmpVM = res.data;
-            this.setVmChart("구미", 0);
-          } else {
-            this.chartItems[this.objList[1]] = [this.tmpVM, res.data];
-          }
-        })
-        .catch((e) => console.log(e));
+    // 차트 가상서버 설정
+    async setVmChart(location) {
+      let data = await axios.get("/api/vm/chartYear/" + location);
+      this.chartItems["vm"].push(data);
     },
+    // 변경사항 데이터 설정
     setList(obj, monthParam) {
-      const url = obj === "server" ? "/api/serversAll" : "/api/vmsAll";
-      this.divParams.forEach((o) => {
-        axios
-          .post(url, {
+      let url = obj === "server" ? "/interface/server/all" : "/api/vm";
+      if (obj === "server") {
+        this.divParams.forEach(async (o) => {
+          let data = await axios.post(url, {
             monthParam: monthParam,
             div: o,
-          })
-          .then((res) => {
-            this.listItems[obj + "_" + o] = res.data;
-            this.listItemsLength[obj + "_" + o] = res.data.length;
-            this.keyList[obj]++;
-          })
-          .catch((e) => console.log(e));
-      });
+          });
+          this.listItems[obj + "_" + o] = data;
+          this.listItemsLength[obj + "_" + o] = data.length;
+        });
+      } else {
+        this.divParams.forEach(async (o) => {
+          let data = await axios.get(url + "/" + o + "/month/" + monthParam);
+          this.listItems[obj + "_" + o] = data;
+          this.listItemsLength[obj + "_" + o] = data.length;
+        });
+      }
     },
     getPopoverTemplate(flag, item) {
       let str = "";
@@ -183,6 +176,7 @@ export default {
         "<table border='1' class='table-outline' style='width:250px; text-align: center;'>";
 
       if (flag === this.objList[0]) {
+        // 물리서버
         str += "<tr>";
         str += "<th>관리번호</th>";
         str += "<td>" + item.ciNo + "</td>";
@@ -233,47 +227,40 @@ export default {
         str += "<td>" + (item.scrapDate ? item.scrapDate : "-") + "</td>";
         str += "</tr>";
       } else {
+        // VM
         str += "<tr>";
         str += "<th>업무명</th>";
-        str += "<td>" + item.vmNickname + "</td>";
+        str += "<td>" + item.nickname + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>VM명</th>";
-        str += "<td>" + item.vmNm + "</td>";
-        str += "</tr>";
-
-        str += "<tr>";
-        str += "<th>DNS</th>";
-        str += "<td>" + item.vmHostname + "</td>";
+        str += "<td>" + item.name + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>OS</th>";
-        str += "<td>" + item.vmOsDetail + "</td>";
+        str += "<td>" + item.osName + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>담당자</th>";
-        str += "<td>" + item.vmUseEmpl + "</td>";
+        str += "<td>" + item.user + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>Comment</th>";
-        str += "<td>" + item.vmComment + "</td>";
+        str += "<td>" + item.comment + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>생성일자</th>";
-        str += "<td>" + item.vmRegDate.substr(0, 10) + "</td>";
+        str += "<td>" + item.regDate + "</td>";
         str += "</tr>";
 
         str += "<tr>";
         str += "<th>폐기일자</th>";
-        str +=
-          "<td>" +
-          (item.vmDelDate ? item.vmDelDate.substr(0, 10) : "-") +
-          "</td>";
+        str += "<td>" + (item.delDate ? item.delDate : "-") + "</td>";
         str += "</tr>";
       }
 
@@ -291,8 +278,10 @@ export default {
     },
   },
   created() {
-    this.setServerChart("S", 1);
-    this.setVmChart("본사", 1);
+    this.setServerChart("S");
+    this.setServerChart("G");
+    this.setVmChart("S");
+    this.setVmChart("K");
     this.objList.forEach((o) => {
       this.setList(o, this.selectedList[o]);
     });

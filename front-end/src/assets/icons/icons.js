@@ -22,9 +22,11 @@ import {
   cibPaypal,
   cibGooglePay,
   cibCcAmex,
+  cilExternalLink,
 } from "@coreui/icons";
 import { cifUs, cifBr, cifIn, cifFr, cifEs, cifPl } from "@coreui/icons";
 import {
+  cilNewspaper,
   cilMonitor,
   cilInfo,
   cilPlus,
@@ -80,6 +82,12 @@ import {
   cilUserFollow,
   cilXCircle,
   cilHome,
+  cilLockUnlocked,
+  cibKubernetes,
+  cilHistory,
+  cilDescription,
+  cilChartLine,
+  cilNotes,
 } from "@coreui/icons";
 import { logo } from "./logo";
 
@@ -87,6 +95,7 @@ export const iconsSet = Object.assign(
   {},
   { logo },
   {
+    cilNewspaper,
     cilMonitor,
     cilInfo,
     cilMinus,
@@ -142,6 +151,13 @@ export const iconsSet = Object.assign(
     cilUserFemale,
     cilUserFollow,
     cilXCircle,
+    cilLockUnlocked,
+    cibKubernetes,
+    cilHistory,
+    cilDescription,
+    cilChartLine,
+    cilNotes,
+    cilExternalLink,
   },
   {
     cifUs,

@@ -15,7 +15,7 @@ export default {
   name: "CChartBarExample",
   components: { CChartBar, ChartJsPluginDataLabels },
   props: {
-    color: String,
+    color: { type: String, default: "#007bff" },
     datas: Array,
     maxValParam: Number,
     labels: {
@@ -32,9 +32,9 @@ export default {
         "9월",
         "10월",
         "11월",
-        "12월"
-      ]
-    }
+        "12월",
+      ],
+    },
   },
   computed: {
     defaultDatasets() {
@@ -42,8 +42,8 @@ export default {
         {
           label: this.labelNm,
           backgroundColor: this.color,
-          data: this.datas
-        }
+          data: this.datas,
+        },
       ];
     },
     defaultPlugins() {
@@ -55,22 +55,22 @@ export default {
           datalabels: {
             font: {
               weight: "bold",
-              size: 14
+              size: 14,
             },
-            align: "top"
-          }
+            align: "top",
+          },
         },
         legend: {
-          display: false
+          display: false,
         },
         scales: {
           xAxes: [
             {
               display: true,
               gridLines: {
-                display: false
-              }
-            }
+                display: false,
+              },
+            },
           ],
           yAxes: [
             {
@@ -78,13 +78,13 @@ export default {
               ticks: {
                 min: 0,
                 max: this.getMaxVal(),
-                maxTicksLimit: this.getMaxVal() / 50 + 1
-              }
-            }
-          ]
-        }
+                maxTicksLimit: this.getMaxVal() > 100 ? this.getMaxVal() / 50 + 1 : 3
+              },
+            },
+          ],
+        },
       };
-    }
+    },
   },
   methods: {
     getMaxVal() {
@@ -94,7 +94,7 @@ export default {
         : maxVal < 50
         ? 50
         : Math.ceil(maxVal / 50) * 50;
-    }
-  }
+    },
+  },
 };
 </script>

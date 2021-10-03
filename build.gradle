@@ -1,14 +1,14 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.3'
+    id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'com.google.cloud.tools.jib' version '3.1.2'
+    id 'com.google.cloud.tools.jib' version '3.1.4'
 }
 
-group = 'com.itsmv'
+group = 'com.choshsh'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = '16'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -20,13 +20,17 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('now', new Date().format('yyyyMMdd'))
+}
+
 jib {
     from {
-        image = "amazoncorretto:16.0.2"
+        image = "amazoncorretto:17"
     }
     to {
-        image = "choshsh/itsmv"
-        tags = ["latest", "${project.name}-${project.version}".toString()]
+        image = "choshsh/choshsh-ui"
+        tags = ["latest", "${project.name}-${now}".toString()]
     }
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
@@ -42,16 +46,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
-    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+    implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'io.kubernetes:client-java:13.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -61,6 +64,5 @@ test {
 
 bootRun {
     String activeProfile = System.properties['spring.profiles.active']
-    println("Profile ===> " + activeProfile)
     systemProperty "spring.profiles.active", activeProfile
 }

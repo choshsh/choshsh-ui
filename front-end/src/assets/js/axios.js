@@ -1,45 +1,47 @@
 import axios from "axios";
 
-const DOMAIN = "";
+const instance = axios.create({});
 
-const req = (method, url, param, func) => {
-  return axios({
-    method,
-    url: DOMAIN + url,
-    param,
-  })
-    .then((res) => res.data)
-    .catch((e) => console.log(e));
-};
+function setAuth() {
+  if (!instance.defaults.headers.common["Authorization"]) {
+    instance.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "userId"
+    );
+  }
+}
 
 export async function get(url, param) {
   try {
-    return await req("get", url, param);
+    setAuth();
+    return (await instance.get(url, { params: param })).data;
   } catch (e) {
-    return new Error(e.status);
+    return new Error(e);
   }
 }
 
 export async function post(url, param) {
   try {
-    return req("post", url, param);
+    setAuth();
+    return (await instance.post(url, param)).data;
   } catch (e) {
-    return new Error(e.status);
+    return new Error(e);
   }
 }
 
 export async function put(url, param) {
   try {
-    return req("put", url, param);
+    setAuth();
+    return (await instance.put(url, param)).data;
   } catch (e) {
-    return new Error(e.status);
+    return new Error(e);
   }
 }
 
 export async function del(url, param) {
   try {
-    return req("delete", url, param);
+    setAuth();
+    return (await instance.delete(url, param)).data;
   } catch (e) {
-    return new Error(e.status);
+    return new Error(e);
   }
 }

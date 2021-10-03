@@ -12,7 +12,7 @@
                   <CInput
                     placeholder="ID"
                     autocomplete="username email"
-                    v-model="form.userId"
+                    v-model="user.userId"
                     autofocus
                   >
                     <template #prepend-content>
@@ -23,7 +23,7 @@
                     placeholder="Password"
                     type="password"
                     autocomplete="curent-password"
-                    v-model="form.userPw"
+                    v-model="user.userPw"
                   >
                     <template #prepend-content>
                       <CIcon name="cil-lock-locked" />
@@ -46,10 +46,9 @@
               body-wrapper
             >
               <CCardBody>
-                <h2>ITSM-View</h2>
+                <h2>CHOSHSH</h2>
                 <p>
-                  정보팀 SE가 관리하는 리소스들의 현황, 데이터, 차트 등을 확인할
-                  수 있습니다.
+                  안녕하세요, 조상현입니다.
                 </p>
               </CCardBody>
             </CCard>
@@ -61,32 +60,31 @@
 </template>
 
 <script>
-import axios from "axios";
+import * as axios from "@/assets/js/axios";
+import urls from "@/assets/js/urls";
 
 export default {
   name: "Login",
   data() {
     return {
-      form: {
+      user: {
         userId: "",
         userPw: "",
       },
     };
   },
   methods: {
-    login() {
-      axios
-        .post("/api/user/info", this.form)
-        .then((res) => {
-          var userNo = res.data.userNo;
-          var check = userNo > 0;
-
-          if (check) {
-            sessionStorage.setItem("userNo", userNo);
-            this.$router.push("/");
-          } else alert("로그인 실패입니다.");
-        })
-        .catch((e) => console.log(e));
+    async login() {
+      let user = await axios.post(urls.auth.login, this.user);
+      if (user.id) {
+        sessionStorage.setItem("id", user.id);
+        sessionStorage.setItem("userId", user.userId);
+        sessionStorage.setItem("userName", user.userName);
+        sessionStorage.setItem("role", user.role);
+        this.$router.push("/");
+      } else {
+        alert("로그인 실패");
+      }
     },
   },
 };
