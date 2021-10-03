@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "itsmv"
+    name: "choshsh-ui"
   profiles:
     group:
       "prod": "prod, default"

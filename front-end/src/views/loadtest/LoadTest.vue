@@ -5,8 +5,8 @@
 
     <CCard>
       <CCardBody>
-        <TopButton :isNew="true" @modalHandler="modalHandler" />
         <!-- 상단 버튼 -->
+        <TopButton :isNew="true" @modalHandler="modalHandler" />
 
         <!-- 요약 -->
         <CRow>
@@ -39,21 +39,33 @@
           </CCol>
         </CRow>
 
-        <!-- 데이터 목록 -->
+        <!-- 테이블 -->
         <CCard>
           <CCardBody>
             <CDataTable
               :items="jobs"
               :fields="fields"
-              :items-per-page="10"
-              :itemsPerPageSelect="{ values: [10, 20, 50, 100] }"
+              :items-per-page="5"
+              :itemsPerPageSelect="{ values: [5, 10, 50, 100] }"
               :pagination="{ align: 'center' }"
               :table-filter="{ label: '검색', placeholder: '검색어 입력...' }"
               :loading="loading"
               :size="'sm'"
-              hover
               sorter
             >
+              <!-- 제목 -->
+              <template #title="{ item }">
+                <td class="font-weight-bold">
+                  <a
+                    href="javascript:;"
+                    @click="routeToInfo(item.id)"
+                    class="text-primary"
+                  >
+                    {{ item.title }}
+                  </a>
+                </td>
+              </template>
+              <!-- 파라미터 formatter -->
               <template #params="{ item }">
                 <td>
                   <ul style="list-style: none; -webkit-padding-start:0px">
@@ -69,6 +81,7 @@
                   </ul>
                 </td>
               </template>
+              <!-- 소요시간 formatter -->
               <template #duration="{ item }">
                 <td>
                   {{
@@ -78,6 +91,7 @@
                   }}
                 </td>
               </template>
+              <!-- result 뱃지 -->
               <template #result="{ item }">
                 <td>
                   <h5 v-if="item.result">
@@ -85,9 +99,10 @@
                       {{ item.result }}
                     </CBadge>
                   </h5>
-                  <CSpinner v-else color="success" size="sm" />
+                  <CSpinner v-else color="info" size="sm" />
                 </td>
               </template>
+              <!-- 아티팩트 formatter -->
               <template #artifacts="{ item }">
                 <td>
                   <ul style="list-style: none; -webkit-padding-start:0px">
@@ -103,7 +118,7 @@
                             s
                         "
                       >
-                        <span class="badge badge-light badge-pill">
+                        <span class="badge badge-light badge-pill text-primary">
                           {{ s }}
                         </span>
                       </a>
@@ -134,17 +149,20 @@ import LoadTestForm from "./LoadTestForm";
 const fields = [
   { key: "result", label: "결과", _style: "width:7%" },
   { key: "title", label: "제목", _style: "width:15%" },
-  { key: "buildNumber", label: "빌드번호", _style: "width:10%" },
   { key: "jobName", label: "Job", _style: "width:15%" },
+  { key: "buildNumber", label: "빌드번호", _style: "width:10%" },
+  { key: "locustEnv", label: "대상환경", _style: "width:10%" },
   { key: "params", label: "파라미터", _style: "width:20%" },
   { key: "regDate", label: "시작시간", _style: "width:12%" },
   { key: "duration", label: "소요시간(HH:mm:ss)", _style: "width:10%" },
-  { key: "artifacts", label: "아티팩트(Click)" },
+  { key: "artifacts", label: "아티팩트(Click)", _style: "width:20%" },
 ];
 
 export default {
-  name: "Vms",
+  name: "Load-Test",
+
   components: { TopButton, ToasterCustom, LoadTestForm },
+  
   data() {
     return {
       fields: fields,
@@ -169,10 +187,13 @@ export default {
       jenkinsJob: "",
     };
   },
+
   methods: {
+    // 결과 뱃지
     getBadge(result) {
       if (result === "SUCCESS") return "success";
       if (result === "FAILURE") return "danger";
+      if (result === "ABORTED") return "secondary";
     },
     // 데이터 설정
     async setData() {
@@ -191,6 +212,7 @@ export default {
       this.toaster.msg = msg;
       this.toaster.number++;
     },
+    // 파라미터 formatter
     formatParams(ks, vs) {
       return ks.map((v, i) => v + " = " + vs[i]);
     },
@@ -200,6 +222,13 @@ export default {
       this.jenkinsURL = data.value;
       data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
       this.jenkinsJob = data.value;
+    },
+    // 상세 페이지로 이동
+    routeToInfo(id) {
+      this.$router.push({
+        path: "/loadTestInfo",
+        query: { id: id },
+      });
     },
   },
 

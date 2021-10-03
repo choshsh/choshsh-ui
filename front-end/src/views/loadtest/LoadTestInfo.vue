@@ -2,116 +2,129 @@
   <div>
     <!-- 알림 -->
     <ToasterCustom :msg="toaster.msg" :fixedToasts="toaster.number" />
-
     <CCard>
       <CCardBody>
-        <TopButton :isNew="true" @modalHandler="modalHandler" />
-        <!-- 상단 버튼 -->
-
-        <!-- 요약 -->
         <CRow>
-          <CCol
-            col="3"
-            v-for="(item, index) in dashboard.data"
-            v-bind:key="index"
-          >
+          <CCol col="9">
+            <!-- 상단 빌드 정보 -->
             <CCard>
-              <CCardHeader class="font-weight-bold">{{
-                item.label
-              }}</CCardHeader>
               <CCardBody>
-                <table class="table table-sm table-borderless">
-                  <tr v-for="(value, key) in item.list" v-bind:key="key">
-                    <td>{{ key }}</td>
-                    <td class="text-right">
-                      <a
-                        href="javascript:;"
-                        class="link-primary"
-                        @click="changeColumnFilter(item.column, key, dashboard)"
-                      >
-                        {{ value }}
-                      </a>
-                    </td>
-                  </tr>
-                </table>
+                <p class="font-weight-bold">
+                  {{ jenkinsEntity.title }} - [{{
+                    jenkinsEntity.jobName + " #" + jenkinsEntity.buildNumber
+                  }}]
+                </p>
+                <ul
+                  style="list-style: none; -webkit-padding-start:0px"
+                  class="list-group list-group-horizontal"
+                >
+                  <li class="list-group-item">
+                    <h5 v-if="jenkinsEntity.result">
+                      <CBadge :color="getBadge(jenkinsEntity.result)">
+                        {{ jenkinsEntity.result }}
+                      </CBadge>
+                    </h5>
+                    <CSpinner v-else color="info" size="sm" />
+                  </li>
+                  <li
+                    v-for="(s, index) in formatParams"
+                    v-bind:key="index"
+                    class="list-group-item"
+                  >
+                    <span class="badge badge-light"> {{ s }}</span>
+                  </li>
+                </ul>
+              </CCardBody>
+            </CCard>
+          </CCol>
+          <CCol col="3">
+            <CCard>
+              <CCardBody>
+                <ul style="list-style: none; -webkit-padding-start:0px">
+                  <li
+                    v-for="(s, index) in jenkinsEntity.artifacts"
+                    v-bind:key="index"
+                  >
+                    <a
+                      :href="
+                        jenkinsURL +
+                          '/job/' +
+                          jenkinsJob +
+                          '/' +
+                          jenkinsEntity.buildNumber +
+                          '/artifact/' +
+                          s
+                      "
+                    >
+                      <span class="badge badge-light badge-pill text-primary">
+                        {{ s }}
+                      </span>
+                    </a>
+                  </li>
+                </ul>
               </CCardBody>
             </CCard>
           </CCol>
         </CRow>
-
-        <!-- 데이터 목록 -->
-        <CCard>
-          <CCardBody>
-            <CDataTable
-              :items="jobs"
-              :fields="fields"
-              :items-per-page="10"
-              :itemsPerPageSelect="{ values: [10, 20, 50, 100] }"
-              :pagination="{ align: 'center' }"
-              :table-filter="{ label: '검색', placeholder: '검색어 입력...' }"
-              :loading="loading"
-              :size="'sm'"
-              hover
-              sorter
-            >
-              <template #params="{ item }">
-                <td>
-                  <ul style="list-style: none; -webkit-padding-start:0px">
-                    <li
-                      v-for="(s, index) in formatParams(
-                        item.paramKeys,
-                        item.paramValues
-                      )"
-                      v-bind:key="index"
-                    >
-                      <span class="badge badge-light badge-pill"> {{ s }}</span>
-                    </li>
-                  </ul>
-                </td>
-              </template>
-              <template #nickname="{ item }">
-                <td>
-                  <a
-                    href="javascript:;"
-                    class="link-primary"
-                    @click="modalHandler(item.id)"
-                  >
-                    {{ item.nickname }}
-                  </a>
-                </td>
-              </template>
-
-              <template #vmPower="{ item }">
-                <td>
-                  <h5>
-                    <CBadge :color="getBadge(item.vmPower)">{{
-                      item.vmPower
-                    }}</CBadge>
-                  </h5>
-                </td>
-              </template>
-
-              <!-- <template #licenseUseCount="{ item }">
-          <td>
-            <a
-              href="javascript:;"
-              class="link-primary"
-              @click="openLicenseModal('vm', item.id)"
-            >
-              {{ item.licenseUseCount ? item.licenseUseCount : 0 }}
-            </a>
-          </td>
-        </template> -->
-            </CDataTable>
-          </CCardBody>
-        </CCard>
+        <!-- grafana embed iframe -->
+        <CRow>
+          <CCol col="4">
+            <CCard>
+              <CCardHeader>
+                <h5 class="text-center">From (jenkins namespace)</h5>
+              </CCardHeader>
+              <CCardBody>
+                <iframe
+                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
+                  class="embed-responsive-item"
+                  :height="iframe.from.height"
+                  width="100%"
+                  allowfullscreen
+                  frameborder="0"
+                  scrolling="no"
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+          <CCol col="4">
+            <CCard>
+              <CCardHeader>
+                <h5 class="text-center">From (jenkins namespace)</h5>
+              </CCardHeader>
+              <CCardBody>
+                <iframe
+                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
+                  class="embed-responsive-item"
+                  :height="iframe.from.height"
+                  width="100%"
+                  allowfullscreen
+                  frameborder="0"
+                  scrolling="no"
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+          <CCol col="4">
+            <CCard>
+              <CCardHeader>
+                <h5 class="text-center">From (jenkins namespace)</h5>
+              </CCardHeader>
+              <CCardBody>
+                <iframe
+                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
+                  class="embed-responsive-item"
+                  :height="iframe.from.height"
+                  width="100%"
+                  allowfullscreen
+                  frameborder="0"
+                  scrolling="no"
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
       </CCardBody>
     </CCard>
-
-    <!-- 상세 모달 -->
-    <div>
-      <LoadTestForm ref="loadTestForm" />
-    </div>
   </div>
 </template>
 
@@ -120,76 +133,113 @@ import * as axios from "@/assets/js/axios";
 import urls from "@/assets/js/urls";
 import TopButton from "@/views/base/TopButton";
 import ToasterCustom from "../base/ToasterCustom";
-import LoadTestForm from "./LoadTestForm";
-
-const fields = [
-  { key: "title", label: "제목", _style: "width:15%" },
-  { key: "buildNumber", label: "빌드번호", _style: "width:10%" },
-  { key: "jobName", label: "Job", _style: "width:15%" },
-  { key: "params", label: "파라미터", _style: "width:20%" },
-  { key: "regDate", label: "시작일자", _style: "width:70px" },
-  { key: "duration", label: "소요시간", _style: "width:70px" },
-  { key: "result", label: "결과", _style: "width:80px" },
-];
 
 export default {
   name: "Vms",
-  components: { TopButton, ToasterCustom, LoadTestForm },
+
+  components: { TopButton, ToasterCustom },
+
   data() {
     return {
-      fields: fields,
-      vms: [],
-      loading: true,
-      alert: {
-        color: "",
-        msg: "",
-        counter: 0,
-      },
-      jobs: [],
-      dashboard: {
-        data: [],
-        columnFilter: {},
-        tableKey: 0,
-      },
       toaster: {
         number: 0,
         msg: "",
       },
+      jenkinsEntity: {},
+      iframe: {
+        from: {},
+        to: {},
+        log: {},
+      },
+      formattedParams: [],
+      jenkinsURL: "",
+      jenkinsJob: "",
     };
   },
+
   methods: {
-    getBadge(vmPower) {
-      return vmPower === "ON"
-        ? "success"
-        : vmPower === "OFF"
-        ? "danger"
-        : "primary";
+    // 결과 뱃지
+    getBadge(result) {
+      if (result === "SUCCESS") return "success";
+      if (result === "FAILURE") return "danger";
+      if (result === "ABORTED") return "secondary";
     },
-    // 데이터 설정
-    async setData() {
-      let data = await axios.get("/jenkins/job");
-      console.log(data);
-      this.jobs = data;
-      this.loading = false;
-    },
-    formatParams() {},
-    // 상세 모달
-    modalHandler() {
-      this.$refs.loadTestForm.modalHandler();
-    },
-    // 알람 컨트롤
-    alertHandler(msg) {
+    // 토스트 컨트롤
+    toastHandler(msg) {
       this.toaster.msg = msg;
       this.toaster.number++;
     },
-    formatParams(ks, vs) {
-      return ks.map((v, i) => v + " = " + vs[i]);
+    // 데이터 설정
+    async setData(id) {
+      let data = await axios.get("/jenkins/build/" + id);
+      this.jenkinsEntity = data;
+      // result가 없을 때
+      if (!this.jenkinsEntity.result) {
+        this.toastHandler("빌드가 진행 중이에요.");
+        const wait = (timeToDelay) =>
+          new Promise((resolve) => setTimeout(resolve, timeToDelay));
+        while (!this.jenkinsEntity.result) {
+          data = await axios.get("/jenkins/build/" + id);
+          this.jenkinsEntity = data;
+          if (this.jenkinsEntity.result) {
+            this.toastHandler("빌드가 완료됐어요.");
+          }
+          await wait(2000);
+        }
+      }
+    },
+
+    // 환경변수 값 가져오기
+    async setEnv() {
+      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
+      this.jenkinsURL = data.value;
+      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
+      this.jenkinsJob = data.value;
+    },
+    // iframe 설정
+    async setGrafanaIframe() {
+      this.setEnv();
+      // time range
+      let fromTime = this.jenkinsEntity.timestamp;
+      let toTime = this.jenkinsEntity.duration
+        ? this.jenkinsEntity.timestamp + this.jenkinsEntity.duration
+        : "";
+
+      let data = await axios.get(urls.admin.iframe + "/loadtest");
+
+      // from
+      let from = data.find((obj) => obj.name === "from");
+      this.iframe.from = from;
+      this.iframe.from.url =
+        from.url +
+        "&refresh=5s&var-namespace=jenkins&from=" +
+        fromTime +
+        "&to=" +
+        toTime;
+
+      // to
+      let to = data.find((obj) => obj.name === "to");
+      this.iframe.to = to;
+    },
+  },
+
+  computed: {
+    // 파라미터 formatter
+    formatParams() {
+      if (typeof this.jenkinsEntity.paramKeys === "object") {
+        return this.jenkinsEntity.paramKeys.map(
+          (v, i) => v + " = " + this.jenkinsEntity.paramValues[i]
+        );
+      }
     },
   },
 
   created() {
-    this.setData();
-    alert(this.$route.query.buildNumber);
+    if (this.$route.query.id > 0) {
+      this.setData(this.$route.query.id);
+      // grafana 대시보드 로드
+      this.setGrafanaIframe();
+    }
   },
 };
 </script>

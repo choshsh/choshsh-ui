@@ -1,5 +1,10 @@
 <template>
-  <CModal color="primary" :show.sync="modal.show" :closeOnBackdrop="false">
+  <CModal
+    color="primary"
+    :show.sync="modal.show"
+    :closeOnBackdrop="false"
+    :size="'lg'"
+  >
     <!-- 알림 -->
     <ToasterCustom :msg="toaster.msg" :fixedToasts="toaster.number" />
 
@@ -16,10 +21,10 @@
             <th style="width: 10%">
               Jenkins Job
               <a
-                :href="jenkinsURL"
+                :href="jenkinsURL + '/job/' + jenkinsJob"
                 target="_black"
                 v-c-tooltip="{
-                  content: 'GitHub에서 Jenkinsfile 보기',
+                  content: 'Jenkins에서 보기',
                 }"
               >
                 <CIcon name="cil-external-link" />
@@ -49,7 +54,20 @@
               />
             </td>
           </tr>
-
+          <tr>
+            <th style="width: 10%">
+              대상 환경
+            </th>
+            <td style="width: 20%">
+              <CInputRadioGroup
+                class="col-sm-9"
+                :options="options.locustEnv"
+                :checked.sync="entity.locustEnv"
+                custom
+                inline
+              />
+            </td>
+          </tr>
           <tr>
             <th style="width: 10%">
               호스트
@@ -77,18 +95,29 @@
               <CIcon
                 name="cil-info"
                 v-c-tooltip="{
-                  content:
-                    'Jenkinsfile이 있는 git repo에서의 상대 경로를 입력합니다.',
+                  content: 'Jenkinsfile이 있는 git repo에서의 상대 경로에요.',
                 }"
               />
+              &nbsp;
+              <a
+                :href="gitURL"
+                target="_black"
+                v-c-tooltip="{
+                  content: 'GitHub에서 보기',
+                }"
+              >
+                <CIcon name="cil-external-link" />
+              </a>
             </th>
             <td style="width: 20%">
-              <CInput
-                v-model="params.pyscript"
+              <CSelect
+                :options="pyscriptOption"
+                :value.sync="params.pyscript"
+                placeholder="..."
                 name="pyscript"
                 style="margin:0"
-                placeholder="/path/script.py"
                 required
+                custom
               />
             </td>
           </tr>
@@ -102,6 +131,7 @@
                 placeholder="..."
                 style="margin:0"
                 required
+                custom
               />
             </td>
           </tr>
@@ -124,6 +154,7 @@
                 placeholder="..."
                 style="margin:0"
                 required
+                custom
               />
             </td>
           </tr>
@@ -145,6 +176,7 @@
                 placeholder="..."
                 style="margin:0"
                 required
+                custom
               />
             </td>
           </tr>
@@ -196,6 +228,8 @@ export default {
         duration: ["10s", "30s", "1m"],
         max: [1, 10, 100, 200],
         increase: [1, 5, 10, 30, 50],
+        pyscript: [],
+        locustEnv: [],
       },
       modal: {
         show: false,
@@ -209,6 +243,7 @@ export default {
       entity: {
         jobName: "",
         title: "",
+        locustEnv: "",
       },
       params: {
         host: "",
@@ -219,6 +254,7 @@ export default {
       },
       jenkinsURL: "",
       jenkinsJob: "",
+      gitURL: "",
       toaster: {
         number: 0,
         msg: "",
@@ -233,6 +269,8 @@ export default {
         document.getElementById(this.formId).classList.remove("was-validated");
       }
       this.alertHandler();
+      this.entity.title = "";
+      this.entity.locustEnv = "E";
       this.entity.params = {};
       this.params = {};
       this.runBuild = false;
@@ -252,7 +290,7 @@ export default {
       this.toaster.msg = msg;
       this.toaster.number++;
     },
-    // 저장
+    // 빌드 실행
     async build() {
       // 유효성 검사
       let form = document.getElementById(this.formId);
@@ -264,19 +302,19 @@ export default {
 
       // 알람
       this.toastHandler(
-        "빌드를 요청을 완료했어요.\n잠시만 기다려주시면 페이지 이동해요."
+        "빌드 요청을 완료했어요.\n잠시만 기다려주시면 페이지가 이동해요."
       );
       this.runBuild = true;
 
       // api 요청
       this.entity.params = this.params;
-      let buildNumber = await axios.post("/jenkins/build", this.entity);
+      let jenkinsEntity = await axios.post("/jenkins/build", this.entity);
 
       // 완료 후 이동
-      if (buildNumber > 0) {
+      if (jenkinsEntity.id > 0) {
         this.$router.push({
           path: "/loadTestInfo",
-          query: { buildNumber: buildNumber },
+          query: { id: jenkinsEntity.id },
         });
       } else {
         this.modalHandler();
@@ -290,11 +328,35 @@ export default {
     async setEnv() {
       let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
       this.jenkinsURL = data.value;
+
+      data = await axios.get(urls.admin.env + "/LOADTEST_GIT_URL");
+      this.gitURL = data.value;
+
       data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
       this.jenkinsJob = data.value;
       this.entity.jobName = data.value;
+
+      this.options.locustEnv = await axios.get("/jenkins/code/locustenv");
+      this.options.pyscript = await axios.get("/jenkins/pyscript");
     },
   },
+
+  computed: {
+    // 대상 환경에 따른 pyscript 옵션 변경
+    pyscriptOption() {
+      switch (this.entity.locustEnv) {
+        case "E":
+          return this.options.pyscript.filter((o) => o.indexOf("simple-") > -1);
+        case "I":
+          return this.options.pyscript.filter(
+            (o) => o.indexOf("complex-") > -1
+          );
+        default:
+          return null;
+      }
+    },
+  },
+
   created() {
     this.setEnv();
   },
