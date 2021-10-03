@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class ItsmvApplication {
+public class ChoshshUiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ItsmvApplication.class, args);
+        SpringApplication.run(ChoshshUiApplication.class, args);
     }
 
 }
