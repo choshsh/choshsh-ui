@@ -9,7 +9,8 @@ INSERT INTO iframe (category, url, name, height, sort) VALUES
      ('log', 'http://grafana.choshsh.com/d/JqglEFN7z/kube-control-plane-log?orgId=1', 'Control Plane', '1000', 2),
      ('metric', 'http://grafana.choshsh.com/d/dn42GQH7z/linux?orgId=1', 'Node', '2200', 1),
      ('metric', 'http://grafana.choshsh.com/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'Pod', '1000', 2),
-     ('loadtest', 'http://grafana.choshsh.com/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'from', '1300', 1);
+     ('loadtest', 'http://grafana.choshsh.com/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'from', '1200', 1),
+     ('loadtest', 'http://grafana.choshsh.com/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'to', '1200', 1);
 
 INSERT INTO user (id, user_id, user_name, user_pw, role) VALUES
      ('1', 'choshsh', '조상현', 'choshsh', 'ADMIN'),

@@ -40,22 +40,15 @@
           <CCol col="3">
             <CCard>
               <CCardBody>
-                <ul style="list-style: none; -webkit-padding-start:0px">
+                <ul
+                  style="list-style: none; -webkit-padding-start:0px"
+                  v-bind:key="resultKey"
+                >
                   <li
                     v-for="(s, index) in jenkinsEntity.artifacts"
                     v-bind:key="index"
                   >
-                    <a
-                      :href="
-                        jenkinsURL +
-                          '/job/' +
-                          jenkinsJob +
-                          '/' +
-                          jenkinsEntity.buildNumber +
-                          '/artifact/' +
-                          s
-                      "
-                    >
+                    <a :href="resultLink(s)">
                       <span class="badge badge-light badge-pill text-primary">
                         {{ s }}
                       </span>
@@ -68,14 +61,14 @@
         </CRow>
         <!-- grafana embed iframe -->
         <CRow>
-          <CCol col="4">
+          <CCol :col="jenkinsEntity.locustEnv === 'I' ? 6 : 12">
             <CCard>
               <CCardHeader>
-                <h5 class="text-center">From (jenkins namespace)</h5>
+                <h5 class="text-center">From (Jenkins namespace)</h5>
               </CCardHeader>
               <CCardBody>
                 <iframe
-                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
+                  :src="iframe.from.url"
                   class="embed-responsive-item"
                   :height="iframe.from.height"
                   width="100%"
@@ -86,34 +79,16 @@
               </CCardBody>
             </CCard>
           </CCol>
-          <CCol col="4">
+          <CCol v-if="jenkinsEntity.locustEnv === 'I'" col="6">
             <CCard>
               <CCardHeader>
-                <h5 class="text-center">From (jenkins namespace)</h5>
+                <h5 class="text-center">To</h5>
               </CCardHeader>
               <CCardBody>
                 <iframe
-                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
+                  :src="iframe.to.url"
                   class="embed-responsive-item"
-                  :height="iframe.from.height"
-                  width="100%"
-                  allowfullscreen
-                  frameborder="0"
-                  scrolling="no"
-                />
-              </CCardBody>
-            </CCard>
-          </CCol>
-          <CCol col="4">
-            <CCard>
-              <CCardHeader>
-                <h5 class="text-center">From (jenkins namespace)</h5>
-              </CCardHeader>
-              <CCardBody>
-                <iframe
-                  :src="iframe.from.url + '&refresh=5s&var-namespace=jenkins'"
-                  class="embed-responsive-item"
-                  :height="iframe.from.height"
+                  :height="iframe.to.height"
                   width="100%"
                   allowfullscreen
                   frameborder="0"
@@ -154,6 +129,7 @@ export default {
       formattedParams: [],
       jenkinsURL: "",
       jenkinsJob: "",
+      resultKey: 0,
     };
   },
 
@@ -173,6 +149,8 @@ export default {
     async setData(id) {
       let data = await axios.get("/jenkins/build/" + id);
       this.jenkinsEntity = data;
+      // grafana 대시보드 로드
+      this.setGrafanaIframe();
       // result가 없을 때
       if (!this.jenkinsEntity.result) {
         this.toastHandler("빌드가 진행 중이에요.");
@@ -181,11 +159,10 @@ export default {
         while (!this.jenkinsEntity.result) {
           data = await axios.get("/jenkins/build/" + id);
           this.jenkinsEntity = data;
-          if (this.jenkinsEntity.result) {
-            this.toastHandler("빌드가 완료됐어요.");
-          }
           await wait(2000);
         }
+        this.toastHandler("빌드가 완료됐어요.");
+        this.resultKey++;
       }
     },
 
@@ -199,27 +176,52 @@ export default {
     // iframe 설정
     async setGrafanaIframe() {
       this.setEnv();
-      // time range
       let fromTime = this.jenkinsEntity.timestamp;
       let toTime = this.jenkinsEntity.duration
         ? this.jenkinsEntity.timestamp + this.jenkinsEntity.duration
         : "";
 
-      let data = await axios.get(urls.admin.iframe + "/loadtest");
-
-      // from
-      let from = data.find((obj) => obj.name === "from");
+      let iframeData = await axios.get(urls.admin.iframe + "/loadtest");
+      this.setGrafanaFrom(iframeData, fromTime, toTime);
+      // 클러스터 내부 테스트 시에만
+      if (this.jenkinsEntity.locustEnv === "I") {
+        this.setGrafanaTo(iframeData, fromTime, toTime);
+      }
+    },
+    // From iframe 설정
+    setGrafanaFrom(iframeData, fromTime, toTime) {
+      let from = iframeData.find((obj) => obj.name === "from");
       this.iframe.from = from;
       this.iframe.from.url =
         from.url +
-        "&refresh=5s&var-namespace=jenkins&from=" +
+        "&refresh=10s&var-namespace=jenkins" +
+        "&from=" +
         fromTime +
         "&to=" +
         toTime;
-
-      // to
-      let to = data.find((obj) => obj.name === "to");
+    },
+    // To iframe 설정
+    setGrafanaTo(iframeData, fromTime, toTime) {
+      let to = iframeData.find((obj) => obj.name === "to");
       this.iframe.to = to;
+      let host = this.jenkinsEntity.paramValues[
+        this.jenkinsEntity.paramKeys.indexOf("host")
+      ];
+
+      if (host.indexOf("https://") > -1) host = host.replace("https://", "");
+      if (host.indexOf("http://") > -1) host = host.replace("http://", "");
+      let podName = host.split(".")[0];
+      let namespace = host.split(".")[1];
+      this.iframe.to.url =
+        to.url +
+        "&refresh=10s&var-namespace=" +
+        namespace +
+        "&var-pod=" +
+        podName +
+        "&from=" +
+        fromTime +
+        "&to=" +
+        toTime;
     },
   },
 
@@ -232,13 +234,21 @@ export default {
         );
       }
     },
+    resultLink() {
+      return (s) =>
+        this.jenkinsURL +
+        "/job/" +
+        this.jenkinsJob +
+        "/" +
+        this.jenkinsEntity.buildNumber +
+        "/artifact/" +
+        s;
+    },
   },
 
   created() {
     if (this.$route.query.id > 0) {
       this.setData(this.$route.query.id);
-      // grafana 대시보드 로드
-      this.setGrafanaIframe();
     }
   },
 };
