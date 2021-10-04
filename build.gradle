@@ -30,13 +30,13 @@ jib {
     }
     to {
         image = "choshsh/choshsh-ui"
-        tags = ["latest", "${project.name}-${now}".toString()]
+        tags = ["latest", "${now}".toString()]
     }
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
-        jvmFlags = ['-Dspring.profiles.active=dev', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
+        jvmFlags = ['-Dspring.profiles.active=prod', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
         ports = ['8080']
-        labels = [maintainer: 'SHsteak <cho911115@gmail.com>']
+        labels = [maintainer: 'choshsh <cho911115@gmail.com>']
         user = "1000:1000"
     }
 }

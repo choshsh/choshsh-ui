@@ -107,17 +107,7 @@
                 <td>
                   <ul style="list-style: none; -webkit-padding-start:0px">
                     <li v-for="(s, index) in item.artifacts" v-bind:key="index">
-                      <a
-                        :href="
-                          jenkinsURL +
-                            '/job/' +
-                            jenkinsJob +
-                            '/' +
-                            item.buildNumber +
-                            '/artifact/' +
-                            s
-                        "
-                      >
+                      <a :href="resultLink(s, item.buildNumber)">
                         <span class="badge badge-light badge-pill text-primary">
                           {{ s }}
                         </span>
@@ -162,7 +152,7 @@ export default {
   name: "Load-Test",
 
   components: { TopButton, ToasterCustom, LoadTestForm },
-  
+
   data() {
     return {
       fields: fields,
@@ -229,6 +219,19 @@ export default {
         path: "/loadTestInfo",
         query: { id: id },
       });
+    },
+  },
+
+  computed: {
+    resultLink() {
+      return (resultName, buildNumber) =>
+        this.jenkinsURL +
+        "/job/" +
+        this.jenkinsJob +
+        "/" +
+        buildNumber +
+        "/artifact/" +
+        resultName;
     },
   },
 

@@ -225,8 +225,8 @@ export default {
   data() {
     return {
       options: {
-        duration: ["10s", "30s", "1m"],
-        max: [1, 10, 100, 200],
+        duration: ["10s", "30s", "1m", "3m", "5m"],
+        max: [1, 10, 100, 200, 500],
         increase: [1, 5, 10, 30, 50],
         pyscript: [],
         locustEnv: [],
@@ -317,7 +317,7 @@ export default {
           query: { id: jenkinsEntity.id },
         });
       } else {
-        this.modalHandler();
+        this.toastHandler("빌드 요청이 실패했어요");
       }
     },
     // 중복실행 방지
