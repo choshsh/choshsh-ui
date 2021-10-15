@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum UserRole implements EnumModel {
+
   ADMIN("ADMIN"), USER("USER"), GUEST("GUEST");
 
   private final String value;

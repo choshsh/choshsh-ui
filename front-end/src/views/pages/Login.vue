@@ -60,8 +60,7 @@
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as userService from "@/api/user";
 
 export default {
   name: "Login",
@@ -75,7 +74,7 @@ export default {
   },
   methods: {
     async login() {
-      let user = await axios.post(urls.auth.login, this.user);
+      let user = await userService.login(this.user);
       if (user.id) {
         sessionStorage.setItem("id", user.id);
         sessionStorage.setItem("userId", user.userId);

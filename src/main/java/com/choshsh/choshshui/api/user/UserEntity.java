@@ -1,8 +1,8 @@
 package com.choshsh.choshshui.api.user;
 
+import com.choshsh.choshshui.config.BaseColumnEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.choshsh.choshshui.api.enums.UserRole;
-import com.choshsh.choshshui.config.BaseDateEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,19 +13,22 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "user")
-public class UserEntity extends BaseDateEntity {
+public class UserEntity extends BaseColumnEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+  /**
+   * PK 자동 생성
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-	private String userId;
-	private String userName;
-	private String userPw;
+  private String userId;
+  private String userName;
+  private String userPw;
 
-	@Enumerated(EnumType.STRING)
-	private UserRole role;
+  @Enumerated(EnumType.STRING)
+  private UserRole role;
 
 }

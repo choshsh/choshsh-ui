@@ -21,7 +21,7 @@
             <th style="width: 10%">
               Jenkins Job
               <a
-                :href="jenkinsURL + '/job/' + jenkinsJob"
+                :href="jenkinsJobURL"
                 target="_black"
                 v-c-tooltip="{
                   content: 'Jenkins에서 보기',
@@ -214,8 +214,7 @@
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as jenkinsService from "@/api/jenkins";
 import * as validate from "@/assets/js/validate";
 import ToasterCustom from "../base/ToasterCustom";
 
@@ -225,8 +224,8 @@ export default {
   data() {
     return {
       options: {
-        duration: ["10s", "30s", "1m", "3m", "5m"],
-        max: [1, 10, 100, 200, 500],
+        duration: ["10s", "30s", "1m", "2m"],
+        max: [1, 10, 100, 200, 500, 1000],
         increase: [1, 5, 10, 30, 50],
         pyscript: [],
         locustEnv: [],
@@ -252,9 +251,6 @@ export default {
         increase: 0,
         pyscript: "",
       },
-      jenkinsURL: "",
-      jenkinsJob: "",
-      gitURL: "",
       toaster: {
         number: 0,
         msg: "",
@@ -269,6 +265,7 @@ export default {
         document.getElementById(this.formId).classList.remove("was-validated");
       }
       this.alertHandler();
+      this.entity.jobName = this.$store.getters["env/getEnv"]("LOADTEST_JOB");
       this.entity.title = "";
       this.entity.locustEnv = "E";
       this.entity.params = {};
@@ -308,7 +305,7 @@ export default {
 
       // api 요청
       this.entity.params = this.params;
-      let jenkinsEntity = await axios.post("/jenkins/build", this.entity);
+      let jenkinsEntity = await jenkinsService.postBuild(this.entity);
 
       // 완료 후 이동
       if (jenkinsEntity.id > 0) {
@@ -326,18 +323,8 @@ export default {
     },
     // 환경변수 값 가져오기
     async setEnv() {
-      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
-      this.jenkinsURL = data.value;
-
-      data = await axios.get(urls.admin.env + "/LOADTEST_GIT_URL");
-      this.gitURL = data.value;
-
-      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
-      this.jenkinsJob = data.value;
-      this.entity.jobName = data.value;
-
-      this.options.locustEnv = await axios.get("/jenkins/code/locustenv");
-      this.options.pyscript = await axios.get("/jenkins/pyscript");
+      this.options.locustEnv = await jenkinsService.getCode("locustenv");
+      this.options.pyscript = await jenkinsService.getPyscript();
     },
   },
 
@@ -354,6 +341,16 @@ export default {
         default:
           return null;
       }
+    },
+    jenkinsJobURL() {
+      return (
+        this.$store.getters["env/getEnv"]("LOADTEST_JENKINS_URL") +
+        "/job/" +
+        this.$store.getters["env/getEnv"]("LOADTEST_JOB")
+      );
+    },
+    gitURL() {
+      return this.$store.getters["env/getEnv"]("LOADTEST_GIT_URL");
     },
   },
 

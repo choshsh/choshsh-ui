@@ -130,8 +130,7 @@
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as jenkinsService from "@/api/jenkins";
 import TopButton from "@/views/base/TopButton";
 import ToasterCustom from "../base/ToasterCustom";
 import LoadTestForm from "./LoadTestForm";
@@ -173,8 +172,6 @@ export default {
         number: 0,
         msg: "",
       },
-      jenkinsURL: "",
-      jenkinsJob: "",
     };
   },
 
@@ -187,7 +184,7 @@ export default {
     },
     // 데이터 설정
     async setData() {
-      let data = await axios.get("/jenkins/build");
+      let data = await jenkinsService.getBuild();
       console.log(data);
       this.jobs = data;
       this.loading = false;
@@ -206,13 +203,6 @@ export default {
     formatParams(ks, vs) {
       return ks.map((v, i) => v + " = " + vs[i]);
     },
-    // 환경변수 값 가져오기
-    async setEnv() {
-      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
-      this.jenkinsURL = data.value;
-      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
-      this.jenkinsJob = data.value;
-    },
     // 상세 페이지로 이동
     routeToInfo(id) {
       this.$router.push({
@@ -225,9 +215,9 @@ export default {
   computed: {
     resultLink() {
       return (resultName, buildNumber) =>
-        this.jenkinsURL +
+        this.$store.getters["env/getEnv"]("LOADTEST_JENKINS_URL") +
         "/job/" +
-        this.jenkinsJob +
+        this.$store.getters["env/getEnv"]("LOADTEST_JOB") +
         "/" +
         buildNumber +
         "/artifact/" +
@@ -236,7 +226,6 @@ export default {
   },
 
   created() {
-    this.setEnv();
     this.setData();
   },
 };
