@@ -7,6 +7,7 @@ const TheContainer = () => import("@/containers/TheContainer");
 // 모니터링
 const Monitor = () => import("@/views/monitoring/Metric");
 const Log = () => import("@/views/monitoring/Log");
+const Alert = () => import("@/views/monitoring/Alert");
 
 // 부하 테스트
 const LoadTest = () => import("@/views/loadtest/LoadTest");
@@ -44,6 +45,11 @@ function configRoutes() {
           path: "monitor/log",
           name: "Log",
           component: Log,
+        },
+        {
+          path: "monitor/alert",
+          name: "Alert",
+          component: Alert,
         },
         {
           path: "loadtest",

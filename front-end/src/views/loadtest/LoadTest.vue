@@ -9,8 +9,8 @@
         <CRow class="mb-3">
           <CCol col="9" class="align-self-center">
             <a href="#" @click="flowHandler"
-              >부하 테스트 기능은 이렇게 동작해요</a
-            >
+              >부하 테스트 기능은 이렇게 동작해요
+            </a>
           </CCol>
           <CCol col="2" class="align-self-center d-flex flex-row-reverse">
             실행해보세요 >>
@@ -153,12 +153,12 @@
                 href="https://github.com/choshsh/jenkins-api-springboot"
                 target="_black"
               >
-                Jenkins-Rest
+                Jenkins-Rest - App
               </a></CListGroupItem
             >
             <CListGroupItem>
               <a
-                href="https://github.com/choshsh/devops-study/blob/master/jenkins/load-test.jenkinsfile"
+                href="https://github.com/choshsh/devops-study/blob/master/jenkins/pipelines/loadTest"
                 target="_black"
               >
                 Jenkins Pipeline
@@ -166,7 +166,7 @@
             >
             <CListGroupItem>
               <a
-                href="https://github.com/choshsh/devops-study/blob/master/jenkins/pod_template/locust.yaml"
+                href="https://github.com/choshsh/devops-study/blob/master/jenkins/podTemplates/loadTest.yaml"
                 target="_black"
               >
                 부하테스트 Pod manifest
@@ -212,7 +212,6 @@ export default {
   data() {
     return {
       fields: fields,
-      vms: [],
       loading: true,
       alert: {
         color: "",

@@ -25,21 +25,36 @@ spring:
       path: /h2-console
       settings:
         web-admin-password: itsmv
+management:
+  endpoints:
+    web:
+      base-path: "/actuator"
+      exposure:
+        include:
+          - health
+          - prometheus
 ---
 spring:
   config.activate.on-profile: prod
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
-    defer-datasource-initialization: true
-    show-sql: true
+    defer-datasource-initialization: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   datasource:
-    initialization-mode: always
+    initialization-mode: never
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://itsmv-db:3306/itsmv?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: P@ssw0rd
+    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+management:
+  endpoints:
+    web:
+      base-path: ${ACTUATOR_PATH}
+      exposure:
+        include:
+          - health
+          - prometheus
 logging:
   pattern:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
@@ -47,11 +62,10 @@ logging:
 spring:
   config.activate.on-profile: default
   jpa:
-    show-sql: true
     open-in-view: true
+    show-sql: true
     hibernate:
       use-new-id-generator-mappings: true
-    properties.hibernate.format_sql: false
 logging:
   level:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
@@ -69,12 +83,3 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-management:
-  endpoints:
-    web:
-      base-path: /manage
-      exposure:
-        include:
-          - metrics
-          - health
-          - prometheus

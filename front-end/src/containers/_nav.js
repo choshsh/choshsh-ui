@@ -19,6 +19,12 @@ export default [
         icon: "cil-notes",
       },
       {
+        _name: "CSidebarNavItem",
+        name: "Alert",
+        to: "/monitor/alert",
+        icon: "cilBell",
+      },
+      {
         _name: "CSidebarNavTitle",
         _children: ["테스트"],
       },
