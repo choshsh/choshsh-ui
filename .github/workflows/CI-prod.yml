@@ -1,19 +1,22 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Build, Test on Dev
+name: Deploy to Prod
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
 
       - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub Registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -29,7 +32,9 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm audit fix
         working-directory: ./front-end
 
       - name: Build Front-end
@@ -54,5 +59,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew clean test -Dspring.profiles.active=dev
+      - name: Build Back-end & Create Docker image & Push to Docker Hub
+        run: ./gradlew clean jib
+
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
