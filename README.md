@@ -18,7 +18,7 @@ Web 콘솔을 제공하는 오픈소스 S/W들이 많습니다. 하지만 사용
 
 grafana 대시보드 + jenkins 빌드
 
-![https://user-images.githubusercontent.com/40452325/139435002-05dbaced-c444-4775-8848-f31e44e39505.gif](https://user-images.githubusercontent.com/40452325/139435002-05dbaced-c444-4775-8848-f31e44e39505.gif)
+![https://user-images.githubusercontent.com/40452325/139435682-a18ef1e4-10d2-42b9-b114-1e9249d31bc0.gif](https://user-images.githubusercontent.com/40452325/139435682-a18ef1e4-10d2-42b9-b114-1e9249d31bc0.gif)
 
 ### 모니터링
 
