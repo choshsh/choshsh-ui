@@ -32,7 +32,9 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm audit fix
         working-directory: ./front-end
 
       - name: Build Front-end
