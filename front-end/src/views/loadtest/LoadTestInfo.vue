@@ -159,6 +159,7 @@ export default {
           this.jenkinsEntity = data;
           await wait(2000);
         }
+        await wait(1000);
         this.toastHandler("빌드가 완료됐어요.");
         this.resultKey++;
       }
