@@ -2,10 +2,10 @@
   <div class="c-app">
     <TheSidebar />
     <CWrapper>
-      <TheHeader :functions="reload" />
+      <TheHeader :key="$store.state.component.header" />
       <div class="c-body">
         <main class="c-main">
-          <CContainer fluid :key="mainKey">
+          <CContainer fluid :key="$store.state.component.container">
             <transition name="fade">
               <router-view></router-view>
             </transition>
@@ -27,18 +27,8 @@ export default {
   components: {
     TheSidebar,
     TheHeader,
-    TheFooter
+    TheFooter,
   },
-  data() {
-    return {
-      mainKey: 0
-    };
-  },
-  methods: {
-    reload() {
-      this.mainKey++;
-    }
-  }
 };
 </script>
 

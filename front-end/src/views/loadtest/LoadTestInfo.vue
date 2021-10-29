@@ -104,8 +104,8 @@
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as jenkinsService from "@/api/jenkins";
+import * as adminService from "@/api/admin";
 import TopButton from "@/views/base/TopButton";
 import ToasterCustom from "../base/ToasterCustom";
 
@@ -127,8 +127,6 @@ export default {
         log: {},
       },
       formattedParams: [],
-      jenkinsURL: "",
-      jenkinsJob: "",
       resultKey: 0,
     };
   },
@@ -147,7 +145,7 @@ export default {
     },
     // 데이터 설정
     async setData(id) {
-      let data = await axios.get("/jenkins/build/" + id);
+      let data = await jenkinsService.getBuild(id);
       this.jenkinsEntity = data;
       // grafana 대시보드 로드
       this.setGrafanaIframe();
@@ -157,31 +155,24 @@ export default {
         const wait = (timeToDelay) =>
           new Promise((resolve) => setTimeout(resolve, timeToDelay));
         while (!this.jenkinsEntity.result) {
-          data = await axios.get("/jenkins/build/" + id);
+          data = await jenkinsService.getBuild(id);
           this.jenkinsEntity = data;
           await wait(2000);
         }
+        await wait(1000);
         this.toastHandler("빌드가 완료됐어요.");
         this.resultKey++;
       }
     },
 
-    // 환경변수 값 가져오기
-    async setEnv() {
-      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
-      this.jenkinsURL = data.value;
-      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
-      this.jenkinsJob = data.value;
-    },
     // iframe 설정
     async setGrafanaIframe() {
-      this.setEnv();
       let fromTime = this.jenkinsEntity.timestamp;
       let toTime = this.jenkinsEntity.duration
         ? this.jenkinsEntity.timestamp + this.jenkinsEntity.duration
         : "";
 
-      let iframeData = await axios.get(urls.admin.iframe + "/loadtest");
+      let iframeData = await adminService.getIframe("loadtest");
       this.setGrafanaFrom(iframeData, fromTime, toTime);
       // 클러스터 내부 테스트 시에만
       if (this.jenkinsEntity.locustEnv === "I") {
@@ -236,9 +227,9 @@ export default {
     },
     resultLink() {
       return (s) =>
-        this.jenkinsURL +
+        this.$store.getters["env/getEnv"]("LOADTEST_JENKINS_URL") +
         "/job/" +
-        this.jenkinsJob +
+        this.$store.getters["env/getEnv"]("LOADTEST_JOB") +
         "/" +
         this.jenkinsEntity.buildNumber +
         "/artifact/" +

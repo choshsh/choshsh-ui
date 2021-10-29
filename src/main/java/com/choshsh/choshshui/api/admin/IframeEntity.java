@@ -30,6 +30,9 @@ public class IframeEntity {
 
   private int height;
 
+  @Column(length = 500)
+  private String tooltip;
+
   private int sort;
 
 }

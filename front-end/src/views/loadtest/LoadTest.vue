@@ -6,7 +6,21 @@
     <CCard>
       <CCardBody>
         <!-- 상단 버튼 -->
-        <TopButton :isNew="true" @modalHandler="modalHandler" />
+        <CRow class="mb-3">
+          <CCol col="9" class="align-self-center">
+            <a href="#" @click="flowHandler"
+              >부하 테스트 기능은 이렇게 동작해요
+            </a>
+          </CCol>
+          <CCol col="2" class="align-self-center d-flex flex-row-reverse">
+            실행해보세요 >>
+          </CCol>
+          <CCol col="1">
+            <CButton block color="primary" @click="modalHandler">
+              New
+            </CButton>
+          </CCol>
+        </CRow>
 
         <!-- 요약 -->
         <CRow>
@@ -123,15 +137,57 @@
     </CCard>
 
     <!-- 상세 모달 -->
-    <div>
-      <LoadTestForm ref="loadTestForm" />
-    </div>
+    <LoadTestForm ref="loadTestForm" />
+    <CModal
+      color="primary"
+      :show.sync="modal.flow.show"
+      :closeOnBackdrop="true"
+      :size="'lg'"
+    >
+      <CCard>
+        <CCardHeader class="font-weight-bold">GitHub 바로가기</CCardHeader>
+        <CCardBody>
+          <CListGroup>
+            <CListGroupItem>
+              <a
+                href="https://github.com/choshsh/jenkins-api-springboot"
+                target="_black"
+              >
+                Jenkins-Rest - App
+              </a></CListGroupItem
+            >
+            <CListGroupItem>
+              <a
+                href="https://github.com/choshsh/devops-study/blob/master/jenkins/pipelines/loadTest"
+                target="_black"
+              >
+                Jenkins Pipeline
+              </a></CListGroupItem
+            >
+            <CListGroupItem>
+              <a
+                href="https://github.com/choshsh/devops-study/blob/master/jenkins/podTemplates/loadTest.yaml"
+                target="_black"
+              >
+                부하테스트 Pod manifest
+              </a></CListGroupItem
+            >
+          </CListGroup>
+        </CCardBody>
+      </CCard>
+      <CCard>
+        <CCardHeader class="font-weight-bold">부하테스트 흐름도</CCardHeader>
+        <CCardBody>
+          <img src="@/assets/images/loadtest-flow.jpg" class="img-fluid" />
+        </CCardBody>
+      </CCard>
+      <div slot="footer" />
+    </CModal>
   </div>
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as jenkinsService from "@/api/jenkins";
 import TopButton from "@/views/base/TopButton";
 import ToasterCustom from "../base/ToasterCustom";
 import LoadTestForm from "./LoadTestForm";
@@ -156,7 +212,6 @@ export default {
   data() {
     return {
       fields: fields,
-      vms: [],
       loading: true,
       alert: {
         color: "",
@@ -173,8 +228,11 @@ export default {
         number: 0,
         msg: "",
       },
-      jenkinsURL: "",
-      jenkinsJob: "",
+      modal: {
+        flow: {
+          show: false,
+        },
+      },
     };
   },
 
@@ -187,8 +245,7 @@ export default {
     },
     // 데이터 설정
     async setData() {
-      let data = await axios.get("/jenkins/build");
-      console.log(data);
+      let data = await jenkinsService.getBuild();
       this.jobs = data;
       this.loading = false;
     },
@@ -206,13 +263,6 @@ export default {
     formatParams(ks, vs) {
       return ks.map((v, i) => v + " = " + vs[i]);
     },
-    // 환경변수 값 가져오기
-    async setEnv() {
-      let data = await axios.get(urls.admin.env + "/LOADTEST_JENKINS_URL");
-      this.jenkinsURL = data.value;
-      data = await axios.get(urls.admin.env + "/LOADTEST_JOB");
-      this.jenkinsJob = data.value;
-    },
     // 상세 페이지로 이동
     routeToInfo(id) {
       this.$router.push({
@@ -220,14 +270,18 @@ export default {
         query: { id: id },
       });
     },
+    // 부하테스트 기능 정보
+    flowHandler() {
+      this.modal.flow.show = !this.modal.flow.show;
+    },
   },
 
   computed: {
     resultLink() {
       return (resultName, buildNumber) =>
-        this.jenkinsURL +
+        this.$store.getters["env/getEnv"]("LOADTEST_JENKINS_URL") +
         "/job/" +
-        this.jenkinsJob +
+        this.$store.getters["env/getEnv"]("LOADTEST_JOB") +
         "/" +
         buildNumber +
         "/artifact/" +
@@ -236,7 +290,6 @@ export default {
   },
 
   created() {
-    this.setEnv();
     this.setData();
   },
 };

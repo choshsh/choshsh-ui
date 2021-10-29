@@ -3,7 +3,14 @@
     <CCardBody>
       <CTabs variant="pills" :active-tab="0" @update:activeTab="setUrl">
         <CTab class="mb-3" v-for="(item, index) in data" v-bind:key="index">
-          <template slot="title">{{ item.name }}</template>
+          <template slot="title">
+            <span v-if="item.tooltip" v-c-tooltip="{ content: item.tooltip }">
+              {{ item.name }}
+            </span>
+            <span v-else>
+              {{ item.name }}
+            </span>
+          </template>
           <CRow>
             <CCol>
               <CCard>
@@ -26,8 +33,7 @@
 </template>
 
 <script>
-import * as axios from "@/assets/js/axios";
-import urls from "@/assets/js/urls";
+import * as adminService from "@/api/admin";
 
 export default {
   name: "VM-Chart",
@@ -39,7 +45,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.data = await axios.get(urls.admin.iframe + "/log");
+      this.data = await adminService.getIframe("log");
       this.setUrl(0);
     },
     setUrl(index) {

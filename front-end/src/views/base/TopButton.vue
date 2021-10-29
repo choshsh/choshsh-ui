@@ -2,7 +2,7 @@
   <CRow class="mb-3 d-flex justify-content-between">
     <CCol col="11"></CCol>
     <CCol v-if="isNew" col="1">
-      <CButton block color="primary" :size="'lg'" @click="newItem">
+      <CButton block color="primary" @click="newItem">
         New
       </CButton>
     </CCol>

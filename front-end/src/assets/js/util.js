@@ -1,3 +1,5 @@
+import moment from "moment";
+
 // json 객체 hard clone
 export function cloneObject(obj) {
   let clone = {};
@@ -17,16 +19,12 @@ export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// yyyyMMdd -> yyyy-MM-dd
-export function dateFormat(dateStr) {
-  if (dateStr) {
-    return (
-      dateStr.substring(0, 4) +
-      "-" +
-      dateStr.substring(4, 6) +
-      "-" +
-      dateStr.substring(6, 8)
-    );
+// yyyyMMdd -> yyyy-MM-dd HH:mm:ss
+export function dateFormat(date) {
+  try {
+    return moment(date).format("YYYY-MM-DD HH:mm:ss");
+  } catch (error) {
+    console.log(error);
   }
 }
 
