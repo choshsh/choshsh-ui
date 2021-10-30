@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.CustomLog;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +22,10 @@ public class EnvEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "env_key")
   private String key;
 
-  @Column(length = 500)
+  @Column(name = "env_value" ,length = 1000)
   private String value;
 
 }

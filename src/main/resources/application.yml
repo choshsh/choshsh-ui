@@ -44,7 +44,7 @@ spring:
   datasource:
     initialization-mode: never
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}
+    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}?${MYSQL_PARAM}
     username: ${MYSQL_USER}
     password: ${MYSQL_PASSWORD}
 management:
