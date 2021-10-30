@@ -13,7 +13,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
   private final HttpLogInterceptor httpLogInterceptor;
 
   @Value("${management.endpoints.web.base-path}")
-  private static String managementUri;
+  private String managementUri;
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
