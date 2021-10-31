@@ -25,3 +25,19 @@ grafana 대시보드 + jenkins 빌드
 **grafana 대시보드**
 
 ![https://user-images.githubusercontent.com/40452325/139429434-bd9c0018-d5b2-4680-9a9e-200f3967671e.png](https://user-images.githubusercontent.com/40452325/139429434-bd9c0018-d5b2-4680-9a9e-200f3967671e.png)
+
+## 사용법
+
+1. Spring Boot 빌드
+
+    ```bash
+    ./gradlew bootRun -Dspring.profiles.active=dev
+    ```
+
+2. Vue.js 빌드
+
+    ```bash
+    cd front-end
+    npm install
+    npm run serve
+    ```
