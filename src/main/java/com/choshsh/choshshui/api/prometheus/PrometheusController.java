@@ -11,17 +11,19 @@ public class PrometheusController {
 
   String url = "http://prometheus.choshsh.com";
   private static final String PREFIX_URL = "/api/prometheus";
-  private WebClient webClient;
+  private final WebClient webClient;
+  private final PrometheusService prometheusService;
 
-  public PrometheusController(WebClient webClient) {
+  public PrometheusController(WebClient webClient, PrometheusService prometheusService) {
     this.webClient = webClient;
+    this.prometheusService = prometheusService;
   }
 
   @ApiOperation(value = "Prometheus 알림 규칙 조회")
   @GetMapping(PREFIX_URL + "/rules")
   public Mono<PrometheusDTO> getRules() {
     return webClient.get()
-        .uri(url + "/api/v1/rules")
+        .uri(prometheusService.getPrometheusUrl() + "/api/v1/rules")
         .retrieve()
         .bodyToMono(PrometheusDTO.class);
   }
@@ -30,7 +32,7 @@ public class PrometheusController {
   @GetMapping(PREFIX_URL + "/alerts")
   public Mono<PrometheusDTO> getAlerts() {
     return webClient.get()
-        .uri(url + "/api/v1/alerts")
+        .uri(prometheusService.getPrometheusUrl() + "/api/v1/alerts")
         .retrieve()
         .bodyToMono(PrometheusDTO.class);
   }
