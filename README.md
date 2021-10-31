@@ -14,9 +14,9 @@ Web 콘솔을 제공하는 오픈소스 S/W들이 많습니다. 하지만 사용
 
 ## UI 샘플
 
-### 부하테스트
+### 부하테스트 (Jenkins + Grafana)
 
-grafana 대시보드 + jenkins 빌드
+[jenkins-api-springboot](https://github.com/choshsh/jenkins-api-springboot) 애플리케이션의 API를 사용하여 jenkins 빌드를 트리거합니다. 테스트 결과는 아티팩트로 저장합니다.
 
 ![https://user-images.githubusercontent.com/40452325/139435682-a18ef1e4-10d2-42b9-b114-1e9249d31bc0.gif](https://user-images.githubusercontent.com/40452325/139435682-a18ef1e4-10d2-42b9-b114-1e9249d31bc0.gif)
 
