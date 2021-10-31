@@ -50,7 +50,7 @@ public class AdminController {
   @ApiOperation(value = "Front-end iframe 리스트 조회")
   @GetMapping(value = PREFIX_URL + "/iframe")
   public List<IframeEntity> listIframe() {
-    return iframeRepo.findAllByOrderByCategoryAsc();
+    return iframeRepo.findAllByOrderByCategoryAscSortAsc();
   }
 
   @GetMapping(value = PREFIX_URL + "/iframe/{category}")
