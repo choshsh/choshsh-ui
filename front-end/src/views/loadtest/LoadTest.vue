@@ -197,7 +197,7 @@ const fields = [
   { key: "title", label: "제목", _style: "width:15%" },
   { key: "jobName", label: "Job", _style: "width:15%" },
   { key: "buildNumber", label: "빌드번호", _style: "width:10%" },
-  { key: "locustEnv", label: "대상환경", _style: "width:10%" },
+  { key: "locustEnvName", label: "대상환경", _style: "width:10%" },
   { key: "params", label: "파라미터", _style: "width:20%" },
   { key: "regDate", label: "시작시간", _style: "width:12%" },
   { key: "duration", label: "소요시간(HH:mm:ss)", _style: "width:10%" },

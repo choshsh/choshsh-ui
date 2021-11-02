@@ -63,6 +63,7 @@
                 class="col-sm-9"
                 :options="options.locustEnv"
                 :checked.sync="entity.locustEnv"
+                @update:checked="updateEnv"
                 custom
                 inline
               />
@@ -85,6 +86,7 @@
                 style="margin:0"
                 placeholder="https://<url>"
                 required
+                :readonly="hostReadonly"
               />
             </td>
           </tr>
@@ -256,6 +258,7 @@ export default {
         msg: "",
       },
       runBuild: false,
+      hostReadonly: false,
     };
   },
   methods: {
@@ -325,6 +328,16 @@ export default {
     async setEnv() {
       this.options.locustEnv = await jenkinsService.getCode("locustenv");
       this.options.pyscript = await jenkinsService.getPyscript();
+    },
+    // 대상 환경에 따른 input 변경
+    updateEnv(value) {
+      if (value === "I") {
+        this.params.host = "http://choshsh-ui-loadtest.default.svc:8080";
+        this.hostReadonly = true;
+      } else {
+        this.params.host = "";
+        this.hostReadonly = false;
+      }
     },
   },
 

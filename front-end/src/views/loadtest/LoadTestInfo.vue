@@ -8,37 +8,36 @@
           <CCol col="9">
             <!-- 상단 빌드 정보 -->
             <CCard>
+              <CCardHeader>빌드 정보</CCardHeader>
               <CCardBody>
                 <p class="font-weight-bold">
                   {{ jenkinsEntity.title }} - [{{
                     jenkinsEntity.jobName + " #" + jenkinsEntity.buildNumber
                   }}]
                 </p>
-                <ul
-                  style="list-style: none; -webkit-padding-start:0px"
-                  class="list-group list-group-horizontal"
-                >
-                  <li class="list-group-item">
-                    <h5 v-if="jenkinsEntity.result">
+                <CListGroup horizontal>
+                  <CListGroup class="list-group-item">
+                    <h5 v-if="jenkinsEntity.result" class="ml-3">
                       <CBadge :color="getBadge(jenkinsEntity.result)">
                         {{ jenkinsEntity.result }}
                       </CBadge>
                     </h5>
-                    <CSpinner v-else color="info" size="sm" />
-                  </li>
-                  <li
+                    <CSpinner v-else color="info" size="sm" class="ml-3" />
+                  </CListGroup>
+                  <CListGroup
                     v-for="(s, index) in formatParams"
                     v-bind:key="index"
                     class="list-group-item"
                   >
-                    <span class="badge badge-light"> {{ s }}</span>
-                  </li>
-                </ul>
+                    <span class="badge badge-light ml-3"> {{ s }}</span>
+                  </CListGroup>
+                </CListGroup>
               </CCardBody>
             </CCard>
           </CCol>
           <CCol col="3">
             <CCard>
+              <CCardHeader>부하테스트 결과 CSV 파일</CCardHeader>
               <CCardBody>
                 <ul
                   style="list-style: none; -webkit-padding-start:0px"
@@ -160,6 +159,7 @@ export default {
           await wait(2000);
         }
         await wait(1000);
+        this.jenkinsEntity = data;
         this.toastHandler("빌드가 완료됐어요.");
         this.resultKey++;
       }
