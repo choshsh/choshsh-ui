@@ -15,6 +15,7 @@ import {
   cilChartLine,
   cilNotes,
   cilExternalLink,
+  cilUser
 } from "@coreui/icons";
 import { logo } from "./logo";
 
@@ -38,5 +39,6 @@ export const iconsSet = Object.assign(
     cilChartLine,
     cilNotes,
     cilExternalLink,
+    cilUser
   }
 );

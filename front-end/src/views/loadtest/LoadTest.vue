@@ -153,25 +153,28 @@
                 href="https://github.com/choshsh/jenkins-api-springboot"
                 target="_black"
               >
-                Jenkins-Rest - App
-              </a></CListGroupItem
-            >
+                Jenkins-Rest
+              </a>
+              : Jenkins API 애플리케이션
+            </CListGroupItem>
             <CListGroupItem>
               <a
                 href="https://github.com/choshsh/devops-study/blob/master/jenkins/pipelines/loadTest"
                 target="_black"
               >
                 Jenkins Pipeline
-              </a></CListGroupItem
-            >
+              </a>
+              : 부하테스트 Pod를 실행하는 jenkins 스크립트
+            </CListGroupItem>
             <CListGroupItem>
               <a
                 href="https://github.com/choshsh/devops-study/blob/master/jenkins/podTemplates/loadTest.yaml"
                 target="_black"
               >
-                부하테스트 Pod manifest
-              </a></CListGroupItem
-            >
+                부하테스트 Pod
+              </a>
+              : 부하테스트 Pod manifest
+            </CListGroupItem>
           </CListGroup>
         </CCardBody>
       </CCard>
@@ -181,6 +184,16 @@
           <img src="@/assets/images/loadtest-flow.jpg" class="img-fluid" />
         </CCardBody>
       </CCard>
+      <div class="text-center row-fluid mb-1 mt-3">
+        <button
+          id="cancelBtn"
+          type="button"
+          class="btn btn-secondary"
+          @click="flowHandler()"
+        >
+          닫기
+        </button>
+      </div>
       <div slot="footer" />
     </CModal>
   </div>
