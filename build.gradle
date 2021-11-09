@@ -21,29 +21,26 @@ repositories {
 }
 
 // 이미지 태그 설정
-if (name.equalsIgnoreCase("jib")) {
-  def imageTags = []
-  if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
-  if (project.hasProperty("latest")) {
-    if (project.getProperty("latest") > 0) imageTags.add(project.getProperty("latest"))
+def imageTags = []
+if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
+if (project.hasProperty("latest")) {
+  if (project.getProperty("latest") > 0) imageTags.add(project.getProperty("latest"))
+}
+
+jib {
+  from {
+    image = "amazoncorretto:17"
   }
-  if (imageTags.isEmpty()) throw new GradleException('Image tag parameter is null.')
-  
-  jib {
-    from {
-      image = "amazoncorretto:17"
-    }
-    to {
-      image = "choshsh/choshsh-ui"
-      tags = imageTags
-    }
-    container {
-      creationTime = "USE_CURRENT_TIMESTAMP"
-      jvmFlags = ['-Dspring.profiles.active=prod', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
-      ports = ['8080']
-      labels = [maintainer: 'choshsh <cho911115@gmail.com>']
-      user = "1000:1000"
-    }
+  to {
+    image = "choshsh/choshsh-ui"
+    tags = imageTags
+  }
+  container {
+    creationTime = "USE_CURRENT_TIMESTAMP"
+    jvmFlags = ['-Dspring.profiles.active=prod', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
+    ports = ['8080']
+    labels = [maintainer: 'choshsh <cho911115@gmail.com>']
+    user = "1000:1000"
   }
 }
 
