@@ -23,9 +23,6 @@ repositories {
 // 이미지 태그 설정
 def imageTags = []
 if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
-if (project.hasProperty("latest")) {
-  if (project.getProperty("latest") > 0) imageTags.add('latest')
-}
 
 jib {
   from {
