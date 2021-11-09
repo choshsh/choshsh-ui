@@ -1,0 +1,33 @@
+image:
+  name: "choshsh-ui"
+  pullPolicy: "Always"
+  tag: "latest"
+
+nameOverride: "choshsh-ui"
+fullnameOverride: "choshsh-ui"
+
+deploy:
+  env:
+    - name: "TZ"
+      value: "Asia/Seoul"
+  envFromConfigMap:
+    configmapName: "mysql"
+    items:
+      - envName: MYSQL_URL
+        key: "url"
+      - envName: MYSQL_DB
+        key: "choshsh-ui"
+      - envName: MYSQL_USER
+        key: "user"
+      - envName: MYSQL_PARAM
+        key: "jdbc-param"
+  envFromSecret:
+    - secretName: "mysql-password"
+      envName: MYSQL_PASSWORD
+      key: "password"
+
+podAnnotations:
+  sidecar.istio.io/inject: "true"
+
+prometheus:
+  enabled: true
