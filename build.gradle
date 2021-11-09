@@ -24,7 +24,7 @@ repositories {
 def imageTags = []
 if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
 if (project.hasProperty("latest")) {
-  if (project.getProperty("latest") > 0) imageTags.add(project.getProperty("latest"))
+  if (project.getProperty("latest") > 0) imageTags.add('latest')
 }
 
 jib {
