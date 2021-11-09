@@ -21,10 +21,13 @@ repositories {
 }
 
 // 이미지 태그 설정
-def imageTags = []
-if (project.hasProperty("tag")) imageTags.add(project.hasProperty("tag"))
-if (project.hasProperty("latest")) {
-  if (project.getProperty("latest") > 0) imageTags.add(project.hasProperty("latest"))
+if (name.equalsIgnoreCase("jib")) {
+  def imageTags = []
+  if (project.hasProperty("tag")) imageTags.add(project.hasProperty("tag"))
+  if (project.hasProperty("latest")) {
+    if (project.getProperty("latest") > 0) imageTags.add(project.hasProperty("latest"))
+  }
+  if (imageTags.isEmpty()) throw new GradleException('Image tag parameter is null.')
 }
 
 jib {
