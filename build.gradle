@@ -28,24 +28,25 @@ if (name.equalsIgnoreCase("jib")) {
     if (project.getProperty("latest") > 0) imageTags.add(project.hasProperty("latest"))
   }
   if (imageTags.isEmpty()) throw new GradleException('Image tag parameter is null.')
+  
+  jib {
+    from {
+      image = "amazoncorretto:17"
+    }
+    to {
+      image = "choshsh/choshsh-ui"
+      tags = imageTags
+    }
+    container {
+      creationTime = "USE_CURRENT_TIMESTAMP"
+      jvmFlags = ['-Dspring.profiles.active=prod', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
+      ports = ['8080']
+      labels = [maintainer: 'choshsh <cho911115@gmail.com>']
+      user = "1000:1000"
+    }
+  }
 }
 
-jib {
-  from {
-    image = "amazoncorretto:17"
-  }
-  to {
-    image = "choshsh/choshsh-ui"
-    tags = imageTags
-  }
-  container {
-    creationTime = "USE_CURRENT_TIMESTAMP"
-    jvmFlags = ['-Dspring.profiles.active=prod', '-XX:+UseContainerSupport', '-Dserver.port=8080', '-Dfile.encoding=UTF-8']
-    ports = ['8080']
-    labels = [maintainer: 'choshsh <cho911115@gmail.com>']
-    user = "1000:1000"
-  }
-}
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
