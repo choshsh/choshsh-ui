@@ -21,7 +21,7 @@ public class PrometheusController {
 
   @ApiOperation(value = "Prometheus 알림 규칙 조회")
   @GetMapping(PREFIX_URL + "/rules")
-  public Mono<PrometheusDTO> getRules() {
+  public Mono<PrometheusDTO> listRules() {
     return webClient.get()
         .uri(prometheusService.getPrometheusUrl() + "/api/v1/rules")
         .retrieve()
@@ -30,7 +30,7 @@ public class PrometheusController {
 
   @ApiOperation(value = "Prometheus 활성 알림 조회")
   @GetMapping(PREFIX_URL + "/alerts")
-  public Mono<PrometheusDTO> getAlerts() {
+  public Mono<PrometheusDTO> listAlerts() {
     return webClient.get()
         .uri(prometheusService.getPrometheusUrl() + "/api/v1/alerts")
         .retrieve()
