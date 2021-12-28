@@ -31,8 +31,7 @@ jobs:
 
       - name: Install NPM Dependencies
         run: |
-          npm install
-          npm audit fix
+          npm ci
         working-directory: ./front-end
 
       - name: Build Front-end
