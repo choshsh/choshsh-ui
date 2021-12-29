@@ -202,7 +202,7 @@
 <script>
 import * as jenkinsService from "@/api/jenkins";
 import TopButton from "@/views/base/TopButton";
-import ToasterCustom from "../base/ToasterCustom";
+import ToasterCustom from "@/views/base/ToasterCustom";
 import LoadTestForm from "./LoadTestForm";
 
 const fields = [

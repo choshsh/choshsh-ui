@@ -1,7 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import * as adminService from "@/api/admin";
-Vue.use(Vuex);
 
 const state = {
   envs: [],
