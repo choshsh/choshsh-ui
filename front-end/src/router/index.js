@@ -1,24 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-// Containers
-const TheContainer = () => import("@/containers/TheContainer");
-
-// 모니터링
-const Monitor = () => import("@/views/monitoring/Metric");
-const Log = () => import("@/views/monitoring/Log");
-const Alert = () => import("@/views/monitoring/Alert");
-
-// 부하 테스트
-const LoadTest = () => import("@/views/loadtest/LoadTest");
-const LoadTestInfo = () => import("@/views/loadtest/LoadTestInfo");
-
-const Settings = () => import("@/views/settings/Settings");
-
-const Page404 = () => import("@/views/pages/Page404");
-const Page500 = () => import("@/views/pages/Page500");
-const Login = () => import("@/views/pages/Login");
-
 Vue.use(Router);
 
 export default new Router({
@@ -34,37 +16,37 @@ function configRoutes() {
       path: "/",
       redirect: "/monitor/metric",
       name: "Home",
-      component: TheContainer,
+      component: () => import("@/containers/TheContainer"),
       children: [
         {
           path: "monitor/metric",
           name: "Metric",
-          component: Monitor,
+          component: () => import("@/views/monitoring/Metric"),
         },
         {
           path: "monitor/log",
           name: "Log",
-          component: Log,
+          component: () => import("@/views/monitoring/Log"),
         },
         {
           path: "monitor/alert",
           name: "Alert",
-          component: Alert,
+          component: () => import("@/views/monitoring/Alert"),
         },
         {
           path: "loadtest",
           name: "부하 테스트",
-          component: LoadTest,
+          component: () => import("@/views/loadtest/LoadTest"),
         },
         {
           path: "loadTestInfo",
           name: "부하 테스트 상세",
-          component: LoadTestInfo,
+          component: () => import("@/views/loadtest/LoadTestInfo"),
         },
         {
           path: "settings",
           name: "Settings",
-          component: Settings,
+          component: () => import("@/views/settings/Settings"),
         },
       ],
     },
@@ -81,17 +63,17 @@ function configRoutes() {
         {
           path: "404",
           name: "Page404",
-          component: Page404,
+          component: () => import("@/views/pages/Page404"),
         },
         {
           path: "500",
           name: "Page500",
-          component: Page500,
+          component: () => import("@/views/pages/Page500"),
         },
         {
           path: "login",
           name: "Login",
-          component: Login,
+          component: () => import("@/views/pages/Login"),
         },
       ],
     },
@@ -99,7 +81,7 @@ function configRoutes() {
       path: "*",
       redirect: "/pages/404",
       name: "Pages",
-      component: Page404,
+      component: () => import("@/views/pages/Page404"),
     },
   ];
 }
