@@ -31,7 +31,6 @@ public class AdminControllerTest {
   @Autowired
   protected ObjectMapper objectMapper;
 
-
   @Test
   public void ADD_HEADER() throws Exception {
     Map<String, String> param = new HashMap<>();
