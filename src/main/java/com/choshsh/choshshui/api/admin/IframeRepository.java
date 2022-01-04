@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IframeRepository extends CrudRepository<IframeEntity, Long> {
-
   List<IframeEntity> findAllByOrderByCategoryAscSortAsc();
-
   List<IframeEntity> findAllByCategoryOrderBySortAsc(String category);
-
 }

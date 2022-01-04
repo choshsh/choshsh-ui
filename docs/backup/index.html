@@ -878,32 +878,26 @@
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="AdminController"><a href="#api-AdminController">API Methods - AdminController</a></li>
-                    <li data-group="AdminController" data-name="addEnvUsingPUT" class="">
-                      <a href="#api-AdminController-addEnvUsingPUT">addEnvUsingPUT</a>
-                    </li>
-                    <li data-group="AdminController" data-name="addHeaderUsingPOST" class="">
-                      <a href="#api-AdminController-addHeaderUsingPOST">addHeaderUsingPOST</a>
-                    </li>
-                    <li data-group="AdminController" data-name="addHeadersUsingPOST" class="">
-                      <a href="#api-AdminController-addHeadersUsingPOST">addHeadersUsingPOST</a>
-                    </li>
-                    <li data-group="AdminController" data-name="addIframeUsingPOST" class="">
-                      <a href="#api-AdminController-addIframeUsingPOST">addIframeUsingPOST</a>
-                    </li>
-                    <li data-group="AdminController" data-name="addIframesUsingPOST" class="">
-                      <a href="#api-AdminController-addIframesUsingPOST">addIframesUsingPOST</a>
-                    </li>
-                    <li data-group="AdminController" data-name="findIframeByCategoryUsingGET" class="">
-                      <a href="#api-AdminController-findIframeByCategoryUsingGET">findIframeByCategoryUsingGET</a>
-                    </li>
                     <li data-group="AdminController" data-name="infoEnvUsingGET" class="">
                       <a href="#api-AdminController-infoEnvUsingGET">infoEnvUsingGET</a>
+                    </li>
+                    <li data-group="AdminController" data-name="insertEnvUsingPUT" class="">
+                      <a href="#api-AdminController-insertEnvUsingPUT">insertEnvUsingPUT</a>
+                    </li>
+                    <li data-group="AdminController" data-name="insertHeaderUsingPOST" class="">
+                      <a href="#api-AdminController-insertHeaderUsingPOST">insertHeaderUsingPOST</a>
+                    </li>
+                    <li data-group="AdminController" data-name="insertIframeUsingPOST" class="">
+                      <a href="#api-AdminController-insertIframeUsingPOST">insertIframeUsingPOST</a>
                     </li>
                     <li data-group="AdminController" data-name="listEnvUsingGET" class="">
                       <a href="#api-AdminController-listEnvUsingGET">listEnvUsingGET</a>
                     </li>
                     <li data-group="AdminController" data-name="listHeaderUsingGET" class="">
                       <a href="#api-AdminController-listHeaderUsingGET">listHeaderUsingGET</a>
+                    </li>
+                    <li data-group="AdminController" data-name="listIframeCategoryUsingGET" class="">
+                      <a href="#api-AdminController-listIframeCategoryUsingGET">listIframeCategoryUsingGET</a>
                     </li>
                     <li data-group="AdminController" data-name="listIframeUsingGET" class="">
                       <a href="#api-AdminController-listIframeUsingGET">listIframeUsingGET</a>
@@ -913,11 +907,11 @@
                       <a href="#api-EnumController-ynUsingGET">ynUsingGET</a>
                     </li>
                   <li class="nav-header" data-group="PrometheusController"><a href="#api-PrometheusController">API Methods - PrometheusController</a></li>
-                    <li data-group="PrometheusController" data-name="listAlertsUsingGET" class="">
-                      <a href="#api-PrometheusController-listAlertsUsingGET">listAlertsUsingGET</a>
+                    <li data-group="PrometheusController" data-name="getAlertsUsingGET" class="">
+                      <a href="#api-PrometheusController-getAlertsUsingGET">getAlertsUsingGET</a>
                     </li>
-                    <li data-group="PrometheusController" data-name="listRulesUsingGET" class="">
-                      <a href="#api-PrometheusController-listRulesUsingGET">listRulesUsingGET</a>
+                    <li data-group="PrometheusController" data-name="getRulesUsingGET" class="">
+                      <a href="#api-PrometheusController-getRulesUsingGET">getRulesUsingGET</a>
                     </li>
                   <li class="nav-header" data-group="UserController"><a href="#api-UserController">API Methods - UserController</a></li>
                     <li data-group="UserController" data-name="createUsingPOST" class="">
@@ -956,1949 +950,6 @@
         <div id="sections">
                 <section id="api-AdminController">
                   <h1>AdminController</h1>
-                    <div id="api-AdminController-addEnvUsingPUT">
-                      <article id="api-AdminController-addEnvUsingPUT-0" data-group="User" data-name="addEnvUsingPUT" data-version="0">
-                        <div class="pull-left">
-                          <h1>addEnvUsingPUT</h1>
-                          <p>Front-end 환경변수 수정</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/api/admin/env/{id}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-addEnvUsingPUT-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-addEnvUsingPUT-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-addEnvUsingPUT-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X PUT\
--H "Accept: application/json,*/*"\
--H "Content-Type: application/json"\
-"http://localhost:8080/api/admin/env/{id}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        Long id = 789; // Long | id
-        EnvEntity body = ; // EnvEntity | 
-        try {
-            EnvEntity result = apiInstance.addEnvUsingPUT(id, body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addEnvUsingPUT");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        Long id = 789; // Long | id
-        EnvEntity body = ; // EnvEntity | 
-        try {
-            EnvEntity result = apiInstance.addEnvUsingPUT(id, body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addEnvUsingPUT");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Long *id = 789; // id
-EnvEntity *body = ; //  (optional)
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// Front-end 환경변수 수정
-[apiInstance addEnvUsingPUTWith:id
-    body:body
-              completionHandler: ^(EnvEntity output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var id = 789; // {{Long}} id
-var opts = { 
-  'body':  // {{EnvEntity}} 
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addEnvUsingPUT(id, opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class addEnvUsingPUTExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var id = 789;  // Long | id
-            var body = new EnvEntity(); // EnvEntity |  (optional) 
-
-            try
-            {
-                // Front-end 환경변수 수정
-                EnvEntity result = apiInstance.addEnvUsingPUT(id, body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.addEnvUsingPUT: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$id = 789; // Long | id
-$body = ; // EnvEntity | 
-
-try {
-    $result = $api_instance->addEnvUsingPUT($id, $body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->addEnvUsingPUT: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $id = 789; # Long | id
-my $body = WWW::SwaggerClient::Object::EnvEntity->new(); # EnvEntity | 
-
-eval { 
-    my $result = $api_instance->addEnvUsingPUT(id => $id, body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->addEnvUsingPUT: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addEnvUsingPUT-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-id = 789 # Long | id
-body =  # EnvEntity |  (optional)
-
-try: 
-    # Front-end 환경변수 수정
-    api_response = api_instance.add_env_using_put(id, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->addEnvUsingPUT: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">id*</td>
-                                  <td>
-                                  
-                                  
-                                      <div id="d2e199_addEnvUsingPUT_id">
-                                          <div class="json-schema-view">
-                                              <div class="primitive">
-                                                  <span class="type">
-                                                      Long
-                                                  </span>
-                                                      <span class="format">
-                                                          (int64)
-                                                      </span>
-                                  
-                                                      <div class="inner description">
-                                                          id
-                                                      </div>
-                                              </div>
-                                                  <div class="inner required">
-                                                      Required
-                                                  </div>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  </tr>
-                            </table>
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body </td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/EnvEntity"
-      }
-    }
-  }
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addEnvUsingPUT_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addEnvUsingPUT_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addEnvUsingPUT-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addEnvUsingPUT-200-schema">
-                                  <div id='responses-addEnvUsingPUT-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/EnvEntity"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/EnvEntity"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addEnvUsingPUT-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addEnvUsingPUT-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addEnvUsingPUT-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-AdminController-addHeaderUsingPOST">
-                      <article id="api-AdminController-addHeaderUsingPOST-0" data-group="User" data-name="addHeaderUsingPOST" data-version="0">
-                        <div class="pull-left">
-                          <h1>addHeaderUsingPOST</h1>
-                          <p>헤더 등록</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/header</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-addHeaderUsingPOST-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeaderUsingPOST-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-addHeaderUsingPOST-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
--H "Accept: application/json,*/*"\
--H "Content-Type: application/json"\
-"http://localhost:8080/api/admin/header"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        HeaderEntity body = ; // HeaderEntity | 
-        try {
-            HeaderEntity result = apiInstance.addHeaderUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addHeaderUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        HeaderEntity body = ; // HeaderEntity | 
-        try {
-            HeaderEntity result = apiInstance.addHeaderUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addHeaderUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">HeaderEntity *body = ; //  (optional)
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// 헤더 등록
-[apiInstance addHeaderUsingPOSTWith:body
-              completionHandler: ^(HeaderEntity output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var opts = { 
-  'body':  // {{HeaderEntity}} 
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addHeaderUsingPOST(opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class addHeaderUsingPOSTExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var body = new HeaderEntity(); // HeaderEntity |  (optional) 
-
-            try
-            {
-                // 헤더 등록
-                HeaderEntity result = apiInstance.addHeaderUsingPOST(body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.addHeaderUsingPOST: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$body = ; // HeaderEntity | 
-
-try {
-    $result = $api_instance->addHeaderUsingPOST($body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->addHeaderUsingPOST: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $body = WWW::SwaggerClient::Object::HeaderEntity->new(); # HeaderEntity | 
-
-eval { 
-    my $result = $api_instance->addHeaderUsingPOST(body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->addHeaderUsingPOST: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeaderUsingPOST-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-body =  # HeaderEntity |  (optional)
-
-try: 
-    # 헤더 등록
-    api_response = api_instance.add_header_using_post(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->addHeaderUsingPOST: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body </td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/HeaderEntity"
-      }
-    }
-  }
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addHeaderUsingPOST_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addHeaderUsingPOST_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addHeaderUsingPOST-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addHeaderUsingPOST-200-schema">
-                                  <div id='responses-addHeaderUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/HeaderEntity"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/HeaderEntity"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addHeaderUsingPOST-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addHeaderUsingPOST-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addHeaderUsingPOST-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-AdminController-addHeadersUsingPOST">
-                      <article id="api-AdminController-addHeadersUsingPOST-0" data-group="User" data-name="addHeadersUsingPOST" data-version="0">
-                        <div class="pull-left">
-                          <h1>addHeadersUsingPOST</h1>
-                          <p>헤더 등록 - list</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/headers</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-addHeadersUsingPOST-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-addHeadersUsingPOST-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-addHeadersUsingPOST-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
--H "Accept: application/json,*/*"\
--H "Content-Type: application/json"\
-"http://localhost:8080/api/admin/headers"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        HeaderEntity body = ; // HeaderEntity | 
-        try {
-            array[HeaderEntity] result = apiInstance.addHeadersUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addHeadersUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        HeaderEntity body = ; // HeaderEntity | 
-        try {
-            array[HeaderEntity] result = apiInstance.addHeadersUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addHeadersUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">HeaderEntity *body = ; //  (optional)
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// 헤더 등록 - list
-[apiInstance addHeadersUsingPOSTWith:body
-              completionHandler: ^(array[HeaderEntity] output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var opts = { 
-  'body':  // {{HeaderEntity}} 
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addHeadersUsingPOST(opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class addHeadersUsingPOSTExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var body = new HeaderEntity(); // HeaderEntity |  (optional) 
-
-            try
-            {
-                // 헤더 등록 - list
-                array[HeaderEntity] result = apiInstance.addHeadersUsingPOST(body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.addHeadersUsingPOST: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$body = ; // HeaderEntity | 
-
-try {
-    $result = $api_instance->addHeadersUsingPOST($body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->addHeadersUsingPOST: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $body = WWW::SwaggerClient::Object::HeaderEntity->new(); # HeaderEntity | 
-
-eval { 
-    my $result = $api_instance->addHeadersUsingPOST(body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->addHeadersUsingPOST: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addHeadersUsingPOST-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-body =  # HeaderEntity |  (optional)
-
-try: 
-    # 헤더 등록 - list
-    api_response = api_instance.add_headers_using_post(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->addHeadersUsingPOST: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body </td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/HeaderEntity"
-      }
-    }
-  }
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addHeadersUsingPOST_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addHeadersUsingPOST_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addHeadersUsingPOST-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addHeadersUsingPOST-200-schema">
-                                  <div id='responses-addHeadersUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/HeaderEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/HeaderEntity"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addHeadersUsingPOST-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addHeadersUsingPOST-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addHeadersUsingPOST-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-AdminController-addIframeUsingPOST">
-                      <article id="api-AdminController-addIframeUsingPOST-0" data-group="User" data-name="addIframeUsingPOST" data-version="0">
-                        <div class="pull-left">
-                          <h1>addIframeUsingPOST</h1>
-                          <p>iframe 등록</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/iframe</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-addIframeUsingPOST-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframeUsingPOST-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-addIframeUsingPOST-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
--H "Accept: application/json,*/*"\
--H "Content-Type: application/json"\
-"http://localhost:8080/api/admin/iframe"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        IframeEntity body = ; // IframeEntity | 
-        try {
-            IframeEntity result = apiInstance.addIframeUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addIframeUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        IframeEntity body = ; // IframeEntity | 
-        try {
-            IframeEntity result = apiInstance.addIframeUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addIframeUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">IframeEntity *body = ; //  (optional)
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// iframe 등록
-[apiInstance addIframeUsingPOSTWith:body
-              completionHandler: ^(IframeEntity output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var opts = { 
-  'body':  // {{IframeEntity}} 
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addIframeUsingPOST(opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class addIframeUsingPOSTExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var body = new IframeEntity(); // IframeEntity |  (optional) 
-
-            try
-            {
-                // iframe 등록
-                IframeEntity result = apiInstance.addIframeUsingPOST(body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.addIframeUsingPOST: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$body = ; // IframeEntity | 
-
-try {
-    $result = $api_instance->addIframeUsingPOST($body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->addIframeUsingPOST: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $body = WWW::SwaggerClient::Object::IframeEntity->new(); # IframeEntity | 
-
-eval { 
-    my $result = $api_instance->addIframeUsingPOST(body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->addIframeUsingPOST: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframeUsingPOST-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-body =  # IframeEntity |  (optional)
-
-try: 
-    # iframe 등록
-    api_response = api_instance.add_iframe_using_post(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->addIframeUsingPOST: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body </td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/IframeEntity"
-      }
-    }
-  }
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addIframeUsingPOST_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addIframeUsingPOST_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addIframeUsingPOST-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addIframeUsingPOST-200-schema">
-                                  <div id='responses-addIframeUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/IframeEntity"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/IframeEntity"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addIframeUsingPOST-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addIframeUsingPOST-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addIframeUsingPOST-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-AdminController-addIframesUsingPOST">
-                      <article id="api-AdminController-addIframesUsingPOST-0" data-group="User" data-name="addIframesUsingPOST" data-version="0">
-                        <div class="pull-left">
-                          <h1>addIframesUsingPOST</h1>
-                          <p>iframe 등록 - list</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/iframes</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-addIframesUsingPOST-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-addIframesUsingPOST-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-addIframesUsingPOST-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
--H "Accept: application/json,*/*"\
--H "Content-Type: application/json"\
-"http://localhost:8080/api/admin/iframes"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        IframeEntity body = ; // IframeEntity | 
-        try {
-            array[IframeEntity] result = apiInstance.addIframesUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addIframesUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        IframeEntity body = ; // IframeEntity | 
-        try {
-            array[IframeEntity] result = apiInstance.addIframesUsingPOST(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#addIframesUsingPOST");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">IframeEntity *body = ; //  (optional)
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// iframe 등록 - list
-[apiInstance addIframesUsingPOSTWith:body
-              completionHandler: ^(array[IframeEntity] output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var opts = { 
-  'body':  // {{IframeEntity}} 
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.addIframesUsingPOST(opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class addIframesUsingPOSTExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var body = new IframeEntity(); // IframeEntity |  (optional) 
-
-            try
-            {
-                // iframe 등록 - list
-                array[IframeEntity] result = apiInstance.addIframesUsingPOST(body);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.addIframesUsingPOST: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$body = ; // IframeEntity | 
-
-try {
-    $result = $api_instance->addIframesUsingPOST($body);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->addIframesUsingPOST: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $body = WWW::SwaggerClient::Object::IframeEntity->new(); # IframeEntity | 
-
-eval { 
-    my $result = $api_instance->addIframesUsingPOST(body => $body);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->addIframesUsingPOST: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-addIframesUsingPOST-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-body =  # IframeEntity |  (optional)
-
-try: 
-    # iframe 등록 - list
-    api_response = api_instance.add_iframes_using_post(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->addIframesUsingPOST: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body </td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/IframeEntity"
-      }
-    }
-  }
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addIframesUsingPOST_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addIframesUsingPOST_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addIframesUsingPOST-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addIframesUsingPOST-200-schema">
-                                  <div id='responses-addIframesUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addIframesUsingPOST-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addIframesUsingPOST-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addIframesUsingPOST-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-AdminController-findIframeByCategoryUsingGET">
-                      <article id="api-AdminController-findIframeByCategoryUsingGET-0" data-group="User" data-name="findIframeByCategoryUsingGET" data-version="0">
-                        <div class="pull-left">
-                          <h1>findIframeByCategoryUsingGET</h1>
-                          <p>ifram 검색 by category</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/admin/iframe/{category}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-AdminController-findIframeByCategoryUsingGET-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-AdminController-findIframeByCategoryUsingGET-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
-"http://localhost:8080/api/admin/iframe/{category}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AdminControllerApi;
-
-import java.io.File;
-import java.util.*;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        String category = category_example; // String | category
-        try {
-            array[IframeEntity] result = apiInstance.findIframeByCategoryUsingGET(category);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#findIframeByCategoryUsingGET");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
-
-public class AdminControllerApiExample {
-
-    public static void main(String[] args) {
-        AdminControllerApi apiInstance = new AdminControllerApi();
-        String category = category_example; // String | category
-        try {
-            array[IframeEntity] result = apiInstance.findIframeByCategoryUsingGET(category);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AdminControllerApi#findIframeByCategoryUsingGET");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *category = category_example; // category
-
-AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
-
-// ifram 검색 by category
-[apiInstance findIframeByCategoryUsingGETWith:category
-              completionHandler: ^(array[IframeEntity] output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
-
-var api = new ChoshshUiSwagger.AdminControllerApi()
-var category = category_example; // {{String}} category
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.findIframeByCategoryUsingGET(category, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class findIframeByCategoryUsingGETExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new AdminControllerApi();
-            var category = category_example;  // String | category
-
-            try
-            {
-                // ifram 검색 by category
-                array[IframeEntity] result = apiInstance.findIframeByCategoryUsingGET(category);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AdminControllerApi.findIframeByCategoryUsingGET: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiAdminControllerApi();
-$category = category_example; // String | category
-
-try {
-    $result = $api_instance->findIframeByCategoryUsingGET($category);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminControllerApi->findIframeByCategoryUsingGET: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::AdminControllerApi;
-
-my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
-my $category = category_example; # String | category
-
-eval { 
-    my $result = $api_instance->findIframeByCategoryUsingGET(category => $category);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling AdminControllerApi->findIframeByCategoryUsingGET: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.AdminControllerApi()
-category = category_example # String | category
-
-try: 
-    # ifram 검색 by category
-    api_response = api_instance.find_iframe_by_category_using_get(category)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AdminControllerApi->findIframeByCategoryUsingGET: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">category*</td>
-                                  <td>
-                                  
-                                  
-                                      <div id="d2e199_findIframeByCategoryUsingGET_category">
-                                          <div class="json-schema-view">
-                                              <div class="primitive">
-                                                  <span class="type">
-                                                      String
-                                                  </span>
-                                  
-                                                      <div class="inner description">
-                                                          category
-                                                      </div>
-                                              </div>
-                                                  <div class="inner required">
-                                                      Required
-                                                  </div>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  </tr>
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-findIframeByCategoryUsingGET-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-findIframeByCategoryUsingGET-200-schema">
-                                  <div id='responses-findIframeByCategoryUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
-    "*/*" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-findIframeByCategoryUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-findIframeByCategoryUsingGET-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-findIframeByCategoryUsingGET-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
                     <div id="api-AdminController-infoEnvUsingGET">
                       <article id="api-AdminController-infoEnvUsingGET-0" data-group="User" data-name="infoEnvUsingGET" data-version="0">
                         <div class="pull-left">
@@ -2932,7 +983,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-infoEnvUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/env/{key}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-infoEnvUsingGET-0-java">
@@ -3161,11 +1212,6 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/EnvEntity"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/EnvEntity"
@@ -3173,7 +1219,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -3194,6 +1240,984 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-infoEnvUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-AdminController-insertEnvUsingPUT">
+                      <article id="api-AdminController-insertEnvUsingPUT-0" data-group="User" data-name="insertEnvUsingPUT" data-version="0">
+                        <div class="pull-left">
+                          <h1>insertEnvUsingPUT</h1>
+                          <p>Front-end 환경변수 수정</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/api/admin/env/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-AdminController-insertEnvUsingPUT-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-java">Java</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertEnvUsingPUT-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-AdminController-insertEnvUsingPUT-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X PUT\
+-H "Accept: */*"\
+-H "Content-Type: application/json"\
+"http://localhost:8080/api/admin/env/{id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.AdminControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        Long id = 789; // Long | id
+        EnvEntity body = ; // EnvEntity | 
+        try {
+            EnvEntity result = apiInstance.insertEnvUsingPUT(id, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertEnvUsingPUT");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        Long id = 789; // Long | id
+        EnvEntity body = ; // EnvEntity | 
+        try {
+            EnvEntity result = apiInstance.insertEnvUsingPUT(id, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertEnvUsingPUT");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Long *id = 789; // id
+EnvEntity *body = ; //  (optional)
+
+AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
+
+// Front-end 환경변수 수정
+[apiInstance insertEnvUsingPUTWith:id
+    body:body
+              completionHandler: ^(EnvEntity output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
+
+var api = new ChoshshUiSwagger.AdminControllerApi()
+var id = 789; // {{Long}} id
+var opts = { 
+  'body':  // {{EnvEntity}} 
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.insertEnvUsingPUT(id, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class insertEnvUsingPUTExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new AdminControllerApi();
+            var id = 789;  // Long | id
+            var body = new EnvEntity(); // EnvEntity |  (optional) 
+
+            try
+            {
+                // Front-end 환경변수 수정
+                EnvEntity result = apiInstance.insertEnvUsingPUT(id, body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AdminControllerApi.insertEnvUsingPUT: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiAdminControllerApi();
+$id = 789; // Long | id
+$body = ; // EnvEntity | 
+
+try {
+    $result = $api_instance->insertEnvUsingPUT($id, $body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminControllerApi->insertEnvUsingPUT: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::AdminControllerApi;
+
+my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
+my $id = 789; # Long | id
+my $body = WWW::SwaggerClient::Object::EnvEntity->new(); # EnvEntity | 
+
+eval { 
+    my $result = $api_instance->insertEnvUsingPUT(id => $id, body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling AdminControllerApi->insertEnvUsingPUT: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertEnvUsingPUT-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.AdminControllerApi()
+id = 789 # Long | id
+body =  # EnvEntity |  (optional)
+
+try: 
+    # Front-end 환경변수 수정
+    api_response = api_instance.insert_env_using_put(id, body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AdminControllerApi->insertEnvUsingPUT: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_insertEnvUsingPUT_id">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                                      <div class="inner description">
+                                                          id
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/EnvEntity"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_insertEnvUsingPUT_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_insertEnvUsingPUT_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-insertEnvUsingPUT-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-insertEnvUsingPUT-200-schema">
+                                  <div id='responses-insertEnvUsingPUT-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/EnvEntity"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-insertEnvUsingPUT-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-insertEnvUsingPUT-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-insertEnvUsingPUT-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-AdminController-insertHeaderUsingPOST">
+                      <article id="api-AdminController-insertHeaderUsingPOST-0" data-group="User" data-name="insertHeaderUsingPOST" data-version="0">
+                        <div class="pull-left">
+                          <h1>insertHeaderUsingPOST</h1>
+                          <p>Front-end 헤더 등록</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/header</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-AdminController-insertHeaderUsingPOST-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-java">Java</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertHeaderUsingPOST-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-AdminController-insertHeaderUsingPOST-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: */*"\
+-H "Content-Type: application/json"\
+"http://localhost:8080/api/admin/header"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.AdminControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        HeaderEntity body = ; // HeaderEntity | 
+        try {
+            'Integer' result = apiInstance.insertHeaderUsingPOST(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertHeaderUsingPOST");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        HeaderEntity body = ; // HeaderEntity | 
+        try {
+            'Integer' result = apiInstance.insertHeaderUsingPOST(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertHeaderUsingPOST");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">HeaderEntity *body = ; //  (optional)
+
+AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
+
+// Front-end 헤더 등록
+[apiInstance insertHeaderUsingPOSTWith:body
+              completionHandler: ^('Integer' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
+
+var api = new ChoshshUiSwagger.AdminControllerApi()
+var opts = { 
+  'body':  // {{HeaderEntity}} 
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.insertHeaderUsingPOST(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class insertHeaderUsingPOSTExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new AdminControllerApi();
+            var body = new HeaderEntity(); // HeaderEntity |  (optional) 
+
+            try
+            {
+                // Front-end 헤더 등록
+                'Integer' result = apiInstance.insertHeaderUsingPOST(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AdminControllerApi.insertHeaderUsingPOST: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiAdminControllerApi();
+$body = ; // HeaderEntity | 
+
+try {
+    $result = $api_instance->insertHeaderUsingPOST($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminControllerApi->insertHeaderUsingPOST: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::AdminControllerApi;
+
+my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
+my $body = WWW::SwaggerClient::Object::HeaderEntity->new(); # HeaderEntity | 
+
+eval { 
+    my $result = $api_instance->insertHeaderUsingPOST(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling AdminControllerApi->insertHeaderUsingPOST: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertHeaderUsingPOST-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.AdminControllerApi()
+body =  # HeaderEntity |  (optional)
+
+try: 
+    # Front-end 헤더 등록
+    api_response = api_instance.insert_header_using_post(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AdminControllerApi->insertHeaderUsingPOST: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/HeaderEntity"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_insertHeaderUsingPOST_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_insertHeaderUsingPOST_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-insertHeaderUsingPOST-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-insertHeaderUsingPOST-200-schema">
+                                  <div id='responses-insertHeaderUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "type" : "integer",
+        "format" : "int32",
+        "x-content-type" : "*/*"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-insertHeaderUsingPOST-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-insertHeaderUsingPOST-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-insertHeaderUsingPOST-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-AdminController-insertIframeUsingPOST">
+                      <article id="api-AdminController-insertIframeUsingPOST-0" data-group="User" data-name="insertIframeUsingPOST" data-version="0">
+                        <div class="pull-left">
+                          <h1>insertIframeUsingPOST</h1>
+                          <p>Front-end iframe 등록</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/admin/iframe</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-AdminController-insertIframeUsingPOST-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-java">Java</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-AdminController-insertIframeUsingPOST-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-AdminController-insertIframeUsingPOST-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: */*"\
+-H "Content-Type: application/json"\
+"http://localhost:8080/api/admin/iframe"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.AdminControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        IframeEntity body = ; // IframeEntity | 
+        try {
+            'Integer' result = apiInstance.insertIframeUsingPOST(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertIframeUsingPOST");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        IframeEntity body = ; // IframeEntity | 
+        try {
+            'Integer' result = apiInstance.insertIframeUsingPOST(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#insertIframeUsingPOST");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">IframeEntity *body = ; //  (optional)
+
+AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
+
+// Front-end iframe 등록
+[apiInstance insertIframeUsingPOSTWith:body
+              completionHandler: ^('Integer' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
+
+var api = new ChoshshUiSwagger.AdminControllerApi()
+var opts = { 
+  'body':  // {{IframeEntity}} 
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.insertIframeUsingPOST(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class insertIframeUsingPOSTExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new AdminControllerApi();
+            var body = new IframeEntity(); // IframeEntity |  (optional) 
+
+            try
+            {
+                // Front-end iframe 등록
+                'Integer' result = apiInstance.insertIframeUsingPOST(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AdminControllerApi.insertIframeUsingPOST: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiAdminControllerApi();
+$body = ; // IframeEntity | 
+
+try {
+    $result = $api_instance->insertIframeUsingPOST($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminControllerApi->insertIframeUsingPOST: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::AdminControllerApi;
+
+my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
+my $body = WWW::SwaggerClient::Object::IframeEntity->new(); # IframeEntity | 
+
+eval { 
+    my $result = $api_instance->insertIframeUsingPOST(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling AdminControllerApi->insertIframeUsingPOST: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-insertIframeUsingPOST-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.AdminControllerApi()
+body =  # IframeEntity |  (optional)
+
+try: 
+    # Front-end iframe 등록
+    api_response = api_instance.insert_iframe_using_post(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AdminControllerApi->insertIframeUsingPOST: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/IframeEntity"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_insertIframeUsingPOST_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_insertIframeUsingPOST_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-insertIframeUsingPOST-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-insertIframeUsingPOST-200-schema">
+                                  <div id='responses-insertIframeUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "type" : "integer",
+        "format" : "int32",
+        "x-content-type" : "*/*"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-insertIframeUsingPOST-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-insertIframeUsingPOST-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-insertIframeUsingPOST-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -3233,7 +2257,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-listEnvUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/env"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-listEnvUsingGET-0-java">
@@ -3424,26 +2448,18 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/EnvEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
     "*/*" : {
       "schema" : {
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/EnvEntity"
-        }
+        },
+        "x-content-type" : "*/*"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -3474,7 +2490,7 @@ except ApiException as e:
                       <article id="api-AdminController-listHeaderUsingGET-0" data-group="User" data-name="listHeaderUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>listHeaderUsingGET</h1>
-                          <p>해더 조회 - list</p>
+                          <p>Front-end 헤더 리스트 조회</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3556,7 +2572,7 @@ public class AdminControllerApiExample {
                               <pre class="prettyprint"><code class="language-cpp">
 AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
 
-// 해더 조회 - list
+// Front-end 헤더 리스트 조회
 [apiInstance listHeaderUsingGETWithCompletionHandler: 
               ^(array[HeaderEntity] output, NSError* error) {
                             if (output) {
@@ -3605,7 +2621,7 @@ namespace Example
 
             try
             {
-                // 해더 조회 - list
+                // Front-end 헤더 리스트 조회
                 array[HeaderEntity] result = apiInstance.listHeaderUsingGET();
                 Debug.WriteLine(result);
             }
@@ -3661,7 +2677,7 @@ from pprint import pprint
 api_instance = swagger_client.AdminControllerApi()
 
 try: 
-    # 해더 조회 - list
+    # Front-end 헤더 리스트 조회
     api_response = api_instance.list_header_using_get()
     pprint(api_response)
 except ApiException as e:
@@ -3732,11 +2748,311 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-AdminController-listIframeCategoryUsingGET">
+                      <article id="api-AdminController-listIframeCategoryUsingGET-0" data-group="User" data-name="listIframeCategoryUsingGET" data-version="0">
+                        <div class="pull-left">
+                          <h1>listIframeCategoryUsingGET</h1>
+                          <p>listIframeCategory</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/admin/iframe/{category}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-AdminController-listIframeCategoryUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-AdminController-listIframeCategoryUsingGET-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-AdminController-listIframeCategoryUsingGET-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: */*"\
+"http://localhost:8080/api/admin/iframe/{category}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.AdminControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        String category = category_example; // String | category
+        try {
+            array[IframeEntity] result = apiInstance.listIframeCategoryUsingGET(category);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#listIframeCategoryUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.AdminControllerApi;
+
+public class AdminControllerApiExample {
+
+    public static void main(String[] args) {
+        AdminControllerApi apiInstance = new AdminControllerApi();
+        String category = category_example; // String | category
+        try {
+            array[IframeEntity] result = apiInstance.listIframeCategoryUsingGET(category);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AdminControllerApi#listIframeCategoryUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *category = category_example; // category
+
+AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
+
+// listIframeCategory
+[apiInstance listIframeCategoryUsingGETWith:category
+              completionHandler: ^(array[IframeEntity] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
+
+var api = new ChoshshUiSwagger.AdminControllerApi()
+var category = category_example; // {{String}} category
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listIframeCategoryUsingGET(category, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class listIframeCategoryUsingGETExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new AdminControllerApi();
+            var category = category_example;  // String | category
+
+            try
+            {
+                // listIframeCategory
+                array[IframeEntity] result = apiInstance.listIframeCategoryUsingGET(category);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AdminControllerApi.listIframeCategoryUsingGET: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiAdminControllerApi();
+$category = category_example; // String | category
+
+try {
+    $result = $api_instance->listIframeCategoryUsingGET($category);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminControllerApi->listIframeCategoryUsingGET: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::AdminControllerApi;
+
+my $api_instance = WWW::SwaggerClient::AdminControllerApi->new();
+my $category = category_example; # String | category
+
+eval { 
+    my $result = $api_instance->listIframeCategoryUsingGET(category => $category);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling AdminControllerApi->listIframeCategoryUsingGET: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-AdminController-listIframeCategoryUsingGET-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.AdminControllerApi()
+category = category_example # String | category
+
+try: 
+    # listIframeCategory
+    api_response = api_instance.list_iframe_category_using_get(category)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AdminControllerApi->listIframeCategoryUsingGET: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">category*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_listIframeCategoryUsingGET_category">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          category
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-listIframeCategoryUsingGET-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-listIframeCategoryUsingGET-200-schema">
+                                  <div id='responses-listIframeCategoryUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/IframeEntity"
+        },
+        "x-content-type" : "*/*"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-listIframeCategoryUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-listIframeCategoryUsingGET-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-listIframeCategoryUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-AdminController-listIframeUsingGET">
                       <article id="api-AdminController-listIframeUsingGET-0" data-group="User" data-name="listIframeUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>listIframeUsingGET</h1>
-                          <p>iframe 조회 - list</p>
+                          <p>Front-end iframe 리스트 조회</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3765,7 +3081,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-listIframeUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/iframe"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-listIframeUsingGET-0-java">
@@ -3818,7 +3134,7 @@ public class AdminControllerApiExample {
                               <pre class="prettyprint"><code class="language-cpp">
 AdminControllerApi *apiInstance = [[AdminControllerApi alloc] init];
 
-// iframe 조회 - list
+// Front-end iframe 리스트 조회
 [apiInstance listIframeUsingGETWithCompletionHandler: 
               ^(array[IframeEntity] output, NSError* error) {
                             if (output) {
@@ -3867,7 +3183,7 @@ namespace Example
 
             try
             {
-                // iframe 조회 - list
+                // Front-end iframe 리스트 조회
                 array[IframeEntity] result = apiInstance.listIframeUsingGET();
                 Debug.WriteLine(result);
             }
@@ -3923,7 +3239,7 @@ from pprint import pprint
 api_instance = swagger_client.AdminControllerApi()
 
 try: 
-    # iframe 조회 - list
+    # Front-end iframe 리스트 조회
     api_response = api_instance.list_iframe_using_get()
     pprint(api_response)
 except ApiException as e:
@@ -3956,26 +3272,18 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
     "*/*" : {
       "schema" : {
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/IframeEntity"
-        }
+        },
+        "x-content-type" : "*/*"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -4270,10 +3578,10 @@ except ApiException as e:
                   </section>
                 <section id="api-PrometheusController">
                   <h1>PrometheusController</h1>
-                    <div id="api-PrometheusController-listAlertsUsingGET">
-                      <article id="api-PrometheusController-listAlertsUsingGET-0" data-group="User" data-name="listAlertsUsingGET" data-version="0">
+                    <div id="api-PrometheusController-getAlertsUsingGET">
+                      <article id="api-PrometheusController-getAlertsUsingGET-0" data-group="User" data-name="getAlertsUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>listAlertsUsingGET</h1>
+                          <h1>getAlertsUsingGET</h1>
                           <p>Prometheus 활성 알림 조회</p>
                         </div>
                         <div class="pull-right"></div>
@@ -4287,26 +3595,26 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-PrometheusController-listAlertsUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listAlertsUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-PrometheusController-getAlertsUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getAlertsUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-PrometheusController-listAlertsUsingGET-0-curl">
+                          <div class="tab-pane active" id="examples-PrometheusController-getAlertsUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/prometheus/alerts"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-java">
+                          <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -4321,17 +3629,17 @@ public class PrometheusControllerApiExample {
         
         PrometheusControllerApi apiInstance = new PrometheusControllerApi();
         try {
-            PrometheusDTO result = apiInstance.listAlertsUsingGET();
+            PrometheusDTO result = apiInstance.getAlertsUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PrometheusControllerApi#listAlertsUsingGET");
+            System.err.println("Exception when calling PrometheusControllerApi#getAlertsUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-android">
+                          <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PrometheusControllerApi;
 
 public class PrometheusControllerApiExample {
@@ -4339,25 +3647,25 @@ public class PrometheusControllerApiExample {
     public static void main(String[] args) {
         PrometheusControllerApi apiInstance = new PrometheusControllerApi();
         try {
-            PrometheusDTO result = apiInstance.listAlertsUsingGET();
+            PrometheusDTO result = apiInstance.getAlertsUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PrometheusControllerApi#listAlertsUsingGET");
+            System.err.println("Exception when calling PrometheusControllerApi#getAlertsUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">
 PrometheusControllerApi *apiInstance = [[PrometheusControllerApi alloc] init];
 
 // Prometheus 활성 알림 조회
-[apiInstance listAlertsUsingGETWithCompletionHandler: 
+[apiInstance getAlertsUsingGETWithCompletionHandler: 
               ^(PrometheusDTO output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -4369,7 +3677,7 @@ PrometheusControllerApi *apiInstance = [[PrometheusControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
 
 var api = new ChoshshUiSwagger.PrometheusControllerApi()
@@ -4380,14 +3688,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.listAlertsUsingGET(callback);
+api.getAlertsUsingGET(callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -4396,7 +3704,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class listAlertsUsingGETExample
+    public class getAlertsUsingGETExample
     {
         public void main()
         {
@@ -4406,12 +3714,12 @@ namespace Example
             try
             {
                 // Prometheus 활성 알림 조회
-                PrometheusDTO result = apiInstance.listAlertsUsingGET();
+                PrometheusDTO result = apiInstance.getAlertsUsingGET();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PrometheusControllerApi.listAlertsUsingGET: " + e.Message );
+                Debug.Print("Exception when calling PrometheusControllerApi.getAlertsUsingGET: " + e.Message );
             }
         }
     }
@@ -4419,22 +3727,22 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-php">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiPrometheusControllerApi();
 
 try {
-    $result = $api_instance->listAlertsUsingGET();
+    $result = $api_instance->getAlertsUsingGET();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PrometheusControllerApi->listAlertsUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PrometheusControllerApi->getAlertsUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::PrometheusControllerApi;
@@ -4442,15 +3750,15 @@ use WWW::SwaggerClient::PrometheusControllerApi;
 my $api_instance = WWW::SwaggerClient::PrometheusControllerApi->new();
 
 eval { 
-    my $result = $api_instance->listAlertsUsingGET();
+    my $result = $api_instance->getAlertsUsingGET();
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling PrometheusControllerApi->listAlertsUsingGET: $@\n";
+    warn "Exception when calling PrometheusControllerApi->getAlertsUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-python">
+                            <div class="tab-pane" id="examples-PrometheusController-getAlertsUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -4462,10 +3770,10 @@ api_instance = swagger_client.PrometheusControllerApi()
 
 try: 
     # Prometheus 활성 알림 조회
-    api_response = api_instance.list_alerts_using_get()
+    api_response = api_instance.get_alerts_using_get()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PrometheusControllerApi->listAlertsUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling PrometheusControllerApi->getAlertsUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -4481,24 +3789,19 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-listAlertsUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-getAlertsUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-listAlertsUsingGET-200-schema">
-                                  <div id='responses-listAlertsUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-getAlertsUsingGET-200-schema">
+                                  <div id='responses-getAlertsUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/PrometheusDTO"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/PrometheusDTO"
@@ -4506,7 +3809,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -4519,24 +3822,24 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-listAlertsUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-listAlertsUsingGET-200-schema-200');
+                                        $('#responses-getAlertsUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAlertsUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-listAlertsUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-getAlertsUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
                         </article>
                       </div>
                       <hr>
-                    <div id="api-PrometheusController-listRulesUsingGET">
-                      <article id="api-PrometheusController-listRulesUsingGET-0" data-group="User" data-name="listRulesUsingGET" data-version="0">
+                    <div id="api-PrometheusController-getRulesUsingGET">
+                      <article id="api-PrometheusController-getRulesUsingGET-0" data-group="User" data-name="getRulesUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>listRulesUsingGET</h1>
+                          <h1>getRulesUsingGET</h1>
                           <p>Prometheus 알림 규칙 조회</p>
                         </div>
                         <div class="pull-right"></div>
@@ -4550,26 +3853,26 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-PrometheusController-listRulesUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PrometheusController-listRulesUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-PrometheusController-getRulesUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-PrometheusController-getRulesUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-PrometheusController-listRulesUsingGET-0-curl">
+                          <div class="tab-pane active" id="examples-PrometheusController-getRulesUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/prometheus/rules"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-java">
+                          <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -4584,17 +3887,17 @@ public class PrometheusControllerApiExample {
         
         PrometheusControllerApi apiInstance = new PrometheusControllerApi();
         try {
-            PrometheusDTO result = apiInstance.listRulesUsingGET();
+            PrometheusDTO result = apiInstance.getRulesUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PrometheusControllerApi#listRulesUsingGET");
+            System.err.println("Exception when calling PrometheusControllerApi#getRulesUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-android">
+                          <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PrometheusControllerApi;
 
 public class PrometheusControllerApiExample {
@@ -4602,25 +3905,25 @@ public class PrometheusControllerApiExample {
     public static void main(String[] args) {
         PrometheusControllerApi apiInstance = new PrometheusControllerApi();
         try {
-            PrometheusDTO result = apiInstance.listRulesUsingGET();
+            PrometheusDTO result = apiInstance.getRulesUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PrometheusControllerApi#listRulesUsingGET");
+            System.err.println("Exception when calling PrometheusControllerApi#getRulesUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">
 PrometheusControllerApi *apiInstance = [[PrometheusControllerApi alloc] init];
 
 // Prometheus 알림 규칙 조회
-[apiInstance listRulesUsingGETWithCompletionHandler: 
+[apiInstance getRulesUsingGETWithCompletionHandler: 
               ^(PrometheusDTO output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -4632,7 +3935,7 @@ PrometheusControllerApi *apiInstance = [[PrometheusControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var ChoshshUiSwagger = require('choshsh_ui_swagger');
 
 var api = new ChoshshUiSwagger.PrometheusControllerApi()
@@ -4643,14 +3946,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.listRulesUsingGET(callback);
+api.getRulesUsingGET(callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -4659,7 +3962,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class listRulesUsingGETExample
+    public class getRulesUsingGETExample
     {
         public void main()
         {
@@ -4669,12 +3972,12 @@ namespace Example
             try
             {
                 // Prometheus 알림 규칙 조회
-                PrometheusDTO result = apiInstance.listRulesUsingGET();
+                PrometheusDTO result = apiInstance.getRulesUsingGET();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PrometheusControllerApi.listRulesUsingGET: " + e.Message );
+                Debug.Print("Exception when calling PrometheusControllerApi.getRulesUsingGET: " + e.Message );
             }
         }
     }
@@ -4682,22 +3985,22 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-php">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiPrometheusControllerApi();
 
 try {
-    $result = $api_instance->listRulesUsingGET();
+    $result = $api_instance->getRulesUsingGET();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PrometheusControllerApi->listRulesUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PrometheusControllerApi->getRulesUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::PrometheusControllerApi;
@@ -4705,15 +4008,15 @@ use WWW::SwaggerClient::PrometheusControllerApi;
 my $api_instance = WWW::SwaggerClient::PrometheusControllerApi->new();
 
 eval { 
-    my $result = $api_instance->listRulesUsingGET();
+    my $result = $api_instance->getRulesUsingGET();
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling PrometheusControllerApi->listRulesUsingGET: $@\n";
+    warn "Exception when calling PrometheusControllerApi->getRulesUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-python">
+                            <div class="tab-pane" id="examples-PrometheusController-getRulesUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -4725,10 +4028,10 @@ api_instance = swagger_client.PrometheusControllerApi()
 
 try: 
     # Prometheus 알림 규칙 조회
-    api_response = api_instance.list_rules_using_get()
+    api_response = api_instance.get_rules_using_get()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PrometheusControllerApi->listRulesUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling PrometheusControllerApi->getRulesUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -4744,24 +4047,19 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-listRulesUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-getRulesUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-listRulesUsingGET-200-schema">
-                                  <div id='responses-listRulesUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-getRulesUsingGET-200-schema">
+                                  <div id='responses-getRulesUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/PrometheusDTO"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/PrometheusDTO"
@@ -4769,7 +4067,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -4782,14 +4080,14 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-listRulesUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-listRulesUsingGET-200-schema-200');
+                                        $('#responses-getRulesUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getRulesUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-listRulesUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-getRulesUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

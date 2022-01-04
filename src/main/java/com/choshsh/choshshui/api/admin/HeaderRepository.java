@@ -7,7 +7,5 @@ import java.util.List;
 
 @Repository
 public interface HeaderRepository extends CrudRepository<HeaderEntity, Long> {
-
   List<HeaderEntity> findAllByOrderBySortAsc();
-
 }

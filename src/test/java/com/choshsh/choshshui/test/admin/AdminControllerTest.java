@@ -1,4 +1,4 @@
-package com.choshsh.choshshui.test;
+package com.choshsh.choshshui.test.admin;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,8 @@ public class AdminControllerTest {
   @Autowired
   protected ObjectMapper objectMapper;
 
-  @Order(1)
   @Test
-  public void POST_HEADER() throws Exception {
+  public void ADD_HEADER() throws Exception {
     Map<String, String> param = new HashMap<>();
     param.put("name", "test");
     param.put("url", "https://choshsh.com");
@@ -42,23 +40,56 @@ public class AdminControllerTest {
     mockMvc.perform(
             post("/api/admin/header")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(List.of(param)))
-        )
-        .andExpect(status().isOk())
+                .content(objectMapper.writeValueAsString(param)))
+        .andExpect(status().isCreated())
         .andDo(print());
   }
 
-  @Order(2)
+  @Test
+  public void ADD_HEADERS() throws Exception {
+    Map<String, String> param = new HashMap<>();
+    param.put("name", "test");
+    param.put("url", "https://choshsh.com");
+    Map<String, String> param2 = new HashMap<>();
+    param2.put("name", "test2");
+    param2.put("url", "https://choshsh2.com");
+
+    mockMvc.perform(
+            post("/api/admin/headers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(List.of(param, param2))))
+        .andExpect(status().isCreated())
+        .andDo(print());
+  }
+
+  @Test
+  public void POST_HEADER_MEDIATYPE_ERROR() throws Exception {
+    Map<String, String> param = new HashMap<>();
+    param.put("name", "test");
+    param.put("url", "https://choshsh.com");
+
+    mockMvc.perform(
+            post("/api/admin/header2")
+                .contentType(MediaType.TEXT_PLAIN)
+                .content(objectMapper.writeValueAsString(param)))
+        .andExpect(status().is4xxClientError())
+        .andDo(print());
+  }
+
   @Test
   public void GET_HEADER_LIST() throws Exception {
-    mockMvc.perform(get("/api/admin/header"))
+    mockMvc.perform(
+            get("/api/admin/header")
+                .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andDo(print());
   }
 
   @Test
-  public void IFRAME_LIST_GET() throws Exception {
-    mockMvc.perform(get("/api/admin/iframe"))
+  public void GET_IFRAME_LIST() throws Exception {
+    mockMvc.perform(
+            get("/api/admin/iframe")
+                .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andDo(print());
   }
