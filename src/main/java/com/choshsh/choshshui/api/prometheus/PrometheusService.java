@@ -14,10 +14,8 @@ public class PrometheusService {
     this.envRepository = envRepository;
   }
 
-  String getPrometheusUrl() {
+  public String getPrometheusUrl() {
     Optional<EnvEntity> envEntity = envRepository.findByKey("PROMETHEUS_URL");
-    return envEntity
-        .map(EnvEntity::getValue)
-        .orElse(null);
+    return envEntity.map(EnvEntity::getValue).orElse(null);
   }
 }

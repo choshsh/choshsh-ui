@@ -1,5 +1,7 @@
 package com.choshsh.choshshui.api.prometheus;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +22,7 @@ public class PrometheusController {
   }
 
   @ApiOperation(value = "Prometheus 알림 규칙 조회")
-  @GetMapping(PREFIX_URL + "/rules")
+  @GetMapping(value = PREFIX_URL + "/rules", consumes = APPLICATION_JSON_VALUE)
   public Mono<PrometheusDTO> listRules() {
     return webClient.get()
         .uri(prometheusService.getPrometheusUrl() + "/api/v1/rules")
@@ -29,7 +31,7 @@ public class PrometheusController {
   }
 
   @ApiOperation(value = "Prometheus 활성 알림 조회")
-  @GetMapping(PREFIX_URL + "/alerts")
+  @GetMapping(value = PREFIX_URL + "/alerts", consumes = APPLICATION_JSON_VALUE)
   public Mono<PrometheusDTO> listAlerts() {
     return webClient.get()
         .uri(prometheusService.getPrometheusUrl() + "/api/v1/alerts")
