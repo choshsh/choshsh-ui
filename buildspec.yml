@@ -1,88 +1,28 @@
+# CodeBuild
+# - 환경 : 컨테이너
+# - 이미지 : choshsh/ubuntu:jdk17-node16
 version: 0.2
 
-run-as: aml2
-
-env:
-  variables:
-    key: "value"
-  exported-variables:
-    - variable
-    - variable
-
 phases:
-  install:
-    run-as: aml2
-    on-failure: ABORT | CONTINUE
-    runtime-versions:
-      runtime: version
-      runtime: version
-    commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
-  pre_build:
-    run-as: aml2
-    on-failure: ABORT | CONTINUE
-    commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
   build:
-    run-as: aml2
-    on-failure: ABORT | CONTINUE
     commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
-  post_build:
-    run-as: aml2
-    on-failure: ABORT | CONTINUE
-    commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
+      - |
+        cd front-end && \
+          npm ci && \
+          npm run build && \
+          cd -
+      - |
+        chmod +x gradlew && \
+        ./gradlew \
+          clean \
+          test
 reports:
-  report-group-name-or-arn:
-    files:
-      - location
-      - location
-    base-directory: location
-    discard-paths: no | yes
-    file-format: report-format
-artifacts:
-  files:
-    - location
-    - location
-  name: artifact-name
-  discard-paths: no | yes
-  base-directory: location
-  exclude-paths: excluded paths
-  enable-symlinks: no | yes
-  s3-prefix: prefix
-  secondary-artifacts:
-    artifactIdentifier:
-      files:
-        - location
-        - location
-      name: secondary-artifact-name
-      discard-paths: no | yes
-      base-directory: location
-    artifactIdentifier:
-      files:
-        - location
-        - location
-      discard-paths: no | yes
-      base-directory: location
+  arn:aws:codebuild:ap-northeast-2:801167518143:report-group/choshsh-ui-report:
+    files: [ "**/*.xml" ]
+    base-directory: "build/test-results"
+
 cache:
   paths:
-    - path
-    - path
-
+    - '/root/.npm/**/*'
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
