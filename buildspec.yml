@@ -1,0 +1,28 @@
+# CodeBuild
+# - 환경 : 컨테이너
+# - 이미지 : choshsh/ubuntu:jdk17-node16
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - |
+        cd front-end && \
+          npm ci && \
+          npm run build && \
+          cd -
+      - |
+        chmod +x gradlew && \
+        ./gradlew \
+          clean \
+          test
+reports:
+  arn:aws:codebuild:ap-northeast-2:801167518143:report-group/choshsh-ui-report:
+    files: [ "**/*.xml" ]
+    base-directory: "build/test-results"
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
