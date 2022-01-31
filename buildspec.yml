@@ -19,7 +19,7 @@ phases:
           clean \
           test
   post_build:
-    commands: slack-go -msg '빌드를 종료됐습니다.' -notifyStatus true
+    commands: slack-go -msg '빌드가 종료됐습니다' -notifyStatus true
 reports:
   arn:aws:codebuild:ap-northeast-2:801167518143:report-group/choshsh-ui-report:
     files: [ "**/*.xml" ]
