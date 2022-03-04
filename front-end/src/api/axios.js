@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const instance = axios.create({});
+const instance = axios.create({
+  headers: { "Content-Type": "application/json" },
+  timeout: 1000,
+});
 
 function setAuth() {
   if (!instance.defaults.headers.common["Authorization"]) {
