@@ -41,3 +41,8 @@ Web 콘솔을 제공하는 오픈소스 S/W들이 많습니다. 하지만 사용
     npm install
     npm run serve
     ```
+3. 로그인 정보
+
+   ```text
+   choshsh / choshsh
+   ```
