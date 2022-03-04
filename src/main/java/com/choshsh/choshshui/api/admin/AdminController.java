@@ -49,13 +49,13 @@ public class AdminController {
   }
 
   @ApiOperation(value = "iframe 조회 - list")
-  @GetMapping(value = PREFIX_URL + "/iframe", consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(value = PREFIX_URL + "/iframe")
   public List<IframeEntity> listIframe() {
     return adminService.listIframe();
   }
 
   @ApiOperation(value = "ifram 검색 by category")
-  @GetMapping(value = PREFIX_URL + "/iframe/{category}", consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(value = PREFIX_URL + "/iframe/{category}")
   public List<IframeEntity> findIframeByCategory(@PathVariable("category") String category) {
     return adminService.findIframeByCategory(category);
   }
@@ -76,13 +76,13 @@ public class AdminController {
   }
 
   @ApiOperation(value = "Front-end 환경변수 리스트 조회")
-  @GetMapping(value = PREFIX_URL + "/env", consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(value = PREFIX_URL + "/env")
   public List<EnvEntity> listEnv() {
     return adminService.listEnv();
   }
 
   @ApiOperation(value = "Front-end 환경변수 조회")
-  @GetMapping(value = PREFIX_URL + "/env/{key}", consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(value = PREFIX_URL + "/env/{key}")
   public EnvEntity infoEnv(@PathVariable("key") String key) {
     return adminService.infoEnv(key);
   }

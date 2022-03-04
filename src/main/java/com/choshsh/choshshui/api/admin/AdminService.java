@@ -101,6 +101,7 @@ public class AdminService {
    * @return EnvEntity
    */
   public List<EnvEntity> listEnv() {
+    envRepo.findAllByOrderByKeyAsc().forEach(envEntity -> System.out.println(envEntity));
     return envRepo.findAllByOrderByKeyAsc();
   }
 
