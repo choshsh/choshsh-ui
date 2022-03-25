@@ -4,8 +4,10 @@
 name: choshsh
 
 on:
+  pull_request:
+    branches: [ master ]
   push:
-    branches: [ master, dev ]
+    branches: [ master ]
 
 jobs:
   cicd:
@@ -39,7 +41,6 @@ jobs:
         working-directory: ./front-end
 
       - name: Build Front-end
-        if: ${{ github.ref_name == 'master' }}
         run: yarn build
         working-directory: ./front-end
 
@@ -62,12 +63,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Test with Gradle
-        if: ${{ github.ref_name == 'dev' }}
+        if: ${{ github.ref_name != 'master' }}
         run: ./gradlew clean test
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
-        if: ${{ github.ref_name == 'dev' }}
+        if: ${{ github.ref_name != 'master' }}
         with:
           files: build/test-results/**/*.xml
 
