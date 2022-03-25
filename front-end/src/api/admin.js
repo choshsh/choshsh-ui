@@ -7,7 +7,7 @@ async function getHeader() {
 }
 
 async function postHeader(param) {
-  return await axios.post(URL + "/header", param);
+  return await axios.post(URL + "/headers", param);
 }
 
 async function getIframe(param) {
@@ -19,7 +19,7 @@ async function getIframe(param) {
 }
 
 async function postIframe(param) {
-  return await axios.post(URL + "/iframe", param);
+  return await axios.post(URL + "/iframes", param);
 }
 
 async function getEnv() {

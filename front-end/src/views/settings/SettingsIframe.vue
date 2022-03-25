@@ -11,7 +11,7 @@
             <th style="width: 25%">URL</th>
             <th style="width: 5%">Height</th>
             <th>설명</th>
-            <th style="width:5%;"></th>
+            <th style="width: 5%"></th>
           </tr>
           <tr v-for="(item, index) in iframes" v-bind:key="index">
             <td>
@@ -88,12 +88,9 @@ export default {
     },
     async save() {
       if (util.roleCheck()) {
-        let param;
-        param = this.iframes;
-        param.forEach((o) => (o.isDel = "N"));
-
+        let param = this.iframes;
         let data = await adminService.postIframe(param);
-        alert(data > 0 ? "성공" : "실패");
+        alert(data.length > 0 ? "성공" : "실패");
         this.getIframe();
       }
     },
