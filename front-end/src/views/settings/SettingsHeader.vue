@@ -9,7 +9,7 @@
             <th class="w-25">이름</th>
             <th>URL</th>
             <th style="width: 10%">새 탭</th>
-            <th style="width:5%;"></th>
+            <th style="width: 5%"></th>
           </tr>
           <tr v-for="(item, index) in headers" v-bind:key="index">
             <td>
@@ -80,12 +80,9 @@ export default {
     },
     async save() {
       if (util.roleCheck()) {
-        let param;
-        param = this.headers;
-        param.forEach((o) => (o.isDel = "N"));
-
+        let param = this.headers;
         let data = await adminService.postHeader(param);
-        alert(data > 0 ? "성공" : "실패");
+        alert(data.length > 0 ? "성공" : "실패");
         this.getHeader();
         this.$store.commit("component/reload", ["header"]);
       }

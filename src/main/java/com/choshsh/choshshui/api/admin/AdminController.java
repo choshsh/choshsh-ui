@@ -26,7 +26,7 @@ public class AdminController {
     this.adminService = adminService;
   }
 
-  @ApiOperation(value = "해더 조회 - list", consumes = APPLICATION_JSON_VALUE)
+  @ApiOperation(value = "해더 조회 - list")
   @GetMapping(value = PREFIX_URL + "/header")
   public List<HeaderEntity> listHeader() {
     return adminService.listHeader();
