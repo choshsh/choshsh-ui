@@ -44,11 +44,9 @@ jobs:
         working-directory: ./front-end
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          distribution: 'zulu'
           java-version: 17
-          java-package: jde
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
