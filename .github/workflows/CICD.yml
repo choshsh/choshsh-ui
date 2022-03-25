@@ -8,6 +8,10 @@ on:
     branches: [ master ]
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '.github/**.yml'
+      - 'docs/**'
 
 jobs:
   cicd:
