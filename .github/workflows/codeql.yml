@@ -64,8 +64,6 @@ jobs:
 
     - if: ${{ matrix.language == 'java' }}
       run: |
-       make bootstrap
-       make release
        chmod +x gradlew
        ./gradlew build
 
