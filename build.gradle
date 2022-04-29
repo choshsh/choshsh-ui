@@ -26,6 +26,7 @@ sonarqube {
     property "sonar.projectKey", "choshsh_choshsh-ui"
     property "sonar.organization", "choshsh"
     property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.tests", "src/test/java/com/choshsh/choshshui/test"
   }
 }
 
