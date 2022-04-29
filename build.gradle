@@ -29,7 +29,7 @@ sonarqube {
   }
 }
 
-// 이미지 태그 설정
+// 이미지 태그 설정 test
 def imageTags = []
 if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
 
