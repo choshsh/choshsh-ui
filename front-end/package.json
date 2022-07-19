@@ -38,7 +38,7 @@
     "@coreui/vue": "^3.2.9",
     "@coreui/vue-chartjs": "^1.0.6",
     "chartjs-plugin-datalabels": "^1.0.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "vue": "~2.6.12",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.5.3",
