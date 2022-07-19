@@ -1918,12 +1918,12 @@
     thread-loader "^3.0.0"
     webpack "^5.54.0"
 
-"@vue/cli-plugin-e2e-nightwatch@^5.0.1":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-e2e-nightwatch/-/cli-plugin-e2e-nightwatch-5.0.4.tgz#7da7a256df546278f9cfdf5e844cf794d98ff421"
-  integrity sha512-OSwxGXGVO21mvQ2bp6yDhpMsfZMTiU1ErXUZaLuApEt2mEWqj2+V6MquTepRrx1DrRTSpEYqvFhnDjUHfEnOTg==
+"@vue/cli-plugin-e2e-nightwatch@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-e2e-nightwatch/-/cli-plugin-e2e-nightwatch-5.0.8.tgz#2952a9ec1ec148a7ff744f6a9bfa3b746b882e68"
+  integrity sha512-CE9lkftqiVtmvhNG7SkzGz6dQCQBqoKO0V4M5kM24RcR/l52CrRLVK4SPf8chTues+EKFggnRRI4XM0mXLq72g==
   dependencies:
-    "@vue/cli-shared-utils" "^5.0.4"
+    "@vue/cli-shared-utils" "^5.0.8"
     deepmerge "^4.2.2"
     nightwatch "^2.0.5"
 
@@ -2053,7 +2053,7 @@
     semver "^6.1.0"
     strip-ansi "^6.0.0"
 
-"@vue/cli-shared-utils@^5.0.4", "@vue/cli-shared-utils@^5.0.8":
+"@vue/cli-shared-utils@^5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-5.0.8.tgz#75fc96528eba2b1c7e33cb7e989a984ddef99c8a"
   integrity sha512-uK2YB7bBVuQhjOJF+O52P9yFMXeJVj7ozqJkwYE9PlMHL1LMHjtCYm4cSdOebuPzyP+/9p0BimM/OqxsevIopQ==
