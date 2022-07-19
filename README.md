@@ -26,23 +26,31 @@ Web 콘솔을 제공하는 오픈소스 S/W들이 많습니다. 하지만 사용
 
 ![https://user-images.githubusercontent.com/40452325/139429434-bd9c0018-d5b2-4680-9a9e-200f3967671e.png](https://user-images.githubusercontent.com/40452325/139429434-bd9c0018-d5b2-4680-9a9e-200f3967671e.png)
 
-## 사용법
+## **사용법**
 
-1. Spring Boot 빌드
+1. Grafana 실행 (docker)
+
+    ```bash
+    docker-compose up
+    ```
+
+2. Spring Boot 실행
 
     ```bash
     ./gradlew bootRun -Dspring.profiles.active=dev
     ```
 
-2. Vue.js 빌드
+3. Vue.js 실행
 
     ```bash
     cd front-end
-    npm install
-    npm run serve
+    yarn install --frozen-lockfile  # npm ci
+    yarn serve  # npm run serve
     ```
-3. 로그인 정보
 
-   ```text
-   choshsh / choshsh
-   ```
+4. 로그인 정보
+
+    ```bash
+    # frontend, grafana 공통
+    choshsh / choshsh
+    ```

@@ -2624,7 +2624,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-findIframeByCategoryUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/iframe/{category}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-findIframeByCategoryUsingGET-0-java">
@@ -2853,26 +2853,18 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
     "*/*" : {
       "schema" : {
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/IframeEntity"
-        }
+        },
+        "x-content-type" : "*/*"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -2932,7 +2924,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-infoEnvUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/env/{key}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-infoEnvUsingGET-0-java">
@@ -3161,11 +3153,6 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/EnvEntity"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/EnvEntity"
@@ -3173,7 +3160,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -3233,7 +3220,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-listEnvUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/env"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-listEnvUsingGET-0-java">
@@ -3424,26 +3411,18 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/EnvEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
     "*/*" : {
       "schema" : {
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/EnvEntity"
-        }
+        },
+        "x-content-type" : "*/*"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -3765,7 +3744,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-AdminController-listIframeUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/admin/iframe"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-AdminController-listIframeUsingGET-0-java">
@@ -3956,26 +3935,18 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/IframeEntity"
-        },
-        "x-content-type" : "application/json"
-      }
-    },
     "*/*" : {
       "schema" : {
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/IframeEntity"
-        }
+        },
+        "x-content-type" : "*/*"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -4303,7 +4274,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PrometheusController-listAlertsUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/prometheus/alerts"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PrometheusController-listAlertsUsingGET-0-java">
@@ -4494,11 +4465,6 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/PrometheusDTO"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/PrometheusDTO"
@@ -4506,7 +4472,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -4566,7 +4532,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PrometheusController-listRulesUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,*/*"\
+-H "Accept: */*"\
 "http://localhost:8080/api/prometheus/rules"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PrometheusController-listRulesUsingGET-0-java">
@@ -4757,11 +4723,6 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "OK",
   "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/PrometheusDTO"
-      }
-    },
     "*/*" : {
       "schema" : {
         "$ref" : "#/components/schemas/PrometheusDTO"
@@ -4769,7 +4730,7 @@ except ApiException as e:
     }
   }
 };
-                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        var schema = schemaWrapper.content["*/*"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
