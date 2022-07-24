@@ -10,8 +10,16 @@ updates:
     target-branch: "dev"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          ['version-update:semver-minor', 'version-update:semver-patch']
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/front-end" # Location of package manifests
     target-branch: "dev"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          ['version-update:semver-minor', 'version-update:semver-patch']
