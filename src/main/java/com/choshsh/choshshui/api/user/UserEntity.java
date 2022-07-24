@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity extends BaseColumnEntity {
 
   /**
