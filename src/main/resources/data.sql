@@ -10,7 +10,7 @@ INSERT INTO iframe (category, url, name, height, tooltip, sort)
 VALUES
      ('log', 'http://localhost:3000/d/XeS0yvN7z/kube-all-resource-log?orgId=1', 'ALL', '1100', null,1),
      ('log', 'http://localhost:3000/d/JqglEFN7z/kube-control-plane-log?orgId=1', 'Control Plane', '1000', 'API서버, 컨트롤러 매니저, 스케줄러, etcd, CoreDNS, kube-proxy', 2),
-     ('metric', 'http://localhost:3000/d/ku9BHmOnz/jvm-micrometer?orgId=1', 'JVM', '3300', 'JVM monitoring', 1),
+     ('metric', 'http://localhost:3000/d/ku9BHmOnz/jvm-micrometer?orgId=1&from=now-5m&to=now', 'JVM', '3300', 'JVM monitoring', 1),
      ('metric', 'http://localhost:3000/d/4b545447f/kubernetes-all-in-one-cluster-monitoring-kr?orgId=1', 'Kubernetes', '1800', 'k8s monitoring', 2),
      ('metric', 'http://localhost:3000/d/LJ_uJAvmk/istio-service-dashboard?orgId=1', 'Istio', '2300', 'Istio monitoring', 3),
      ('loadtest', 'http://localhost:3000/d/U8-JyvH7k/choshsh-pod-metric?orgId=1', 'from', '1200', null, 1),
