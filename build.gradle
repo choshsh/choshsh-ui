@@ -39,6 +39,16 @@ if (project.hasProperty("tag")) imageTags.add(project.getProperty("tag"))
 jib {
   from {
     image = "amazoncorretto:17"
+    platforms {
+      platform {
+        architecture = "arm64"
+        os = "linux"
+      }
+      platform {
+        architecture = "amd64"
+        os = "linux"
+      }
+    }
   }
   to {
     image = "choshsh/choshsh-ui"
