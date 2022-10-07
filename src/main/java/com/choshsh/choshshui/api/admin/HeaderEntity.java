@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +25,10 @@ public class HeaderEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotBlank(message = "name must not be blank")
   private String name;
 
+  @NotBlank(message = "url must not be blank")
   @Column(length = 500)
   private String url;
 

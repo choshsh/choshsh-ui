@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.HashMap;
+import com.google.common.collect.ImmutableMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.MethodOrderer;
@@ -33,9 +33,9 @@ public class AdminControllerTest {
 
   @Test
   public void ADD_HEADER() throws Exception {
-    Map<String, String> param = new HashMap<>();
-    param.put("name", "test");
-    param.put("url", "https://choshsh.com");
+    Map<String, String> param = ImmutableMap.of(
+        "name", "test",
+        "url", "https://choshsh.com");
 
     mockMvc.perform(
             post("/api/admin/header")
@@ -46,30 +46,47 @@ public class AdminControllerTest {
   }
 
   @Test
+  public void ADD_HEADER_INVALID_PARAMETER() throws Exception {
+    Map<String, String> param = ImmutableMap.of(
+        "name", "",
+        "url", "");
+
+    mockMvc.perform(
+            post("/api/admin/header")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(param)))
+        .andExpect(status().isBadRequest())
+        .andDo(print());
+  }
+
+  @Test
   public void ADD_HEADERS() throws Exception {
-    Map<String, String> param = new HashMap<>();
-    param.put("name", "test");
-    param.put("url", "https://choshsh.com");
-    Map<String, String> param2 = new HashMap<>();
-    param2.put("name", "test2");
-    param2.put("url", "https://choshsh2.com");
+    Map<String, String> param = ImmutableMap.of(
+        "name", "test",
+        "url", "https://choshsh.com");
+
+    Map<String, String> param2 = ImmutableMap.of(
+        "name", "test2",
+        "url", "https://choshsh222.com");
 
     mockMvc.perform(
             post("/api/admin/headers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(List.of(param, param2))))
+                .content(
+                    objectMapper.writeValueAsString(List.of(param, param2)))
+        )
         .andExpect(status().isCreated())
         .andDo(print());
   }
 
   @Test
   public void POST_HEADER_MEDIATYPE_ERROR() throws Exception {
-    Map<String, String> param = new HashMap<>();
-    param.put("name", "test");
-    param.put("url", "https://choshsh.com");
+    Map<String, String> param = ImmutableMap.of(
+        "name", "test",
+        "url", "https://choshsh.com");
 
     mockMvc.perform(
-            post("/api/admin/header2")
+            post("/api/admin/header")
                 .contentType(MediaType.TEXT_PLAIN)
                 .content(objectMapper.writeValueAsString(param)))
         .andExpect(status().is4xxClientError())
