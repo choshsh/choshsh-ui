@@ -75,7 +75,7 @@ jobs:
 
       - name: Build Back-end & Create Docker image & Push to Docker Hub
         if: ${{ github.ref_name == 'master' }}
-        run: ./gradlew clean jib
+        run: ./gradlew clean jib -Ptag=${{ github.sha }}
 
   docs:
     runs-on: ubuntu-latest
