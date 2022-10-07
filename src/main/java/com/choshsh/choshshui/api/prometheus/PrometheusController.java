@@ -1,39 +1,29 @@
 package com.choshsh.choshshui.api.prometheus;
 
+import com.choshsh.choshshui.feign.PrometheusClient;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 @RestController
+@RequiredArgsConstructor
 public class PrometheusController {
 
   private static final String PREFIX_URL = "/api/prometheus";
-  private final WebClient webClient;
-  private final PrometheusService prometheusService;
+  private final PrometheusClient prometheusClient;
 
-  public PrometheusController(WebClient webClient, PrometheusService prometheusService) {
-    this.webClient = webClient;
-    this.prometheusService = prometheusService;
-  }
 
-  @GetMapping(value = PREFIX_URL + "/rules")
   @Operation(description = "List prometheus alert rules")
-  public Mono<PrometheusDTO> listRules() {
-    return webClient.get()
-        .uri(prometheusService.getPrometheusUrl() + "/api/v1/rules")
-        .retrieve()
-        .bodyToMono(PrometheusDTO.class);
+  @GetMapping(value = PREFIX_URL + "/rules")
+  public PrometheusDTO listRules() {
+    return prometheusClient.listRules();
   }
 
-  @GetMapping(value = PREFIX_URL + "/alerts")
   @Operation(description = "List prometheus alert firing")
-  public Mono<PrometheusDTO> listAlerts() {
-    return webClient.get()
-        .uri(prometheusService.getPrometheusUrl() + "/api/v1/alerts")
-        .retrieve()
-        .bodyToMono(PrometheusDTO.class);
+  @GetMapping(value = PREFIX_URL + "/alerts")
+  public PrometheusDTO listAlerts() {
+    return prometheusClient.listAlerts();
   }
 
 }

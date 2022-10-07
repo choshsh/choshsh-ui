@@ -85,3 +85,6 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+custom:
+  prometheus:
+      url: http://127.0.0.1:9090
