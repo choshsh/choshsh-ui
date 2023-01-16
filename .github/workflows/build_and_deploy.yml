@@ -68,10 +68,10 @@ jobs:
         run: ./gradlew clean test
 
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ github.ref_name != 'master' }}
         with:
-          files: build/test-results/**/*.xml
+          junit_files: build/test-results/**/*.xml
 
       - name: Build Back-end & Create Docker image & Push to Docker Hub
         if: ${{ github.ref_name == 'master' }}
