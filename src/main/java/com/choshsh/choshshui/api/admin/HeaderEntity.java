@@ -11,14 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Setter
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "header")
+@NoArgsConstructor
 public class HeaderEntity {
 
   @Id

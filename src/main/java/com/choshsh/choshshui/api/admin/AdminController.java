@@ -11,6 +11,7 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class AdminController {
       method = "GET",
       responses = @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = HeaderEntity.class))))
   )
+  @Cacheable(value = "header", key = "'headerList'")
   @GetMapping(value = PREFIX_URL + "/header")
   public List<HeaderEntity> listHeader() {
     return adminService.listHeader();
