@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +47,7 @@ public class GlobalExceptionHandler {
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(BindException.class)
-  public Map<String, Object> handleValidationExceptions(@NotNull BindException e) {
+  public Map<String, Object> handleValidationExceptions(BindException e) {
     List<String> details = new ArrayList<>();
     e.getBindingResult().getAllErrors().forEach((error) -> {
       details.add(error.getDefaultMessage());

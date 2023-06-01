@@ -102,7 +102,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Generate api docs
-        run: ./gradlew clean generateOpenApiDocs generateSwaggerCode -Dspring.profiles.active=dev
+        run: ./gradlew clean resolveMainClassName generateOpenApiDocs generateSwaggerCode -Dspring.profiles.active=dev
 
       - name: Commit
         run: |
