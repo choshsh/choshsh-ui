@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EnvRepository extends CrudRepository<EnvEntity, Long> {
+
   List<EnvEntity> findAllByOrderByKeyAsc();
+
   Optional<EnvEntity> findByKey(String key);
+
 }

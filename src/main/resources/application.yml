@@ -5,7 +5,7 @@ spring:
     group:
       "prod": "prod, default"
       "dev": "dev, default"
-      "default": "default"
+      "default": "dev, default"
 ---
 spring:
   config.activate.on-profile: dev

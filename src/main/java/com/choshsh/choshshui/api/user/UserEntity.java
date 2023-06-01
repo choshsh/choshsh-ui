@@ -3,11 +3,17 @@ package com.choshsh.choshshui.api.user;
 import com.choshsh.choshshui.config.BaseColumnEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.choshsh.choshshui.api.enums.UserRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 
 @Getter
 @Setter

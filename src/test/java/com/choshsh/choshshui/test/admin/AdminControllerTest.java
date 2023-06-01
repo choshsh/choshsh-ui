@@ -32,7 +32,7 @@ public class AdminControllerTest {
   protected ObjectMapper objectMapper;
 
   @Test
-  public void ADD_HEADER() throws Exception {
+  void ADD_HEADER() throws Exception {
     Map<String, String> param = ImmutableMap.of(
         "name", "test",
         "url", "https://choshsh.com");
@@ -46,7 +46,7 @@ public class AdminControllerTest {
   }
 
   @Test
-  public void ADD_HEADER_INVALID_PARAMETER() throws Exception {
+  void ADD_HEADER_INVALID_PARAMETER() throws Exception {
     Map<String, String> param = ImmutableMap.of(
         "name", "",
         "url", "");
@@ -80,7 +80,7 @@ public class AdminControllerTest {
   }
 
   @Test
-  public void POST_HEADER_MEDIATYPE_ERROR() throws Exception {
+  void POST_HEADER_MEDIATYPE_ERROR() throws Exception {
     Map<String, String> param = ImmutableMap.of(
         "name", "test",
         "url", "https://choshsh.com");
@@ -94,7 +94,7 @@ public class AdminControllerTest {
   }
 
   @Test
-  public void GET_HEADER_LIST() throws Exception {
+  void GET_HEADER_LIST() throws Exception {
     mockMvc.perform(
             get("/api/admin/header")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -103,7 +103,7 @@ public class AdminControllerTest {
   }
 
   @Test
-  public void GET_IFRAME_LIST() throws Exception {
+  void GET_IFRAME_LIST() throws Exception {
     mockMvc.perform(
             get("/api/admin/iframe")
                 .contentType(MediaType.APPLICATION_JSON))

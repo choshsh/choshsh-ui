@@ -2,22 +2,17 @@ package com.choshsh.choshshui.api.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class AdminService {
 
   private final HeaderRepository headerRepo;
   private final IframeRepository iframeRepo;
   private final EnvRepository envRepo;
-
-  public AdminService(HeaderRepository headerRepo,
-      IframeRepository iframeRepo, EnvRepository envRepository) {
-    this.headerRepo = headerRepo;
-    this.iframeRepo = iframeRepo;
-    this.envRepo = envRepository;
-  }
 
   /**
    * 헤더 리스트 조회
@@ -101,7 +96,7 @@ public class AdminService {
    * @return EnvEntity
    */
   public List<EnvEntity> listEnv() {
-    envRepo.findAllByOrderByKeyAsc().forEach(envEntity -> System.out.println(envEntity));
+    envRepo.findAllByOrderByKeyAsc().forEach(System.out::println);
     return envRepo.findAllByOrderByKeyAsc();
   }
 
