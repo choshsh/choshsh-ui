@@ -15,7 +15,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    initialization-mode: always
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:itsmv
     username: sa
@@ -26,6 +25,9 @@ spring:
       path: /h2-console
       settings:
         web-admin-password: itsmv
+  sql:
+    init:
+      mode: always
 management:
   endpoints:
     web:
@@ -77,6 +79,8 @@ server:
   compression:
     enabled: true
   port: 8080
+  http2:
+    enabled: true
   servlet:
     context-path: /
     session:
